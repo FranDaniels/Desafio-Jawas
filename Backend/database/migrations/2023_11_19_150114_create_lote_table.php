@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('lote', function (Blueprint $table) {
             $table->id()->unique();
+            $table->string('descripción');
             $table->string('ubicacion');
             $table->string('estado');
             $table->dateTime('fecha_entrega');            

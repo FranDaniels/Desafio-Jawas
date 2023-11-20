@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('lote', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('id_empresa')->constrained('empresa');
+            $table->id()->unique();
             $table->string('ubicacion');
             $table->string('estado');
             $table->dateTime('fecha_entrega');            

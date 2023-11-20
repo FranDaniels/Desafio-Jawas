@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('receta', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('id_joya')->constrained('joyas');
-            $table->foreignId('id_componente')->constrained('componentes');
+            $table->id()->unique();
+            $table->foreignId('id_joya')->constrained('joya');
+            $table->foreignId('id_componente')->constrained('componente');
             $table->integer('cantidad');
             $table->timestamps();
         });

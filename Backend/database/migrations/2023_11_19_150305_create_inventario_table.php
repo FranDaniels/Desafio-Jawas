@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('inventario', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_usuario')->constrained('usuario');
+            $table->foreignId('id_usuario')->constrained('users');
             $table->foreignId('id_componente')->constrained('componente');
             $table->integer('cantidad_disponible');            
             $table->timestamps();

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('despiece', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_lote')->constrained('lote');
-            $table->foreignId('id_usuario_clasificador')->constrained('usuario');
+            $table->foreignId('id_usuario_clasificador')->constrained('users');
             $table->foreignId('id_componente')->constrained('componente');
             $table->integer('cantidad');
             $table->text('descripcion');            

@@ -16,3 +16,13 @@ botonRegistro.addEventListener("click",function(){
         if (comprobarValidaciones(nombre,apellido,correo,pass,pass2)) {
         }
 })
+
+async function crearUsuario(){     
+       let response = await fetch("http://127.0.0.1:8000/api/registro", { 
+         method: "POST",
+         headers: headersList
+       });
+       
+       let data = await response.text();
+       console.log(data);
+}

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\controllerRegistro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('registro',[controllerRegistro::class,'crearUsuario']);
+Route::post('crearRol',[controllerRegistro::class,'crearRol']);
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });

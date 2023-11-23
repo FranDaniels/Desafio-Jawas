@@ -93,4 +93,22 @@ class controllerAdministrador extends Controller
 
         return response()->json(['mens' => $msg],$cod);
     }
+
+    public function crearRol(Request $request){
+        $rol=new Rol;
+
+        $rol->nombre=$request->get('nombre');
+
+        $msg=$rol;
+        $cod=200;
+
+        try {
+            $rol->save();
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
+        return response()->json(['mens' => $msg],$cod);
+    }
+
 }

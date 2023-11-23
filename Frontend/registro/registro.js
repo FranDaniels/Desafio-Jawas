@@ -1,3 +1,4 @@
+import { crearUsuario } from "../src/http/registro.js";
 import { comprobarValidaciones } from "../utils/validaciones.js";
 
 let nombre=document.getElementById("nombre");
@@ -12,11 +13,10 @@ formulario.addEventListener("input",function(){
     botonRegistro.removeAttribute("disabled",true);
 })
 
-botonRegistro.addEventListener("click", function(){
+botonRegistro.addEventListener("click",async function(){
         if (comprobarValidaciones(nombre,apellido,correo,pass,pass2)) {
           var datos=cargarDatos();
-          console.log('hola'+datos)
-          crearUsuario(datos).then('Usuario creado');
+          await crearUsuario(datos).then('Usuario creado');
         }
 })
 
@@ -29,28 +29,4 @@ function cargarDatos(){
   }
 
   return datos;
-}
-
-async function crearUsuario(datos){   
-  let bodyContent = JSON.stringify(
-    {
-        "nombre": datos.nombre,
-        "apellido": datos.apellido,
-        "correo": datos.correo,
-        "password": datos.password,
-    }
-);  
-console.log()
-  let headersList = {
-  "Content-Type": "application/json",
-    };
-
-  let response = await fetch("http://127.0.0.1:8000/api/registro", {
-    method: "POST",
-    body: bodyContent,
-    headers: headersList,
-  });
-
-let data = await response.json();
-return data;
 }

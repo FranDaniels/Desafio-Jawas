@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 //Administrador
 //Hay que añadirle un middleware
-Route::get('listarUsuarios',[controllerAdministrador::class,'listarUsuarios']);
+
+Route::get('listarUsuarios',[controllerAdministrador::class,'listarUsuarios'])->middleware('admin');
 Route::get('listarUsuario',[controllerAdministrador::class,'listarUsuario']);
 Route::post('crearUsuario',[controllerAdministrador::class,'crearUsuario']);
 Route::put('modificarUsuario',[controllerAdministrador::class,'modificarUsuario']);

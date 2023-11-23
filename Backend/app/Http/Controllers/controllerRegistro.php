@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rol;
 use App\Models\rol_usuario;
 use App\Models\User;
 use App\Models\Usuario;

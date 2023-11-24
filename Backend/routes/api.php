@@ -22,9 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('listarUsuarios',[controllerAdministrador::class,'listarUsuarios'])->middleware('admin');
 Route::get('listarUsuario',[controllerAdministrador::class,'listarUsuario'])->middleware('admin');
 Route::post('crearUsuario',[controllerAdministrador::class,'crearUsuario'])->middleware('admin');
-Route::post('crearRol',[controllerAdministrador::class,'crearRol'])->middleware('admin');
+Route::post('rol',[controllerAdministrador::class,'crearRol'])->middleware('admin');
+Route::post('rolUsuario',[controllerAdministrador::class,'addRolUsuario'])->middleware('admin');
 Route::put('modificarUsuario',[controllerAdministrador::class,'modificarUsuario'])->middleware('admin');
-Route::put('modificarRol',[controllerAdministrador::class,'modificarRolUsuario'])->middleware('admin');
 Route::delete('borrarUsuario',[controllerAdministrador::class,'borrarUsuario'])->middleware('admin');
 
 //Usuario

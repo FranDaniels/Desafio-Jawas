@@ -92,19 +92,19 @@ class controllerAdministrador extends Controller
         return response()->json(['mens' => $msg],$cod);
     }
 
-    public function modificarRolUsuario(Request $request){
+    public function addRolUsuario(Request $request){
         try {
-            $id=$request->get('id');
+            $rol=new rol_usuario;
 
-            $rol=rol_usuario::find($id);
-            $rol->id_rol=$request->get('newRol');
-            $rol->id_usuario=$id;
+            $rol->id_rol=$request->get('idRol');
+            $rol->id_usuario=$request->get('idUsuario');
+
             $rol->save();
-
-            $msg='Rol modificado';
+            $msg=$rol;
             $cod=200;
+            
         } catch (Exception $e) {
-            $msg=$e;
+            $msg='Error al crear el rol_usuario';
             $cod=404;
         }
 

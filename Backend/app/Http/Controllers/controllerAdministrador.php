@@ -10,31 +10,34 @@ use Exception;
 
 class controllerAdministrador extends Controller
 {
-    public function listarUsuarios(Request $request){
-        $usuario=new User;
-
-        $msg=$usuario;
-        $cod=200;
+    public function listarUsuarios(){
 
         try {
-            
+            $usuario=User::all();
+
+            $msg=$usuario;
+            $cod=200;
         } catch (Exception $e) {
-            
+            $msg=$e;
+            $cod=404;
         }
 
         return response()->json(['mens' => $msg],$cod);
     }
 
     public function listarUsuario(Request $request){
-        $usuario=new User;
-
-        $msg=$usuario;
-        $cod=200;
 
         try {
-            
+            $id=$request->get('id');
+
+            $usuario=User::find($id);
+
+            $msg=$usuario;
+            $cod=200;
+
         } catch (Exception $e) {
-            
+            $msg=$e;
+            $cod=404;
         }
 
         return response()->json(['mens' => $msg],$cod);
@@ -58,38 +61,76 @@ class controllerAdministrador extends Controller
             $rolU=new rol_usuario;
             $rolU->id_rol=$user->id_rol;
             $rolU->id_usuario=$user->id;
+            $rolU->save();
         } catch (Exception $e) {
             $msg=$e;
             $cod=404;
         }
+
         return response()->json(['mens' => $msg],$cod);
     }
 
     public function modificarUsuario(Request $request){
-        $usuario=new User;
-
-        $msg=$usuario;
-        $cod=200;
 
         try {
+            $id=$request->get('id');
+
+            $usuarioEncontrado=User::find($id);
+
+            $usuarioEncontrado->id_rol=$request->get('rol');
+
+            $usuarioEncontrado->save();
+            $msg=$usuarioEncontrado;
+            $cod=200;
+            
+
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
+
+        return response()->json(['mens' => $msg],$cod);
+    }
+
+    public function addRolUsuario(Request $request){
+        try {
+            $rol=new rol_usuario;
+
+            $rol->id_rol=$request->get('idRol');
+            $rol->id_usuario=$request->get('idUsuario');
+
+            $rol->save();
+            $msg=$rol;
+            $cod=200;
             
         } catch (Exception $e) {
-            
+            $msg='Error al crear el rol_usuario';
+            $cod=404;
         }
 
         return response()->json(['mens' => $msg],$cod);
     }
 
     public function borrarUsuario(Request $request){
-        $usuario=new User;
-
-        $msg=$usuario;
-        $cod=200;
 
         try {
-            
+            $id=$request->get('id');
+
+            $rol=rol_usuario::where('id_usuario',$id)->delete();
+            $usuarioBorrado=User::where('id',$id)->delete();
+
+            if ($usuarioBorrado==0&&$rol==0) {
+                $msg="Usuario no encontrado";
+                $cod=200;
+            }else{
+                $msg='Usuario borrado correctamente';
+
+                $cod=200;
+            }
+
         } catch (Exception $e) {
-            
+            $msg=$e;
+            $cod=404;
         }
 
         return response()->json(['mens' => $msg],$cod);
@@ -109,6 +150,7 @@ class controllerAdministrador extends Controller
             $msg=$e;
             $cod=404;
         }
+
         return response()->json(['mens' => $msg],$cod);
     }
 

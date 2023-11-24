@@ -20,14 +20,15 @@ use Illuminate\Support\Facades\Route;
 //Hay que añadirle un middleware
 
 Route::get('listarUsuarios',[controllerAdministrador::class,'listarUsuarios'])->middleware('admin');
-Route::get('listarUsuario',[controllerAdministrador::class,'listarUsuario']);
-Route::post('crearUsuario',[controllerAdministrador::class,'crearUsuario']);
-Route::put('modificarUsuario',[controllerAdministrador::class,'modificarUsuario']);
-Route::delete('borrarUsuario',[controllerAdministrador::class,'borrarUsuario']);
+Route::get('listarUsuario',[controllerAdministrador::class,'listarUsuario'])->middleware('admin');
+Route::post('crearUsuario',[controllerAdministrador::class,'crearUsuario'])->middleware('admin');
+Route::post('rol',[controllerAdministrador::class,'crearRol'])->middleware('admin');
+Route::post('rolUsuario',[controllerAdministrador::class,'addRolUsuario'])->middleware('admin');
+Route::put('modificarUsuario',[controllerAdministrador::class,'modificarUsuario'])->middleware('admin');
+Route::delete('borrarUsuario',[controllerAdministrador::class,'borrarUsuario'])->middleware('admin');
 
-
+//Usuario
 Route::post('registro',[controllerRegistro::class,'crearUsuario']);
-Route::post('crearRol',[controllerRegistro::class,'crearRol']);
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });

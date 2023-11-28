@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lote;
 use Illuminate\Http\Request;
 use App\Models\rol_usuario;
 use App\Models\User;
@@ -75,6 +76,27 @@ class controllerUsuario extends Controller
             $cod=404;
         }
 
+        return response()->json(['mens' => $msg],$cod);
+    }
+
+    public function donar(Request $request){
+        try {
+            $lote=new Lote;
+
+            $lote->descripcion=$request->get('descripcion');
+            $lote->ubicacion=$request->get('ubicacion');
+            $lote->estado=$request->get('estado');
+            $lote->fecha_entrega=$request->get('fecha_entrega');
+            $lote->id_usuario=$request->get('idUsuario');
+
+            $msg=$lote;
+            $cod=200;
+
+            $lote->save();
+        } catch (Exception $e) {
+            $msg = $e;
+            $cod=404;
+        }
         return response()->json(['mens' => $msg],$cod);
     }
 }

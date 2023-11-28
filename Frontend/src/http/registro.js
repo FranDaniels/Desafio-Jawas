@@ -7,7 +7,7 @@ export async function crearUsuario(datos){
           "password": datos.password,
       }
   );  
-  console.log()
+
     let headersList = {
     "Content-Type": "application/json",
       };
@@ -19,5 +19,6 @@ export async function crearUsuario(datos){
     });
   
   let data = await response.json();
+  
   return data;
   }

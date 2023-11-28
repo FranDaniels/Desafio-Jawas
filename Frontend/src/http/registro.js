@@ -17,8 +17,13 @@ export async function crearUsuario(datos){
       body: bodyContent,
       headers: headersList,
     });
-  
-  let data = await response.json();
-  
-  return data;
+
+    if (!response.ok) {
+      throw new Error('Error')
+    }else{
+      let data = await response.json();
+      
+      return data;          
+    }
+
   }

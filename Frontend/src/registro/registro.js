@@ -1,4 +1,4 @@
-import { crearUsuario } from "../src/http/registro.js";
+import { crearUsuario } from "../http/registro.js";
 import { comprobarValidaciones } from "../utils/validaciones.js";
 
 let nombre=document.getElementById("nombre");
@@ -14,9 +14,19 @@ formulario.addEventListener("input",function(){
 })
 
 botonRegistro.addEventListener("click",async function(){
-        if (comprobarValidaciones(nombre,apellido,correo,pass,pass2)) {
+  if (comprobarValidaciones(nombre,apellido,correo,pass,pass2)) {
           var datos=cargarDatos();
-          await crearUsuario(datos).then('Usuario creado');
+          await crearUsuario(datos).then(function(data){
+            var error=document.getElementById("errores");
+            error.innerHTML="";
+            error.style.color="green";
+            error.innerHTML="Usuario Creado";
+          }).catch(function(error){
+            var error=document.getElementById("errores");
+            error.innerHTML="";
+            error.style.color="red";
+            error.innerHTML="Usuario no creado";
+          });
         }
 })
 

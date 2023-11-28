@@ -26,6 +26,7 @@ btnDatos.addEventListener("click",function(){
     //Actualizaremos los datos del local con los datos que nos han proporcionado
 
         if (usuario) {
+            console.log('Entro a datos')
             cambiarDatos(usuario)//Hay que realizar pruebas en la pantalla perfil
         }
     }
@@ -38,6 +39,7 @@ btnPassword.addEventListener("click",function(){
         //Actualizaremos los datos del local con los datos que nos han proporcionado
 
         if (usuario) {
+            console.log('Entro a contraseña')
             cambiarPassword(usuario)//Hay que realizar pruebas en la pantalla perfil
         }
     }

@@ -1,0 +1,13 @@
+.container {
+    padding: 30px;
+    margin-top: 10%;
+    width: 5%;
+}
+
+#perfil {
+    margin-left: 15%;
+    margin-right: 15%;
+    background-color: white;
+    border: 2px solid #000;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}

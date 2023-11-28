@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('descripción');
             $table->string('ubicacion');
             $table->string('estado');
-            $table->dateTime('fecha_entrega');            
+            $table->dateTime('fecha_entrega');
+            $table->foreignId('id_usuario')->constrained('users');            
             $table->timestamps();
         });
     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\controllerAdministrador;
+use App\Http\Controllers\controllerClasificador;
 use App\Http\Controllers\controllerUsuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,18 +19,25 @@ use Illuminate\Support\Facades\Route;
 
 //Administrador
 //Hay que añadirle un middleware
-Route::get('listarUsuarios',[controllerAdministrador::class,'listarUsuarios'])->middleware('admin');
-Route::get('listarUsuario',[controllerAdministrador::class,'listarUsuario'])->middleware('admin');
-Route::post('crearUsuario',[controllerAdministrador::class,'crearUsuario'])->middleware('admin');
-Route::post('rol',[controllerAdministrador::class,'crearRol'])->middleware('admin');
-Route::post('rolUsuario',[controllerAdministrador::class,'addRolUsuario'])->middleware('admin');
-Route::put('modificarUsuario',[controllerAdministrador::class,'modificarUsuario'])->middleware('admin');
-Route::delete('borrarUsuario',[controllerAdministrador::class,'borrarUsuario'])->middleware('admin');
+Route::get('admin/listarUsuarios',[controllerAdministrador::class,'listarUsuarios'])->middleware('admin');
+Route::get('admin/listarUsuario',[controllerAdministrador::class,'listarUsuario'])->middleware('admin');
+Route::post('admin/crearUsuario',[controllerAdministrador::class,'crearUsuario'])->middleware('admin');
+Route::post('admin/rol',[controllerAdministrador::class,'crearRol'])->middleware('admin');
+Route::post('admin/rolUsuario',[controllerAdministrador::class,'addRolUsuario'])->middleware('admin');
+Route::put('admin/modificarUsuario',[controllerAdministrador::class,'modificarUsuario'])->middleware('admin');
+Route::delete('admin/borrarUsuario',[controllerAdministrador::class,'borrarUsuario'])->middleware('admin');
 
 //Usuario
 Route::post('registro',[controllerUsuario::class,'crearUsuario']);
 Route::put('modificarPass',[controllerUsuario::class,'modificarPassword']);
 Route::put('modificarDatos',[controllerUsuario::class,'modificarDatos']);
+//Lotes
+Route::post('donar',[controllerUsuario::class,'donar']);
+
+//Clasificador
+Route::get('clasificador/listarLotes',[controllerClasificador::class,'listarLotes']);
+Route::get('clasificador/listarLote',[controllerClasificador::class,'listarLote']);
+
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });

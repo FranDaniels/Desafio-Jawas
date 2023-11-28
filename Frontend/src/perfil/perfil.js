@@ -1,3 +1,4 @@
+import { cambiarDatos, cambiarPassword } from "../http/perfil.js";
 import { comprobarPasswordPerfil, comprobarValidacionePerfil } from "../utils/validaciones.js";
 
 var nombre=document.getElementById('nombre');
@@ -20,13 +21,25 @@ formularioPassword.addEventListener('input',function(){
 
 btnDatos.addEventListener("click",function(){
     if ( comprobarValidacionePerfil(nombre,apellido,correo,password)) {
-    
+        var usuario=localStorage.getItem("user")
+    //Cargaremos los datos del usuario en el login con un getItem
+    //Actualizaremos los datos del local con los datos que nos han proporcionado
+
+        if (usuario) {
+            cambiarDatos(usuario)//Hay que realizar pruebas en la pantalla perfil
+        }
     }
 })
 
 btnPassword.addEventListener("click",function(){
     if (comprobarPasswordPerfil(password)) {
-        
+        var usuario=localStorage.getItem("user")
+        //Cargaremos los datos del usuario en el login con un getItem
+        //Actualizaremos los datos del local con los datos que nos han proporcionado
+
+        if (usuario) {
+            cambiarPassword(usuario)//Hay que realizar pruebas en la pantalla perfil
+        }
     }
 })
 

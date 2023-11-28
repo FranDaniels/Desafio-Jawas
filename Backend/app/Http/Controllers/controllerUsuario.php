@@ -43,7 +43,7 @@ class controllerUsuario extends Controller
             $usuarioEncontrado->password=$request->get('password');
 
             $usuarioEncontrado->save();
-            $msg=$usuarioEncontrado;
+            $msg="Password cambiada correctamente";
             $cod=200;
             
 

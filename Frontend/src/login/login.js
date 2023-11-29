@@ -1,47 +1,43 @@
 import { inicioSesion } from "../http/inicioSesion.js";
 
-let btnIniciarSesion = document.getElementById("btn-iniciar-sesion");
-let correoInput = document.querySelector('input[type="email"]');
-let contrasenaInput = document.querySelector('input[type="password"]');
-let errorContainer = document.getElementById('error');
+document.addEventListener('DOMContentLoaded', function() {
 
-btnIniciarSesion.addEventListener("click", async function () {
-    console.log("llegue")
-    btnIniciarSesion.disabled = true;
-    try {
-        let correo = correoInput.value;
-        let contrasena = contrasenaInput.value;
+    let btnIniciarSesion = document.getElementById("btn-iniciar-sesion");
+    let errorContainer = document.getElementById('error');
+
+    async function realizarInicioSesion() {
+        let correo = document.getElementById('correoElectronico').value;
+        let contrasena = document.getElementById('contrasena').value;
     
-        let usuarioGuardado = await inicioSesion({ correo, contrasena });
+        try {
+            let datos = {
+                "correo": correo,
+                "password": contrasena,
+            };
 
-        if (usuarioGuardado && usuarioGuardado.mensaje === 'Inicio de sesion exitoso'){
-            sessionStorage.setItem('usuario', JSON.stringify(usuarioGuardado));
-            window.location.href = "../inicio";
-        } else {
-            mostrarError("Inicio de sesión fallido. Mensaje: " + usuarioGuardado.mensaje);
+            const usuarioGuardado = await inicioSesion(datos);
+
+            if (usuarioGuardado && usuarioGuardado.mensaje === 'Inicio de sesion exitoso') {
+                sessionStorage.setItem('usuario', JSON.stringify(usuarioGuardado));
+                window.location.href = "../inicio";
+            } else {
+                mostrarError("Inicio de sesión fallido. Mensaje: " + usuarioGuardado.mensaje);
+            }
+        } catch (error) {
+            console.error("Error al iniciar sesión:", error);
         }
-    } catch (error) {
-        console.error("Error al iniciar sesión:", error);
-    } finally {
-        btnIniciarSesion.disabled = false;
-    }
-});
+    };
 
-correoInput.addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') {
-        contrasenaInput.focus();
+    if (btnIniciarSesion) {
+        btnIniciarSesion.addEventListener('click', realizarInicioSesion);
+    } else {
+        console.error('No se encontró el botón de inicio de sesión');
     }
-});
 
-contrasenaInput.addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') {
-        btnIniciarSesion.click();
+    function mostrarError(mensaje) {
+        errorContainer.textContent = mensaje;
+        setTimeout(() => {
+            errorContainer.textContent = "";
+        }, 3500);
     }
-});
-
-function mostrarError(mensaje) {
-    errorContainer.textContent = mensaje;
-    setTimeout(() => {
-        errorContainer.textContent = "";
-    }, 3500);
-}
+})

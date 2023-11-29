@@ -1,21 +1,26 @@
 export async function inicioSesion(datos) {
+    let bodyContent = JSON.stringify({
+        "correo": datos.correo,
+        "password": datos.password,
+    });
+
+    let headersList = {
+        "Content-Type": "application/json",
+    };
+
     try {
-        const response = await fetch("http://127.0.0.1:8000/api/inicioSesion", {
+        let response = await fetch("http://127.0.0.1:8000/api/inicioSesion", {
             method: "POST",
-            body: JSON.stringify({
-                "correo": datos.correo,
-                "password": datos.password,
-            }),
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: headersList,
+            body: bodyContent,
         });
 
         if (!response.ok) {
-            throw new Error('Error en la solicitud');
+            let errorData = await response.json();
+            throw new Error(`Error en la solicitud: ${response.status} - ${errorData.message}`);
         }
 
-        const data = await response.json();
+        let data = await response.json();
         return data;
     } catch (error) {
         throw error;

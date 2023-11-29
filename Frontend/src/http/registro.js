@@ -26,4 +26,4 @@ export async function crearUsuario(datos){
       return data;          
     }
 
-  }
+}

@@ -10,7 +10,7 @@ export async function crearUsuario(datos){
 
     let headersList = {
     "Content-Type": "application/json",
-      };
+    };
   
     let response = await fetch("http://127.0.0.1:8000/api/registro", {
       method: "POST",
@@ -25,5 +25,4 @@ export async function crearUsuario(datos){
       
       return data;          
     }
-
 }

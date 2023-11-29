@@ -6,22 +6,19 @@ let contrasenaInput = document.querySelector('input[type="password"]');
 let errorContainer = document.getElementById('error');
 
 btnIniciarSesion.addEventListener("click", async function () {
-    let correo = correoInput.value;
-    let contrasena = contrasenaInput.value;
-
+    console.log("llegue")
     btnIniciarSesion.disabled = true;
-
     try {
+        let correo = correoInput.value;
+        let contrasena = contrasenaInput.value;
+    
         let usuarioGuardado = await inicioSesion({ correo, contrasena });
-        if (!correo || !contrasena){
-            mostrarError("Por favor ingresa tanto el correo como la contraseña.");
-        }else if (!usuarioGuardado || usuarioGuardado.correo !== correo){
-            mostrarError("Usuario no encontrado. Verifica tu correo electrónico.");
-        }else if (usuarioGuardado.contrasena !== contrasena){
-            mostrarError("La contraseña es incorrecta.");
-        } else {
+
+        if (usuarioGuardado && usuarioGuardado.mensaje === 'Inicio de sesion exitoso'){
             sessionStorage.setItem('usuario', JSON.stringify(usuarioGuardado));
             window.location.href = "../inicio";
+        } else {
+            mostrarError("Inicio de sesión fallido. Mensaje: " + usuarioGuardado.mensaje);
         }
     } catch (error) {
         console.error("Error al iniciar sesión:", error);

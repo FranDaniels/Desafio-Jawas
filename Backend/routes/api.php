@@ -39,7 +39,8 @@ Route::post('donar',[controllerUsuario::class,'donar']);
 //Clasificador
 Route::get('clasificador/listarLotes',[controllerClasificador::class,'listarLotes']);
 Route::get('clasificador/listarLote',[controllerClasificador::class,'listarLote']);
-
+Route::post('clasificador/componente',[controllerClasificador::class,'crearComponente']);
+Route::post('clasificador/inventario',[controllerClasificador::class,'addInventario']);
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });

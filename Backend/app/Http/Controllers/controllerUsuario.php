@@ -36,18 +36,18 @@ class controllerUsuario extends Controller
         return response()->json(['mens' => $msg],$cod);
     }
 
-    public function iniciarSesion(Request $request){
+    public function inicioSesion(Request $request){
         $request->validate([
-            'id' => 'required|exists:users,id',
+            'correo' => 'required|exists:users,correo',
             'password' => 'required',
         ]); 
-
-        $usuario = User::find($request->input('correo'));
-
+    
+        $usuario = User::where('correo', $request->input('correo'))->first();
+    
         if ($usuario && Hash::check($request->input('password'), $usuario->password)) {
             return response()->json(['mensaje' => 'Inicio de sesión exitoso'], 200);
         } else {
-            return response()->json(['mensaje' => 'ID o contraseña incorrectos'], 401);
+            return response()->json(['mensaje' => 'Correo o contraseña incorrectos'], 401);
         }
     }
 

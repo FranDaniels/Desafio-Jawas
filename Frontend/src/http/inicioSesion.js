@@ -1,15 +1,15 @@
 export async function inicioSesion(datos) {
-    let bodyContent = JSON.stringify({
+    const bodyContent = JSON.stringify({
         "correo": datos.correo,
         "password": datos.password,
     });
 
-    let headersList = {
+    const headersList = {
         "Content-Type": "application/json",
     };
 
     try {
-        let response = await fetch("http://127.0.0.1:8000/api/inicioSesion", {
+        const response = await fetch("http://127.0.0.1:8000/api/inicioSesion", {
             method: "POST",
             body: bodyContent,
             headers: headersList,
@@ -19,7 +19,7 @@ export async function inicioSesion(datos) {
             throw new Error('Error en la solicitud');
         }
 
-        let data = await response.json();
+        const data = await response.json();
         return data;
     } catch (error) {
         console.error('Error al iniciar sesión:', error);

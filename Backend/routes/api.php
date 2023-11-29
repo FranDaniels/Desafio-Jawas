@@ -30,7 +30,7 @@ Route::delete('admin/borrarUsuario',[controllerAdministrador::class,'borrarUsuar
 
 //Usuario
 Route::post('registro',[controllerUsuario::class,'crearUsuario']);
-Route::post('inicioSesion', [controllerInicioSesion::class, 'iniciarSesion']);
+Route::post('inicioSesion', [controllerUsuario::class, 'inicioSesion']);
 Route::put('modificarPass',[controllerUsuario::class,'modificarPassword']);
 Route::put('modificarDatos',[controllerUsuario::class,'modificarDatos']);
 //Lotes

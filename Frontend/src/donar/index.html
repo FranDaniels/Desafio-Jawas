@@ -15,20 +15,21 @@
             <div class="row">
                 <form class="row g-3" id="formularioRegistro">
                     <div class="col-md-6">
-                        <label class="form-label">Descripción</label><br>
-                        <textarea class="form-control" id="descripcion" name="descripcion" cols="10" rows="20"></textarea>
+                        <label class="form-label">Descripción<p id="errorDescripcion"></p></label><br>
+                        <textarea class="form-control" id="descripcion" name="descripcion" cols="10" rows="12"></textarea>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Ubicación</label><br>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1597159.506996497!2d-5.83161440698097!3d38.56943414955892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6b8cf7cb6ab315%3A0x169f4088f058d797!2sC.I.%20Formaci%C3%B3n%20Profesional%20Virgen%20de%20Gracia!5e0!3m2!1ses!2ses!4v1701205496444!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1597159.506996497!2d-5.83161440698097!3d38.56943414955892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6b8cf7cb6ab315%3A0x169f4088f058d797!2sC.I.%20Formaci%C3%B3n%20Profesional%20Virgen%20de%20Gracia!5e0!3m2!1ses!2ses!4v1701205496444!5m2!1ses!2ses" width="650" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" id="mapa"></iframe>
                     </div>
                     <div class="row">
                         <div class="col-md-5">
-                            <label class="form-label">Fecha de entrega</label>
-                            <input type="datetime" class="form-control" id="fechaEntrega" required placeholder="2023-11-28 09:59:52">
+                            <label class="form-label">Fecha de entrega<p id="errorFecha"></p></label>
+                            <input type="datetime-local" class="form-control" id="fechaEntrega" required placeholder="2023-11-28 09:59:52">
                         </div>
                     </div>
                     <div class="col-md-5">
+                        <label class="form-label">Estado<p id="errorEstado"></p></label>
                         <select class="form-select" id="estado">
                             <option value="" disabled selected>Estado</option>
                             <option value="1" id="optionCamino">En camino</option>
@@ -36,7 +37,7 @@
                         </select>
                     </div>
                     <div class="col-12">
-                        <button type="button" class="btn btn-primary d-inline" id="btn-donar" disabled>Donar Lote</button>
+                        <button type="button" class="btn btn-primary d-inline" id="btn-donar" >Donar Lote</button>
                     </div>
                 </form>
             </div>

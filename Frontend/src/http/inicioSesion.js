@@ -11,18 +11,18 @@ export async function inicioSesion(datos) {
     try {
         let response = await fetch("http://127.0.0.1:8000/api/inicioSesion", {
             method: "POST",
-            body: bodyContent,
             headers: headersList,
+            body: bodyContent,
         });
 
         if (!response.ok) {
-            throw new Error('Error en la solicitud');
+            let errorData = await response.json();
+            throw new Error(`Error en la solicitud: ${response.status} - ${errorData.message}`);
         }
 
         let data = await response.json();
         return data;
     } catch (error) {
-        console.error('Error al iniciar sesión:', error);
         throw error;
     }
 }

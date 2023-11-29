@@ -1,50 +1,55 @@
 import { inicioSesion } from "../http/inicioSesion.js";
 
-const btnIniciarSesion = document.getElementById("btn-iniciar-sesion");
-const correoInput = document.querySelector('input[type="email"]');
-const contrasenaInput = document.querySelector('input[type="password"]');
-const errorContainer = document.getElementById('error');
+document.addEventListener('DOMContentLoaded', function() {
 
-btnIniciarSesion.addEventListener("click", async function () {
-    const correo = correoInput.value;
-    const contrasena = contrasenaInput.value;
+    let btnIniciarSesion = document.getElementById("btn-iniciar-sesion");
+    let errorContainer = document.getElementById('error');
 
-    try {
-        const usuarioGuardado = await inicioSesion();
+    async function realizarInicioSesion() {
+        console.log("entro");
+        let correo = document.getElementById('correoElectronico');
+        let contrasena = document.getElementById('contrasena');
+
+        console.log(correo.value);
+        console.log(contrasena.value);
 
         if (!correo || !contrasena) {
-            mostrarError("Por favor ingresa tanto el correo electrónico como la contraseña.");
-        } else if (!usuarioGuardado){
-            mostrarError("Usuario no encontrado.");      
-        }else if (usuarioGuardado.correo !== correo) {
-            mostrarError("Usuario no encontrado. Verifica tu correo electrónico.");
-        } else if (usuarioGuardado.contrasena !== contrasena) {
-            mostrarError("Contraseña incorrecta.");
-        } else {
-            sessionStorage.setItem('usuario', JSON.stringify(usuarioGuardado));
-            window.location.href = "../inicio/index.html";
+            mostrarError('No se encontraron los campos de correo electrónico o contraseña');
+            return;
         }
-    } catch (error) {
-        console.error("Error al obtener el usuario guardado:", error);
-        mostrarError("Error al obtener el usuario guardado. Inténtalo de nuevo.");
-    }
-});
 
-correoInput.addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') {
-        contrasenaInput.focus();
-    }
-});
+        let correoValor = correo.value;
+        let contrasenaValor = contrasena.value;
+    
+        try {
+            let datos = {
+                correo: correoValor,
+                password: contrasenaValor,
+            };
 
-contrasenaInput.addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') {
-        btnIniciarSesion.click();
-    }
-});
+            const usuarioGuardado = await inicioSesion(datos);
 
-function mostrarError(mensaje) {
-    errorContainer.textContent = mensaje;
-    setTimeout(() => {
-        errorContainer.textContent = "";
-    }, 3500);
-}
+            if (usuarioGuardado && usuarioGuardado.mensaje === 'Inicio de sesion exitoso') {
+                sessionStorage.setItem('usuario', JSON.stringify(usuarioGuardado));
+                window.location.href = "../inicio";
+            } else {
+                mostrarError("Inicio de sesión fallido. Mensaje: " + usuarioGuardado.mensaje);
+            }
+        } catch (error) {
+            console.error("Error al iniciar sesión:", error);
+        }
+    };
+
+    if (btnIniciarSesion) {
+        btnIniciarSesion.addEventListener('click', realizarInicioSesion);
+    } else {
+        console.error('No se encontró el botón de inicio de sesión');
+    }
+
+    function mostrarError(mensaje) {
+        errorContainer.textContent = mensaje;
+        setTimeout(() => {
+            errorContainer.textContent = "";
+        }, 3500);
+    }
+})

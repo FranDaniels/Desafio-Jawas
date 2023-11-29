@@ -1,4 +1,4 @@
-import { inicioSesion, obtenerUsuarioGuardado } from "../http/inicioSesion.js";
+import { inicioSesion } from "../http/inicioSesion.js";
 
 const btnIniciarSesion = document.getElementById("btn-iniciar-sesion");
 const correoInput = document.querySelector('input[type="email"]');

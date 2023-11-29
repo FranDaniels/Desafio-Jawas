@@ -1,14 +1,3 @@
-export async function obtenerUsuarioGuardado() {
-    return new Promise((resolve, reject) => {
-        try {
-            let usuarioGuardado = JSON.parse(localStorage.getItem('usuario'));
-            resolve(usuarioGuardado);
-        } catch (error) {
-            reject(error);
-        }
-    });
-}
-
 export async function inicioSesion(datos) {
     let bodyContent = JSON.stringify({
         "correo": datos.correo,

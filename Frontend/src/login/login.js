@@ -1,51 +1,50 @@
-function btnIniciarSesion(){
-    window.location.href = "../inicio/inicio.html";
-}
+import { inicioSesion } from "../http/inicioSesion.js";
 
-function validarInicio(){
-    const correo = document.querySelector('input[type = "email"]').value;
-    const contrasena = document.querySelector('input[type = "password"]').value;
-
-    const usuarioGuardado = JSON.parse(localStorage.getItem('usuario'));
-    var error = document.getElementById('error');
-
-    if (!correo || !contrasena){
-        error.textContent = "Por favor ingresa tanto el correo electrónico como la contraseña.";
-        setTimeout(function(){
-            error.textContent = "";
-        }, 3500);
-    }else{
-        if (usuarioGuardado && usuarioGuardado.correo === correo && usuarioGuardado.contrasena === contrasena) {
-            Object.assign(usuario, usuarioGuardado);
-            btnIniciarSesion();
-        } else {
-            error.textContent = "Correo electrónico o contraseña incorrecta. Vuelve a intentarlo.";
-            setTimeout(function(){
-                error.textContent = "";
-            }, 3500);
-        }
-        return false;
-    }
-}
-
-window.validarInicio = validarInicio;
-
-const botonIniciarSesion = document.getElementById('iniciarSesion');
-botonIniciarSesion.addEventListener('click', validarInicio);
-
-const botonRegistrarNav = document.getElementById('btnRegistrar');
-botonRegistrarNav.addEventListener('click', btnRegistrarNav);
-
+const btnIniciarSesion = document.getElementById("btn-iniciar-sesion");
 const correoInput = document.querySelector('input[type="email"]');
+const contrasenaInput = document.querySelector('input[type="password"]');
+const errorContainer = document.getElementById('error');
+
+btnIniciarSesion.addEventListener("click", async function () {
+    const correo = correoInput.value;
+    const contrasena = contrasenaInput.value;
+
+    try {
+        const usuarioGuardado = await inicioSesion();
+
+        if (!correo || !contrasena) {
+            mostrarError("Por favor ingresa tanto el correo electrónico como la contraseña.");
+        } else if (!usuarioGuardado){
+            mostrarError("Usuario no encontrado.");      
+        }else if (usuarioGuardado.correo !== correo) {
+            mostrarError("Usuario no encontrado. Verifica tu correo electrónico.");
+        } else if (usuarioGuardado.contrasena !== contrasena) {
+            mostrarError("Contraseña incorrecta.");
+        } else {
+            sessionStorage.setItem('usuario', JSON.stringify(usuarioGuardado));
+            window.location.href = "../inicio/index.html";
+        }
+    } catch (error) {
+        console.error("Error al obtener el usuario guardado:", error);
+        mostrarError("Error al obtener el usuario guardado. Inténtalo de nuevo.");
+    }
+});
+
 correoInput.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
-        document.querySelector('input[type="password"]').focus();
+        contrasenaInput.focus();
     }
 });
 
-const contrasenaInput = document.querySelector('input[type="password"]');
 contrasenaInput.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
-        validarInicio();
+        btnIniciarSesion.click();
     }
 });
+
+function mostrarError(mensaje) {
+    errorContainer.textContent = mensaje;
+    setTimeout(() => {
+        errorContainer.textContent = "";
+    }, 3500);
+}

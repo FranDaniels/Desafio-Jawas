@@ -2,8 +2,10 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+    mode: 'development',
     entry: {
         login: './src/login/login.js',
+        registro: './src/registro/registro.js',
     },
     output: {
         filename: '[name].main.js',
@@ -12,8 +14,12 @@ module.exports = {
 
     plugins:[
         new HtmlWebpackPlugin({
-            template: './src/login/login.html',
+            template: './src/login/index.html',
             filename: 'login.html',
+        }),
+        new HtmlWebpackPlugin({
+            template: './src/registro/index.html',
+            filename: 'registro.html',
         }),
     ]
 };

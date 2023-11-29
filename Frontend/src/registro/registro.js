@@ -27,6 +27,9 @@ botonRegistro.addEventListener("click",async function(){
             error.style.color="red";
             error.innerHTML="Usuario no creado";
           });
+          setTimeout(function(){
+            window.location.href = "../login"
+          },5000)
         }
 })
 

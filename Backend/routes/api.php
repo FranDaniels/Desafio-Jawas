@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\controllerAdministrador;
 use App\Http\Controllers\controllerClasificador;
+use App\Http\Controllers\controllerInicioSesion;
 use App\Http\Controllers\controllerUsuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,7 @@ Route::delete('admin/borrarUsuario',[controllerAdministrador::class,'borrarUsuar
 
 //Usuario
 Route::post('registro',[controllerUsuario::class,'crearUsuario']);
+Route::post('inicioSesion', [controllerInicioSesion::class, 'iniciarSesion']);
 Route::put('modificarPass',[controllerUsuario::class,'modificarPassword']);
 Route::put('modificarDatos',[controllerUsuario::class,'modificarDatos']);
 //Lotes

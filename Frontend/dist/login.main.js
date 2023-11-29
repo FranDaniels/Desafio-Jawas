@@ -7,26 +7,90 @@
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/http/inicioSesion.js":
+/*!**********************************!*\
+  !*** ./src/http/inicioSesion.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   inicioSesion: () => (/* binding */ inicioSesion)\n/* harmony export */ });\nasync function inicioSesion(datos) {\r\n    let bodyContent = JSON.stringify({\r\n        \"correo\": datos.correo,\r\n        \"password\": datos.password,\r\n    });\r\n\r\n    let headersList = {\r\n        \"Content-Type\": \"application/json\",\r\n    };\r\n\r\n    try {\r\n        let response = await fetch(\"http://127.0.0.1:8000/api/inicioSesion\", {\r\n            method: \"POST\",\r\n            body: bodyContent,\r\n            headers: headersList,\r\n        });\r\n\r\n        if (!response.ok) {\r\n            throw new Error('Error en la solicitud');\r\n        }\r\n\r\n        let data = await response.json();\r\n        return data;\r\n    } catch (error) {\r\n        console.error('Error al iniciar sesión:', error);\r\n        throw error;\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack://frontend/./src/http/inicioSesion.js?");
+
+/***/ }),
 
 /***/ "./src/login/login.js":
 /*!****************************!*\
   !*** ./src/login/login.js ***!
   \****************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("function validarInicio(){\r\n    const correo = document.querySelector('input[type = \"email\"]').value;\r\n    const contrasena = document.querySelector('input[type = \"password\"]').value;\r\n\r\n    const usuarioGuardado = JSON.parse(localStorage.getItem('usuario'));\r\n    var error = document.getElementById('error');\r\n\r\n    if (!correo || !contrasena){\r\n        error.textContent = \"Por favor ingresa tanto el correo electrónico como la contraseña.\";\r\n        setTimeout(function(){\r\n            error.textContent = \"\";\r\n        }, 3500);\r\n    }else{\r\n        if (usuarioGuardado && usuarioGuardado.correo === correo && usuarioGuardado.contrasena === contrasena) {\r\n            Object.assign(usuario, usuarioGuardado);\r\n            btnIniciarSesion();\r\n        } else {\r\n            error.textContent = \"Correo electrónico o contraseña incorrecta. Vuelve a intentarlo.\";\r\n            setTimeout(function(){\r\n                error.textContent = \"\";\r\n            }, 3500);\r\n        }\r\n        return false;\r\n    }\r\n}\r\n\r\nwindow.validarInicio = validarInicio;\r\n\r\nconst correoInput = document.querySelector('input[type=\"email\"]');\r\ncorreoInput.addEventListener('keydown', function (event) {\r\n    if (event.key === 'Enter') {\r\n        document.querySelector('input[type=\"password\"]').focus();\r\n    }\r\n});\r\n\r\nconst contrasenaInput = document.querySelector('input[type=\"password\"]');\r\ncontrasenaInput.addEventListener('keydown', function (event) {\r\n    if (event.key === 'Enter') {\r\n        validarInicio();\r\n    }\r\n});\n\n//# sourceURL=webpack://frontend/./src/login/login.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _http_inicioSesion_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../http/inicioSesion.js */ \"./src/http/inicioSesion.js\");\n\r\n\r\nconst btnIniciarSesion = document.getElementById(\"btn-iniciar-sesion\");\r\nconst correoInput = document.querySelector('input[type=\"email\"]');\r\nconst contrasenaInput = document.querySelector('input[type=\"password\"]');\r\nconst errorContainer = document.getElementById('error');\r\n\r\nbtnIniciarSesion.addEventListener(\"click\", async function () {\r\n    const correo = correoInput.value;\r\n    const contrasena = contrasenaInput.value;\r\n\r\n    btnIniciarSesion.disabled = true;\r\n\r\n    try {\r\n        const resultadoInicioSesion = await (0,_http_inicioSesion_js__WEBPACK_IMPORTED_MODULE_0__.inicioSesion)({ correo, contrasena });\r\n\r\n        if (resultadoInicioSesion.mensaje === 'Inicio de sesión exitoso') {\r\n            sessionStorage.setItem('usuario', JSON.stringify(resultadoInicioSesion.usuario));\r\n            window.location.href = \"../inicio/index.html\";\r\n        } else {\r\n            mostrarError(\"Correo o contraseña incorrecta\");\r\n        }\r\n    } catch (error) {\r\n        console.error(\"Error al iniciar sesión:\", error);\r\n\r\n        if (!correo || !contrasena) {\r\n            mostrarError(\"Por favor ingresa tanto el correo electrónico como la contraseña.\");\r\n        } else {\r\n            mostrarError(\"Error al iniciar sesión. Inténtalo de nuevo.\");\r\n        }\r\n    } finally {\r\n        btnIniciarSesion.disabled = false;\r\n    }\r\n});\r\n\r\ncorreoInput.addEventListener('keydown', function (event) {\r\n    if (event.key === 'Enter') {\r\n        contrasenaInput.focus();\r\n    }\r\n});\r\n\r\ncontrasenaInput.addEventListener('keydown', function (event) {\r\n    if (event.key === 'Enter') {\r\n        btnIniciarSesion.click();\r\n    }\r\n});\r\n\r\nfunction mostrarError(mensaje) {\r\n    errorContainer.textContent = mensaje;\r\n    setTimeout(() => {\r\n        errorContainer.textContent = \"\";\r\n    }, 3500);\r\n}\r\n\n\n//# sourceURL=webpack://frontend/./src/login/login.js?");
 
 /***/ })
 
 /******/ 	});
 /************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./src/login/login.js"]();
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/login/login.js");
 /******/ 	
 /******/ })()
 ;

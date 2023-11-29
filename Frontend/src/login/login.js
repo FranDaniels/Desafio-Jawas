@@ -9,24 +9,27 @@ btnIniciarSesion.addEventListener("click", async function () {
     const correo = correoInput.value;
     const contrasena = contrasenaInput.value;
 
+    btnIniciarSesion.disabled = true;
+
     try {
-        const usuarioGuardado = await inicioSesion();
+        const resultadoInicioSesion = await inicioSesion({ correo, contrasena });
+
+        if (resultadoInicioSesion.mensaje === 'Inicio de sesión exitoso') {
+            sessionStorage.setItem('usuario', JSON.stringify(resultadoInicioSesion.usuario));
+            window.location.href = "../inicio/index.html";
+        } else {
+            mostrarError("Correo o contraseña incorrecta");
+        }
+    } catch (error) {
+        console.error("Error al iniciar sesión:", error);
 
         if (!correo || !contrasena) {
             mostrarError("Por favor ingresa tanto el correo electrónico como la contraseña.");
-        } else if (!usuarioGuardado){
-            mostrarError("Usuario no encontrado.");      
-        }else if (usuarioGuardado.correo !== correo) {
-            mostrarError("Usuario no encontrado. Verifica tu correo electrónico.");
-        } else if (usuarioGuardado.contrasena !== contrasena) {
-            mostrarError("Contraseña incorrecta.");
         } else {
-            sessionStorage.setItem('usuario', JSON.stringify(usuarioGuardado));
-            window.location.href = "../inicio/index.html";
+            mostrarError("Error al iniciar sesión. Inténtalo de nuevo.");
         }
-    } catch (error) {
-        console.error("Error al obtener el usuario guardado:", error);
-        mostrarError("Error al obtener el usuario guardado. Inténtalo de nuevo.");
+    } finally {
+        btnIniciarSesion.disabled = false;
     }
 });
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\rol_usuario;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Hash;
 
 class controllerUsuario extends Controller
 {
@@ -33,6 +34,21 @@ class controllerUsuario extends Controller
             $cod=404;
         }
         return response()->json(['mens' => $msg],$cod);
+    }
+
+    public function iniciarSesion(Request $request){
+        $request->validate([
+            'id' => 'required|exists:users,id',
+            'password' => 'required',
+        ]); 
+
+        $usuario = User::find($request->input('correo'));
+
+        if ($usuario && Hash::check($request->input('password'), $usuario->password)) {
+            return response()->json(['mensaje' => 'Inicio de sesión exitoso'], 200);
+        } else {
+            return response()->json(['mensaje' => 'ID o contraseña incorrectos'], 401);
+        }
     }
 
     public function modificarPassword(Request $request){

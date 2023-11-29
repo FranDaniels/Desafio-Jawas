@@ -15,7 +15,7 @@
             <div class="row">
                 <form class="row g-3" id="formularioRegistro">
                     <div class="col-md-6">
-                        <label class="form-label">Descripción</label><br>
+                        <label class="form-label">Descripción<p id="errorDescripcion"></p></label><br>
                         <textarea class="form-control" id="descripcion" name="descripcion" cols="10" rows="12"></textarea>
                     </div>
                     <div class="col-md-6">
@@ -24,11 +24,12 @@
                     </div>
                     <div class="row">
                         <div class="col-md-5">
-                            <label class="form-label">Fecha de entrega</label>
+                            <label class="form-label">Fecha de entrega<p id="errorFecha"></p></label>
                             <input type="datetime-local" class="form-control" id="fechaEntrega" required placeholder="2023-11-28 09:59:52">
                         </div>
                     </div>
                     <div class="col-md-5">
+                        <label class="form-label">Estado<p id="errorEstado"></p></label>
                         <select class="form-select" id="estado">
                             <option value="" disabled selected>Estado</option>
                             <option value="1" id="optionCamino">En camino</option>

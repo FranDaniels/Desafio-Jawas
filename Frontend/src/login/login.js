@@ -6,13 +6,25 @@ document.addEventListener('DOMContentLoaded', function() {
     let errorContainer = document.getElementById('error');
 
     async function realizarInicioSesion() {
-        let correo = document.getElementById('correoElectronico').value;
-        let contrasena = document.getElementById('contrasena').value;
+        console.log("entro");
+        let correo = document.getElementById('correoElectronico');
+        let contrasena = document.getElementById('contrasena');
+
+        console.log(correo.value);
+        console.log(contrasena.value);
+
+        if (!correo || !contrasena) {
+            mostrarError('No se encontraron los campos de correo electrónico o contraseña');
+            return;
+        }
+
+        let correoValor = correo.value;
+        let contrasenaValor = contrasena.value;
     
         try {
             let datos = {
-                "correo": correo,
-                "password": contrasena,
+                correo: correoValor,
+                password: contrasenaValor,
             };
 
             const usuarioGuardado = await inicioSesion(datos);

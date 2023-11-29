@@ -1,7 +1,3 @@
-function btnIniciarSesion(){
-    window.location.href = "../inicio/inicio.html";
-}
-
 function validarInicio(){
     const correo = document.querySelector('input[type = "email"]').value;
     const contrasena = document.querySelector('input[type = "password"]').value;
@@ -29,12 +25,6 @@ function validarInicio(){
 }
 
 window.validarInicio = validarInicio;
-
-const botonIniciarSesion = document.getElementById('iniciarSesion');
-botonIniciarSesion.addEventListener('click', validarInicio);
-
-const botonRegistrarNav = document.getElementById('btnRegistrar');
-botonRegistrarNav.addEventListener('click', btnRegistrarNav);
 
 const correoInput = document.querySelector('input[type="email"]');
 correoInput.addEventListener('keydown', function (event) {

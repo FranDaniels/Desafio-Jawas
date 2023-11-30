@@ -1,4 +1,4 @@
-import { cambiarDatos, cambiarPassword } from "../http/perfil.js";
+import { cambiarDatos, cambiarPassword, obtenerUsuario } from "../http/perfil.js";
 import { comprobarPasswordPerfil, comprobarValidacionePerfil } from "../utils/validaciones.js";
 
 var nombre=document.getElementById('nombre');
@@ -10,7 +10,14 @@ let formularioPassword=document.getElementById("formularioPassword")
 let btnDatos=document.getElementById("btnDatos")
 let btnPassword=document.getElementById("btnPassword")
 
-console.log('hola')
+var id="32";
+
+await obtenerUsuario(id).then(function(data){
+    cargarDatos(data)
+  }).catch(function(error){
+    return error
+  });
+
 formularioDatos.addEventListener('input', function(){
     btnDatos.removeAttribute("disabled",true)
 })
@@ -19,33 +26,48 @@ formularioPassword.addEventListener('input',function(){
     btnPassword.removeAttribute("disabled",true)
 })
 
-btnDatos.addEventListener("click",function(){
+btnDatos.addEventListener("click",async function(){
     if ( comprobarValidacionePerfil(nombre,apellido,correo,password)) {
-        var usuario=localStorage.getItem("user")
-    //Cargaremos los datos del usuario en el login con un getItem
-    //Actualizaremos los datos del local con los datos que nos han proporcionado
-
-        if (usuario) {
-            console.log('Entro a datos')
-            cambiarDatos(usuario)//Hay que realizar pruebas en la pantalla perfil
-        }
+    var datos=cargarDatosCambiados(id)
+    await cambiarDatos(datos).then(function(data){
+    console.log('bien')
+    })
     }
 })
 
-btnPassword.addEventListener("click",function(){
+btnPassword.addEventListener("click",async function(){
     if (comprobarPasswordPerfil(password)) {
-        var usuario=localStorage.getItem("user")
-        //Cargaremos los datos del usuario en el login con un getItem
-        //Actualizaremos los datos del local con los datos que nos han proporcionado
+        var datos=cargarPasswordCambiada(id)
+        await cambiarPassword(datos).then(function(data){
+            console.log('bien')
+        })
 
-        if (usuario) {
-            console.log('Entro a contraseña')
-            cambiarPassword(usuario)//Hay que realizar pruebas en la pantalla perfil
-        }
     }
 })
 
+function cargarDatos(user){
+    nombre.value=user.nombre
+    apellido.value=user.apellido
+    correo.value=user.correo
+}
 
+function cargarDatosCambiados(id) {
+    var datos={
+        id:id,
+        nombre:nombre.value,
+        apellido:apellido.value,
+        correo:correo.value
+    }
+
+    return datos
+}
+
+function cargarPasswordCambiada(id){
+    var datos={
+        id:id,
+        password:password.value
+    }
+}
 
 
 

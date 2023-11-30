@@ -119,4 +119,20 @@ class controllerUsuario extends Controller
         }
         return response()->json(['mens' => $msg],$cod);
     }
+
+    public function obtenerIdUsu($id){
+        try {
+
+            $usuario=User::find($id);
+
+            $msg=$usuario;
+            $cod=200;
+
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
+
+        return response()->json($msg,$cod);
+    }
 }

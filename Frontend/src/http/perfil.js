@@ -1,4 +1,6 @@
-export async function cambiarDatos(datos){   
+export async function cambiarDatos(datos){ 
+  console.log(datos)  
+  console.log(datos.id)  
     let bodyContent = JSON.stringify(
       {
         "id":datos.id,
@@ -18,9 +20,13 @@ export async function cambiarDatos(datos){
         headers: headersList
     });
   
-  let data = await response.json();
-  
-  return data;
+    if (!response.ok) {
+      throw new Error('Error')
+    }else{
+      let data = await response.json();
+      
+      return data;          
+    }
   }
 
   export async function cambiarPassword(datos){   
@@ -44,4 +50,19 @@ export async function cambiarDatos(datos){
   let data = await response.json();
 
   return data;
+  }
+
+  export async function obtenerUsuario(datos){
+    let headersList = {
+      "Content-Type": "application/json"
+     }
+     
+     let response = await fetch("http://127.0.0.1:8000/api/usuario/"+datos, { 
+       method: "GET",
+       headers: headersList
+     });
+     
+     let data = await response.json();
+     
+     return data
   }

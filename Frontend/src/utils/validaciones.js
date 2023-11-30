@@ -138,7 +138,7 @@ export function comprobarValidaciones(nombre,apellido,correo,password,password2)
     return esValido;
 }
 
-export function comprobarValidacionePerfil(nombre,apellido,correo,pass){
+export function comprobarValidacionePerfil(nombre,apellido,correo){
     var esValido=false;
     validacionCorrecta=[];
     validacionIncorrecta=[];
@@ -147,16 +147,18 @@ export function comprobarValidacionePerfil(nombre,apellido,correo,pass){
     comprobarCorreo(correo)
     
     if (validacionIncorrecta.length>0) {
+        var error=document.getElementById("errores");
         console.log('adios')
         error.innerHTML="";
         error.style.color="red";
         console.log(validacionIncorrecta)
         error.innerHTML=mensajesDeError(validacionIncorrecta);
     }else{
+        var error=document.getElementById("errores");
         console.log('hola')
-        error.innerHTML="";
-        error.style.color="green";
-        error.innerHTML="Datos cambiados";
+        // error.innerHTML="";
+        // error.style.color="green";
+        // error.innerHTML="Datos cambiados";
         esValido=true
     }
     return esValido;
@@ -169,6 +171,7 @@ export function comprobarPasswordPerfil(password){
     comprobarPassword(password)
 
     if (validacionIncorrecta.length>0) {
+        var error=document.getElementById("errores");
         console.log('adios')
         error.innerHTML="";
         error.style.color="red";
@@ -176,9 +179,10 @@ export function comprobarPasswordPerfil(password){
         error.innerHTML=mensajesDeError(validacionIncorrecta);
     }else{
         console.log('hola')
-        error.innerHTML="";
-        error.style.color="green";
-        error.innerHTML="Contraseña cambiada";
+        var error=document.getElementById("errores");
+        //error.innerHTML="";
+        // error.style.color="green";
+        // error.innerHTML="Contraseña cambiada";
         esValido=true
     }
     return esValido;

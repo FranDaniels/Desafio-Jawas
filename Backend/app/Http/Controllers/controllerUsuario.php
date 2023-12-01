@@ -107,6 +107,7 @@ class controllerUsuario extends Controller
             $lote->ubicacion=$request->get('ubicacion');
             $lote->estado=$request->get('estado');
             $lote->fecha_entrega=$request->get('fecha_entrega');
+            $lote->disponible=$request->get('disponible');
             $lote->id_usuario=$request->get('idUsuario');
 
             $msg=$lote;

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Componente;
 use App\Models\Inventario;
 use App\Models\Lote;
+use App\Models\lote_usuario;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class controllerClasificador extends Controller
 {
@@ -21,7 +23,7 @@ class controllerClasificador extends Controller
             $cod=404;
         }
 
-        return response()->json(['mens' => $msg],$cod);
+        return response()->json($msg,$cod);
     }
 
     public function listarLote(Request $request){
@@ -81,4 +83,70 @@ class controllerClasificador extends Controller
         return response()->json(['mens' => $msg],$cod);
     }
    
+    public function listarLoteNombreUsu(){
+        try {
+            $lotes = DB::select('
+            SELECT
+                l.id AS lote_id,
+                l.descripcion AS lote_descripcion,
+                l.ubicacion AS lote_ubicacion,
+                l.estado AS lote_estado,
+                l.fecha_entrega AS lote_fecha_entrega,
+                u.nombre AS usuario_nombre
+            FROM
+                lote l
+            JOIN
+                users u ON l.id_usuario = u.id
+            WHERE
+                l.disponible = 1
+            ORDER BY
+                l.id
+            ');
+
+        $msg=$lotes;
+        $cod=200;
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
+        
+        return response()->json($msg,$cod);
+    }
+
+    public function asignarLote(Request $request){
+        try {
+            $loteAsignado=new lote_usuario;
+
+            $loteAsignado->id_usuario=$request->get('idUsuario');
+            $loteAsignado->id_lote=$request->get('idLote');
+
+            $id=$request->get('idLote');
+
+            $loteEncontrado=Lote::find($id);
+            
+            $loteEncontrado->disponible=0;
+
+            $loteEncontrado->save();
+            $loteAsignado->save();
+
+            $msg=$loteAsignado;
+            $cod=200;
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
+
+        return response()->json(['mens' => $msg],$cod);
+    }
+
+    public function listarMisLotes(){
+        try {
+            $misLotes=DB::select('');
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
+
+        return response()->json($msg,$cod);
+    }
 }

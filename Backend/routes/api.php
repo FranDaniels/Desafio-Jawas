@@ -31,17 +31,9 @@ Route::delete('admin/borrarUsuario',[controllerAdministrador::class,'borrarUsuar
 //Usuario
 Route::get('usuario/{id}',[controllerUsuario::class,'obtenerIdUsu']);
 Route::post('registro',[controllerUsuario::class,'crearUsuario']);
+Route::post('inicioSesion', [controllerUsuario::class, 'inicioSesion']);
 Route::put('modificarPass',[controllerUsuario::class,'modificarPassword']);
 Route::put('modificarDatos',[controllerUsuario::class,'modificarDatos']);
-
-if (app()->environment('local')) {
-    Route::middleware(['AllowCors'])->group(function () {
-        Route::post('inicioSesion', [controllerUsuario::class, 'inicioSesion']);
-    });
-} /*else {
-    // tus rutas normales aquí
-}*/
-
 
 //Lotes
 Route::post('donar',[controllerUsuario::class,'donar']);

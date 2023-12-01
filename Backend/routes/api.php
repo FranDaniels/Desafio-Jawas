@@ -29,6 +29,7 @@ Route::put('admin/modificarUsuario',[controllerAdministrador::class,'modificarUs
 Route::delete('admin/borrarUsuario',[controllerAdministrador::class,'borrarUsuario'])->middleware('admin');
 
 //Usuario
+Route::get('usuario/{id}',[controllerUsuario::class,'obtenerIdUsu']);
 Route::post('registro',[controllerUsuario::class,'crearUsuario']);
 Route::post('inicioSesion', [controllerUsuario::class, 'inicioSesion']);
 Route::put('modificarPass',[controllerUsuario::class,'modificarPassword']);
@@ -38,10 +39,12 @@ Route::put('modificarDatos',[controllerUsuario::class,'modificarDatos']);
 Route::post('donar',[controllerUsuario::class,'donar']);
 
 //Clasificador
+Route::get('clasificador/listarLotesNombre',[controllerClasificador::class,'listarLoteNombreUsu']);
 Route::get('clasificador/listarLotes',[controllerClasificador::class,'listarLotes']);
 Route::get('clasificador/listarLote',[controllerClasificador::class,'listarLote']);
 Route::post('clasificador/componente',[controllerClasificador::class,'crearComponente']);
 Route::post('clasificador/inventario',[controllerClasificador::class,'addInventario']);
+Route::post('clasificador/asignarLote',[controllerClasificador::class,'asignarLote']);
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });

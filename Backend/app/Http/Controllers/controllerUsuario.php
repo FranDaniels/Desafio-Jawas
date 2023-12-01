@@ -107,6 +107,7 @@ class controllerUsuario extends Controller
             $lote->ubicacion=$request->get('ubicacion');
             $lote->estado=$request->get('estado');
             $lote->fecha_entrega=$request->get('fecha_entrega');
+            $lote->disponible=$request->get('disponible');
             $lote->id_usuario=$request->get('idUsuario');
 
             $msg=$lote;
@@ -118,5 +119,21 @@ class controllerUsuario extends Controller
             $cod=404;
         }
         return response()->json(['mens' => $msg],$cod);
+    }
+
+    public function obtenerIdUsu($id){
+        try {
+
+            $usuario=User::find($id);
+
+            $msg=$usuario;
+            $cod=200;
+
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
+
+        return response()->json($msg,$cod);
     }
 }

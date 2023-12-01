@@ -50,7 +50,8 @@ function cargarDatos(estado) {
         descripcion:descripcion.value,
         ubicacion:'Mi casa',
         estado:estado,
-        fecha_entrega:fechaEntrega.value
+        fecha_entrega:fechaEntrega.value,
+        disponible:1
     }
     
     return datos;

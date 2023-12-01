@@ -14,6 +14,10 @@
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
+    # Serve static files from dist without rewriting
+    RewriteRule ^dist/.*\.js - [L]
+    AddType application/javascript .js
+
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f

@@ -7,31 +7,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function realizarInicioSesion() {
         console.log("entro");
-        let correo = document.getElementById('correoElectronico');
-        let contrasena = document.getElementById('contrasena');
-
-        console.log(correo.value);
-        console.log(contrasena.value);
+        let correo = document.getElementById('correoElectronico').value;
+        let contrasena = document.getElementById('contrasena').value;
 
         if (!correo || !contrasena) {
             mostrarError('No se encontraron los campos de correo electrónico o contraseña');
             return;
         }
-
-        let correoValor = correo.value;
-        let contrasenaValor = contrasena.value;
     
         try {
             let datos = {
-                correo: correoValor,
-                password: contrasenaValor,
+                correo: correo,
+                password: contrasena,
             };
 
             const usuarioGuardado = await inicioSesion(datos);
 
-            if (usuarioGuardado && usuarioGuardado.mensaje === 'Inicio de sesion exitoso') {
+            if (usuarioGuardado) {
                 sessionStorage.setItem('usuario', JSON.stringify(usuarioGuardado));
-                window.location.href = "../inicio";
+                window.location.href = "../dist/inicio.html";
             } else {
                 mostrarError("Inicio de sesión fallido. Mensaje: " + usuarioGuardado.mensaje);
             }

@@ -11,8 +11,6 @@ module.exports = {
     output: {
         filename: '[name].main.js',
         path: path.resolve(__dirname, 'dist'),
-        scriptType: "text/javascript",
-        publicPath: '/',
     },
     module: {
         rules: [

@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let errorContainer = document.getElementById('error');
 
     async function realizarInicioSesion() {
-        console.log("entro");
         let correo = document.getElementById('correoElectronico').value;
         let contrasena = document.getElementById('contrasena').value;
 
@@ -25,7 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (usuarioGuardado) {
                 sessionStorage.setItem('usuario', JSON.stringify(usuarioGuardado));
-                window.location.href = "../dist/inicio.html";
+                localStorage.setItem('usuarioId', usuarioGuardado.id);
+                window.location.href = "../inicio/inicio.html";
             } else {
                 mostrarError("Inicio de sesión fallido. Mensaje: " + usuarioGuardado.mensaje);
             }

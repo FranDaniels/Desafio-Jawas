@@ -6,6 +6,7 @@ use App\Models\Lote;
 use Illuminate\Http\Request;
 use App\Models\rol_usuario;
 use App\Models\User;
+use App\Models\Rol;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 
@@ -25,8 +26,11 @@ class controllerUsuario extends Controller
         try {
             $usuario->save();
             $id = $usuario->id;
+
+            $idRolSeleccionado = $request->input('seleccionRol');
+
             $rolU = new rol_usuario;
-            $rolU->id_rol = 2;
+            $rolU->id_rol = $idRolSeleccionado;
             $rolU->id_usuario=$id;
             $rolU->save();
         } catch (Exception $e) {
@@ -46,11 +50,21 @@ class controllerUsuario extends Controller
             $usuario = User::where('correo', $request->input('correo'))->first();
         
             if ($usuario && Hash::check($request->input('password'), $usuario->password)) {
-                return response()->json(['mensaje' => 'Inicio de sesión exitoso'], 200);
+                return response()->json(['mensaje' => 'Inicio de sesión exitoso', 'usuario' => $usuario], 200);
             } else {
                 return response()->json(['mensaje' => 'Correo o contraseña incorrectos'], 401);
             }
         } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function seleccionRol(){
+        try {
+            $roles = Rol::all();
+    
+            return response()->json(['roles' => $roles], 200);
+        } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }

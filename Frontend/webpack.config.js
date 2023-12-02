@@ -11,36 +11,38 @@ module.exports = {
     output: {
         filename: '[name].main.js',
         path: path.resolve(__dirname, 'dist'),
+        publicPath: '/'
     },
     module: {
-        rules: [
-          {
+        rules: [{
             test: /\.s?css$/,
             use: [
               "style-loader", 
               "css-loader",
-            ]
-          }
-        ]
-      },
-      devServer: {
-        historyApiFallback: true,
-      },
+              "sass-loader",
+              {
+                loader: "sass-loader",
+                options: {
+                  implementation: require.resolve("sass"),
+                }
+              }
+        ]}
+      ]},
     
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html',
             filename: 'index.html',
-            chunks: ['login'], // Nombre del entry correspondiente
+            chunks: ['login'], 
         }),
         new HtmlWebpackPlugin({
             template: './src/registro/registro.html',
-            filename: 'registro.html',
+            filename: 'registro/registro.html',
             chunks: ['registro'],
         }),
         new HtmlWebpackPlugin({
           template: './src/inicio/inicio.html',
-          filename: 'inicio.html',
+          filename: 'inicio/inicio.html',
           chunks: ['inicio'],
       }),
     ],

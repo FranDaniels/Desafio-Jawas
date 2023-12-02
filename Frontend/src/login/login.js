@@ -24,6 +24,7 @@ async function realizarInicioSesion() {
         if (usuarioGuardado && usuarioGuardado.usuario) {
             const datosUsuario = usuarioGuardado.usuario;
             sessionStorage.setItem('usuario', JSON.stringify(datosUsuario));
+            localStorage.setItem('usuarioId', datosUsuario.id);
             window.location.href = "../seleccionRol/seleccionRol.html";
         } else {
             mostrarError("Inicio de sesión fallido.");

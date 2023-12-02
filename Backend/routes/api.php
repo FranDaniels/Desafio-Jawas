@@ -32,6 +32,7 @@ Route::delete('admin/borrarUsuario',[controllerAdministrador::class,'borrarUsuar
 Route::get('usuario/{id}',[controllerUsuario::class,'obtenerIdUsu']);
 Route::post('registro',[controllerUsuario::class,'crearUsuario']);
 Route::post('inicioSesion', [controllerUsuario::class, 'inicioSesion']);
+Route::get('seleccionarRol', [controllerUsuario::class, 'seleccionRol']);
 Route::put('modificarPass',[controllerUsuario::class,'modificarPassword']);
 Route::put('modificarDatos',[controllerUsuario::class,'modificarDatos']);
 

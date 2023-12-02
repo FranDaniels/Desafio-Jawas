@@ -7,6 +7,7 @@ module.exports = {
         login: './src/login/login.js',
         registro: './src/registro/registro.js',
         inicio: './src/inicio/inicio.js',
+        seleccionRol: './src/seleccionRol/seleccionRol.js',
     },
     output: {
         filename: '[name].main.js',
@@ -30,20 +31,26 @@ module.exports = {
       ]},
     
     plugins: [
-        new HtmlWebpackPlugin({
-            template: './src/index.html',
-            filename: 'index.html',
-            chunks: ['login'], 
-        }),
-        new HtmlWebpackPlugin({
-            template: './src/registro/registro.html',
-            filename: 'registro/registro.html',
-            chunks: ['registro'],
-        }),
-        new HtmlWebpackPlugin({
+
+      new HtmlWebpackPlugin({
+          template: './src/index.html',
+          filename: 'index.html',
+          chunks: ['login'], 
+      }),
+      new HtmlWebpackPlugin({
+          template: './src/registro/registro.html',
+          filename: 'registro/registro.html',
+          chunks: ['registro'],
+      }),
+      new HtmlWebpackPlugin({
           template: './src/inicio/inicio.html',
           filename: 'inicio/inicio.html',
           chunks: ['inicio'],
       }),
+      new HtmlWebpackPlugin({
+          template: './src/seleccionRol/seleccionRol.html',
+          filename: 'seleccionRol/seleccionRol.html',
+          chunks: ['seleccionRol'],
+      })
     ],
 };

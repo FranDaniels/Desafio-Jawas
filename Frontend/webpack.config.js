@@ -12,27 +12,30 @@ module.exports = {
     output: {
         filename: '[name].main.js',
         path: path.resolve(__dirname, 'dist'),
+        publicPath: '/'
     },
     module: {
-        rules: [
-          {
+        rules: [{
             test: /\.s?css$/,
             use: [
               "style-loader", 
               "css-loader",
-            ]
-          }
-        ]
-      },
-      devServer: {
-        historyApiFallback: true,
-      },
+              "sass-loader",
+              {
+                loader: "sass-loader",
+                options: {
+                  implementation: require.resolve("sass"),
+                }
+              }
+        ]}
+      ]},
     
     plugins: [
+
       new HtmlWebpackPlugin({
           template: './src/index.html',
           filename: 'index.html',
-          chunks: ['login'], // Nombre del entry correspondiente
+          chunks: ['login'], 
       }),
       new HtmlWebpackPlugin({
           template: './src/registro/registro.html',
@@ -40,14 +43,14 @@ module.exports = {
           chunks: ['registro'],
       }),
       new HtmlWebpackPlugin({
-        template: './src/inicio/inicio.html',
-        filename: 'inicio/inicio.html',
-        chunks: ['inicio'],
+          template: './src/inicio/inicio.html',
+          filename: 'inicio/inicio.html',
+          chunks: ['inicio'],
       }),
       new HtmlWebpackPlugin({
-        template: './src/seleccionRol/seleccionRol.html',
-        filename: 'seleccionRol/seleccionRol.html',
-        chunks: ['seleccionRol'],
+          template: './src/seleccionRol/seleccionRol.html',
+          filename: 'seleccionRol/seleccionRol.html',
+          chunks: ['seleccionRol'],
       })
     ],
 };

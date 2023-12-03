@@ -4,6 +4,7 @@ use App\Http\Controllers\controllerAdministrador;
 use App\Http\Controllers\controllerClasificador;
 use App\Http\Controllers\controllerInicioSesion;
 use App\Http\Controllers\controllerUsuario;
+use App\Http\Controllers\controllerRol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,10 +32,13 @@ Route::delete('admin/borrarUsuario',[controllerAdministrador::class,'borrarUsuar
 //Usuario
 Route::get('usuario/{id}',[controllerUsuario::class,'obtenerIdUsu']);
 Route::post('registro',[controllerUsuario::class,'crearUsuario']);
-Route::post('inicioSesion', [controllerUsuario::class, 'inicioSesion']);
-Route::get('seleccionarRol', [controllerUsuario::class, 'seleccionRol']);
 Route::put('modificarPass',[controllerUsuario::class,'modificarPassword']);
 Route::put('modificarDatos',[controllerUsuario::class,'modificarDatos']);
+
+Route::post('inicioSesion', [controllerUsuario::class, 'inicioSesion']);
+
+Route::get('mostrarRol', [controllerRol::class, 'mostrarRol']);
+Route::put('asignarRol', [controllerRol::class, 'asignarRol']);
 
 //Lotes
 Route::post('donar',[controllerUsuario::class,'donar']);

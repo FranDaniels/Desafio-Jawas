@@ -6,7 +6,6 @@ use App\Models\Lote;
 use Illuminate\Http\Request;
 use App\Models\rol_usuario;
 use App\Models\User;
-use App\Models\Rol;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 
@@ -55,16 +54,6 @@ class controllerUsuario extends Controller
                 return response()->json(['mensaje' => 'Correo o contraseña incorrectos'], 401);
             }
         } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-    }
-
-    public function seleccionRol(){
-        try {
-            $roles = Rol::all();
-    
-            return response()->json(['roles' => $roles], 200);
-        } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }

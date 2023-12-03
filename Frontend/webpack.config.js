@@ -43,5 +43,10 @@ module.exports = {
           filename: 'inicio.html',
           chunks: ['inicio'],
       }),
+      new HtmlWebpackPlugin({
+        template: './src/perfil/perfil.html',
+        filename: 'perfil.html',
+        chunks: ['perfil'],
+    }),
     ],
 };

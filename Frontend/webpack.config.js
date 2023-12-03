@@ -48,6 +48,11 @@ module.exports = {
           chunks: ['inicio'],
       }),
       new HtmlWebpackPlugin({
+        template: './src/perfil/perfil.html',
+        filename: 'perfil.html',
+        chunks: ['perfil'],
+    }),
+      new HtmlWebpackPlugin({
           template: './src/seleccionRol/seleccionRol.html',
           filename: 'seleccionRol/seleccionRol.html',
           chunks: ['seleccionRol'],

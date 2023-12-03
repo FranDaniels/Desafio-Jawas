@@ -4,7 +4,6 @@ let btnIniciarSesion = document.getElementById("btn-iniciar-sesion");
 let errorContainer = document.getElementById('error');
 
 async function realizarInicioSesion() {
-    console.log("entro");
     let correo = document.getElementById('correoElectronico').value;
     let contrasena = document.getElementById('contrasena').value;
 

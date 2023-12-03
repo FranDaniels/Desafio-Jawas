@@ -7,6 +7,9 @@ use App\Models\Rol;
 use Exception;
 use App\Models\User;
 
+/**
+ * @author Marina Laguna 
+ */
 class controllerRol extends Controller
 {
     public function mostrarRol(){
@@ -21,7 +24,7 @@ class controllerRol extends Controller
 
     public function asignarRol(Request $request) {
         try {
-            $correoUsuario = $request->input('correoUsuario');
+            $correoUsuario = $request->input('correo');
             $nombreRolSeleccionado = $request->input('nombreRol');
     
             $usuario = User::where('correo', $correoUsuario)->first();

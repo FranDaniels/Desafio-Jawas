@@ -30,9 +30,20 @@ if (btnConfirmar) {
         try {
             const selectedRol = seleccionRol.value;
 
-            await asignarRol({ idRol: selectedRol });
-            window.location.href = '/ruta-de-redireccion';
-            console.error('No se ha seleccionado ningún rol.');
+            if (!selectedRol) {
+                console.error('No se ha seleccionado ningún rol.');
+                return;
+            }
+
+            const correoUsuario = sessionStorage.getItem('correoUsuario');
+
+            if (!correoUsuario) {
+                console.error('Correo de usuario no encontrado en el sessionStorage');
+                return;
+            }
+
+            await asignarRol({ nombreRol: selectedRol, correoUsuario });
+            // window.location.href = '/ruta-de-redireccion';
         } catch (error) {
             console.error('Error en la llamada:', error);
         }

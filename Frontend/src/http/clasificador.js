@@ -43,3 +43,23 @@ export async function listarLotes(){
         return data;          
       }
   }
+
+  export async function listarMisLotes(id){   
+
+    let headersList = {
+    "Content-Type": "application/json",
+      };
+  console.log(id)
+      let response = await fetch("http://127.0.0.1:8000/api/clasificador/listarMisLotes/"+id, { 
+        method: "GET",
+        headers: headersList
+      });
+      
+    if (!response.ok) {
+        throw new Error('Error')
+      }else{
+        let data = await response.json();
+        console.log(data)
+        return data;          
+      }
+  }

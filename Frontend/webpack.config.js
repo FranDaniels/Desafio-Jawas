@@ -8,6 +8,9 @@ module.exports = {
         registro: './src/registro/registro.js',
         inicio: './src/inicio/inicio.js',
         seleccionRol: './src/seleccionRol/seleccionRol.js',
+        admin: './src/admin/admin.js',
+        clasificador: './src/clasificador/clasificador.js',
+        donar: './src/donar/donar.js'
     },
     output: {
         filename: '[name].main.js',
@@ -49,13 +52,28 @@ module.exports = {
       }),
       new HtmlWebpackPlugin({
         template: './src/perfil/perfil.html',
-        filename: 'perfil.html',
+        filename: 'perfil/perfil.html',
         chunks: ['perfil'],
     }),
       new HtmlWebpackPlugin({
           template: './src/seleccionRol/seleccionRol.html',
           filename: 'seleccionRol/seleccionRol.html',
           chunks: ['seleccionRol'],
-      })
+      }),
+      new HtmlWebpackPlugin({
+        template: './src/admin/admin.html',
+        filename: 'admin/admin.html',
+        chunks: ['admin'],
+      }),
+      new HtmlWebpackPlugin({
+        template: './src/clasificador/clasificador.html',
+        filename: 'clasificador/clasificador.html',
+        chunks: ['clasificador'],
+      }),
+      new HtmlWebpackPlugin({
+        template: './src/donar/donar.html',
+        filename: 'donar/donar.html',
+        chunks: ['donar'],
+      }),
     ],
 };

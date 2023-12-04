@@ -32,7 +32,7 @@ export async function asignarRol(data) {
     }
 
     try {
-        const response = await fetch('https://127.0.0.1:8000/api/asignarRol', {
+        const response = await fetch('http://127.0.0.1:8000/api/asignarRol', {
             method: 'PUT', 
             headers: {
                 'Content-Type': 'application/json',

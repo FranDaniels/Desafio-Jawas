@@ -10,6 +10,8 @@ var btnClasificar=document.getElementById('clasificar')
 var btnCancelar=document.getElementById('cancelar')
 
 var componentesMostrados=[]
+var tiposComponentes=[]
+var cantidadComponentes=[]
 
 var idLote=localStorage.getItem('idLote')
 
@@ -77,6 +79,7 @@ function generarFilaComponente(tipoComponente){
     tipo.setAttribute("disabled",true)
     tipo.setAttribute("style","width: 150px")
     tipo.setAttribute("id",tipoComponente)
+    tipo.setAttribute("name","tipoComponentes")
     tipo.value=tipoComponente
 
     cell1.appendChild(tipo)
@@ -87,6 +90,7 @@ function generarFilaComponente(tipoComponente){
     cantidad.setAttribute("class","form-control")
     cantidad.setAttribute("type","number")
     cantidad.setAttribute("id","cantidad"+tipoComponente)
+    cantidad.setAttribute("name","cantidadComponentes")
     cantidad.setAttribute("style","width: 150px")
 
     cell2.appendChild(cantidad)
@@ -122,7 +126,17 @@ btnAdd.addEventListener("click",function(){
 })
 
 btnClasificar.addEventListener("click",function(){
-    
+    var tipos=document.getElementsByName('tipoComponentes')
+    var cantidad=document.getElementsByName('cantidadComponentes')
+
+    for (let i = 0; i < tipos.length; i++) {
+        tiposComponentes.push(tipos[i].id)
+    }
+
+    for (let i = 0; i < cantidad.length; i++) {
+        cantidadComponentes.push(cantidad[i].value)
+    }
+
 })
 
 btnCancelar.addEventListener("click",function(){

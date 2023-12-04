@@ -44,6 +44,7 @@ Route::put('asignarRol', [controllerRol::class, 'asignarRol']);
 Route::post('donar',[controllerUsuario::class,'donar']);
 
 //Clasificador
+Route::get('clasificador/componentes',[controllerClasificador::class,'listarComponentes']);
 Route::get('clasificador/listarLotesNombre',[controllerClasificador::class,'listarLoteNombreUsu']);
 Route::get('clasificador/listarLotes',[controllerClasificador::class,'listarLotes']);
 Route::get('clasificador/listarLote/{id}',[controllerClasificador::class,'listarLote']);

@@ -166,4 +166,18 @@ class controllerClasificador extends Controller
 
         return response()->json($msg,$cod);
     }
+
+    public function listarComponentes(){
+        try {
+            $componentes = DB::select('SELECT tipo FROM componente');
+
+            $msg=$componentes;
+            $cod=200;
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
+
+        return response()->json($msg,$cod);
+    }
 }

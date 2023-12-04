@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Joya;
 use Exception;
 
+/**
+ * @author Marina Laguna
+ */
 class ControllerJoyas extends Controller
 {
     public function listarJoyas(){

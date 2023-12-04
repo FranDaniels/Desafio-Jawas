@@ -1,17 +1,24 @@
-import { listarLote } from "../http/clasificador.js"
+import { listarComponentes, listarLote } from "../http/clasificador.js"
 
 var h1=document.getElementById('h1');
 var descripcion=document.getElementById('descripcion');
 var ubicacion=document.getElementById('ubicacion');
 var estado=document.getElementById('estado');
+var btnAdd=document.getElementById('addComponente')
+var btnClasificar=document.getElementById('clasificar')
+var btnCancelar=document.getElementById('cancelar')
 
 var idLote=localStorage.getItem('idLote')
-console.log(idLote)
 
 await listarLote(idLote).then(function(data){
     var lote=data;
     var datos=cargarDatos(lote)
     cargarLote(datos)
+})
+
+await listarComponentes().then(function(data){
+    var componentes=data;
+    generarTablaComponentes(componentes)
 })
 
 function cargarDatos(lote){
@@ -33,6 +40,75 @@ function cargarLote(datos){
     estado.textContent=datos.estado
 }
 
-function generarTablaComponentes(){
-    
+function generarTablaComponentes(componentes){
+    const selectTable=document.getElementById('select')
+
+    const select=document.createElement("select")
+    select.setAttribute("class","form-select")
+    select.setAttribute("style","width: 150px")
+    select.setAttribute("id","selectComponente")
+
+    for (let i = 0; i < componentes.length; i++) {
+
+        let key=["tipo"]
+
+        for (let j = 0; j < key.length; j++) {
+            const option=document.createElement("option")
+            
+            option.setAttribute("value",i)
+
+            option.textContent=componentes[i][key[j]]
+            select.appendChild(option)
+        }
+        selectTable.appendChild(select)
+    }
 }
+
+function generarFilaComponente(tipoComponente){
+    const componenteBody=document.getElementById("tbody")
+    const row = document.createElement("tr");
+    const cell1 = document.createElement("td");
+
+    const tipo=document.createElement("input")
+    tipo.setAttribute("class","form-control")
+    tipo.setAttribute("disabled",true)
+    tipo.setAttribute("style","width: 150px")
+    tipo.value=tipoComponente
+
+    cell1.appendChild(tipo)
+    row.appendChild(cell1)
+   
+    const cell2 = document.createElement("td");
+    const cantidad=document.createElement("input")
+    cantidad.setAttribute("class","form-control")
+    cantidad.setAttribute("type","number")
+    cantidad.setAttribute("style","width: 150px")
+
+    cell2.appendChild(cantidad)
+    row.appendChild(cell2)
+
+    componenteBody.appendChild(row)
+}
+
+btnAdd.addEventListener("click",function(){
+    var selectedOption=document.getElementById('selectComponente')
+    var i=0;
+    var encontrado=false
+    while (encontrado==false) {     
+        if (selectedOption[i].selected) {
+              encontrado=true
+            var componenteTipo=selectedOption[i].textContent
+        } 
+        i++   
+    }
+    
+    generarFilaComponente(componenteTipo)
+})
+
+btnClasificar.addEventListener("click",function(){
+    
+})
+
+btnCancelar.addEventListener("click",function(){
+    window.location.href="../inicio/inicio.html"
+})

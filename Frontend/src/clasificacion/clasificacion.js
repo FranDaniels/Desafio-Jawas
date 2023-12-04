@@ -1,23 +1,38 @@
 import { listarLote } from "../http/clasificador.js"
 
+var h1=document.getElementById('h1');
+var descripcion=document.getElementById('descripcion');
+var ubicacion=document.getElementById('ubicacion');
+var estado=document.getElementById('estado');
+
 var idLote=localStorage.getItem('idLote')
 console.log(idLote)
 
 await listarLote(idLote).then(function(data){
     var lote=data;
-    generarLote(lote)
+    var datos=cargarDatos(lote)
+    cargarLote(datos)
 })
 
-function generarLote(lote) {
-    const divClasificacion = document.getElementById("clasificacion");
+function cargarDatos(lote){
 
-    for (let i = 0; i < lote.length; i++) {
-        let key = ["id", "descripcion", "estado", "ubicacion", "fecha_entrega", "id_usuario"];
-
-        for (let j = 0; j < key.length; j++) {
-            const h1 = document.createElement("h1");
-            h1.textContent = `Lote ${key[j]}: ${lote[i][key[j]]}`;
-            divClasificacion.appendChild(h1);
-        }
+    var datos={
+        id:lote.mens[0].id,
+        descripcion:lote.mens[0].descripcion,
+        ubicacion:lote.mens[0].ubicacion,
+        estado:lote.mens[0].estado
     }
+
+    return datos;
+}
+
+function cargarLote(datos){
+    h1.textContent='Lote:'+ ' '+datos.id
+    descripcion.textContent=datos.descripcion
+    ubicacion.textContent=datos.ubicacion
+    estado.textContent=datos.estado
+}
+
+function generarTablaComponentes(){
+    
 }

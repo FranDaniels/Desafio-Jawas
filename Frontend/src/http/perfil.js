@@ -1,14 +1,14 @@
 export async function cambiarDatos(datos){ 
-  console.log(datos)  
-  console.log(datos.id)  
+  
     let bodyContent = JSON.stringify(
       {
         "id":datos.id,
         "nombre": datos.nombre,
         "apellido": datos.apellido,
-        "correo": datos.correo,
+        "correo": datos.correo
       }
   );  
+
 
     let headersList = {
     "Content-Type": "application/json",
@@ -19,7 +19,7 @@ export async function cambiarDatos(datos){
         body: bodyContent,
         headers: headersList
     });
-  
+ 
     if (!response.ok) {
       throw new Error('Error')
     }else{

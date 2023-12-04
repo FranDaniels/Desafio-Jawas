@@ -10,7 +10,8 @@ module.exports = {
         seleccionRol: './src/seleccionRol/seleccionRol.js',
         admin: './src/admin/admin.js',
         clasificador: './src/clasificador/clasificador.js',
-        donar: './src/donar/donar.js'
+        donar: './src/donar/donar.js',
+        perfil: './src/perfil/perfil.js'
     },
     output: {
         filename: '[name].main.js',

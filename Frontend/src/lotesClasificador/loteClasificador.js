@@ -1,7 +1,7 @@
 import { asignarLoteUsuario, listarLotes, listarMisLotes } from "../http/clasificador.js"
 
 var tabla=document.getElementById("tbody")
-var idUsuario=localStorage.getItem("idUsuario")
+var idUsuario=localStorage.getItem("usuarioId")
 
 await listarMisLotes(idUsuario).then(function(data){
     var lotes=data;
@@ -38,7 +38,7 @@ function generarTablaLotes(lotes) {
     }
 }
 
-function asignarLote(btnAsignar) {
+function clasificarLote(btnAsignar) {
     btnAsignar.addEventListener("click",function(event){
         var idLote=event.target.id
         localStorage.setItem("idLote",idLote)

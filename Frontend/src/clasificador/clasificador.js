@@ -41,9 +41,7 @@ function asignarLote(btnAsignar) {
     btnAsignar.addEventListener("click",function(event){
         var idLote=event.target.id
         localStorage.setItem("idLote",idLote)
-        var idUsuarioItem=2
-        var idUsuario=localStorage.setItem("idUsuario",idUsuarioItem)
-        var idUsuario=localStorage.getItem("idUsuario")
+        var idUsuario=localStorage.getItem("usuarioId")
 
         var datos={
             idUsuario:idUsuario,

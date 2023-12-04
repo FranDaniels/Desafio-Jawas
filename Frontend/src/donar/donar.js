@@ -47,13 +47,15 @@ if (comprobarPantallaDonar()) {
 })
 
 function cargarDatos(estado) {
+    var idUsuario=localStorage.getItem("usuarioId")
+console.log(idUsuario)
     var datos={
         descripcion:descripcion.value,
         ubicacion:'Mi casa',
         estado:estado,
         fecha_entrega:fechaEntrega.value,
-        disponible:"2",
-        id_usuario:1
+        disponible:"1",
+        id_usuario:idUsuario
     }
     
     return datos;

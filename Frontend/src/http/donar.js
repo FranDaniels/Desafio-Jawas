@@ -1,7 +1,7 @@
 export async function donarLote(datos){   
 
   console.log(datos)
-  console.log(datos.descripcion)
+  console.log(datos.id_usuario)
     let bodyContent = JSON.stringify(
       {
         "descripcion":datos.descripcion,
@@ -9,7 +9,7 @@ export async function donarLote(datos){
         "estado": datos.estado,
         "fecha_entrega": datos.fecha_entrega,
         "disponible":1,
-        "idUsuario":1
+        "idUsuario":datos.id_usuario
       }
   );  
 

@@ -1,4 +1,4 @@
-import { asignarLoteUsuario, listarLotes, listarMisLotes } from "../http/clasificador.js"
+import { listarMisLotes } from "../http/clasificador.js"
 
 var tabla=document.getElementById("tbody")
 var idUsuario=localStorage.getItem("usuarioId")
@@ -6,7 +6,7 @@ var idUsuario=localStorage.getItem("usuarioId")
 await listarMisLotes(idUsuario).then(function(data){
     var lotes=data;
     generarTablaLotes(lotes)
-    asignarLote(tabla)
+    clasificarLote(tabla)
 })
 
 function generarTablaLotes(lotes) {
@@ -30,7 +30,7 @@ function generarTablaLotes(lotes) {
         const btn=document.createElement("a")
         btn.text="Clasificar Lote"
         btn.style.color="black"
-        btn.id=lotes[i].lote_id
+        btn.id=lotes[i].id
         btn.setAttribute("class","btn btn-primary")
         row.appendChild(btn)
 
@@ -42,15 +42,6 @@ function clasificarLote(btnAsignar) {
     btnAsignar.addEventListener("click",function(event){
         var idLote=event.target.id
         localStorage.setItem("idLote",idLote)
-        var idUsuarioItem=3
-        var idUsuario=localStorage.setItem("idUsuario",idUsuarioItem)
-        var idUsuario=localStorage.getItem("idUsuario")
-
-        var datos={
-            idUsuario:idUsuario,
-            idLote:idLote
-        }
-
-        asignarLoteUsuario(datos)
+        window.location.href="../clasificacion/clasificacion.html";
     })
 }

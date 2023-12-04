@@ -47,6 +47,7 @@ Route::post('donar',[controllerUsuario::class,'donar']);
 Route::get('clasificador/listarLotesNombre',[controllerClasificador::class,'listarLoteNombreUsu']);
 Route::get('clasificador/listarLotes',[controllerClasificador::class,'listarLotes']);
 Route::get('clasificador/listarLote',[controllerClasificador::class,'listarLote']);
+Route::get('clasificador/listarMisLotes/{id}',[controllerClasificador::class,'listarMisLotes']);
 Route::post('clasificador/componente',[controllerClasificador::class,'crearComponente']);
 Route::post('clasificador/inventario',[controllerClasificador::class,'addInventario']);
 Route::post('clasificador/asignarLote',[controllerClasificador::class,'asignarLote']);

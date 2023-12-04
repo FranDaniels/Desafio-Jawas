@@ -1,4 +1,5 @@
 import { listarComponentes, listarLote } from "../http/clasificador.js"
+import { includes, tieneElementosRepetidos } from "../utils/funciones.js";
 
 var h1=document.getElementById('h1');
 var descripcion=document.getElementById('descripcion');
@@ -7,6 +8,8 @@ var estado=document.getElementById('estado');
 var btnAdd=document.getElementById('addComponente')
 var btnClasificar=document.getElementById('clasificar')
 var btnCancelar=document.getElementById('cancelar')
+
+var componentesMostrados=[]
 
 var idLote=localStorage.getItem('idLote')
 
@@ -73,6 +76,7 @@ function generarFilaComponente(tipoComponente){
     tipo.setAttribute("class","form-control")
     tipo.setAttribute("disabled",true)
     tipo.setAttribute("style","width: 150px")
+    tipo.setAttribute("id",tipoComponente)
     tipo.value=tipoComponente
 
     cell1.appendChild(tipo)
@@ -82,6 +86,7 @@ function generarFilaComponente(tipoComponente){
     const cantidad=document.createElement("input")
     cantidad.setAttribute("class","form-control")
     cantidad.setAttribute("type","number")
+    cantidad.setAttribute("id","cantidad"+tipoComponente)
     cantidad.setAttribute("style","width: 150px")
 
     cell2.appendChild(cantidad)
@@ -91,18 +96,29 @@ function generarFilaComponente(tipoComponente){
 }
 
 btnAdd.addEventListener("click",function(){
+    try {
     var selectedOption=document.getElementById('selectComponente')
+    var error=document.getElementById('errorClasificar')
     var i=0;
     var encontrado=false
     while (encontrado==false) {     
         if (selectedOption[i].selected) {
-              encontrado=true
-            var componenteTipo=selectedOption[i].textContent
+            if (includes(componentesMostrados,selectedOption[i].textContent)) {
+                error.innerHTML="Ya has creado uno aumenta la cantidad del ya creado"
+                error.style.color="red"
+            }else{
+                error.innerHTML=""
+                encontrado=true
+                var componenteTipo=selectedOption[i].textContent
+                componentesMostrados.push(selectedOption[i].textContent)
+                generarFilaComponente(componenteTipo)
+            }
         } 
         i++   
     }
-    
-    generarFilaComponente(componenteTipo)
+    } catch (error) {
+        console.log('Esta duplicado')           
+    }
 })
 
 btnClasificar.addEventListener("click",function(){

@@ -24,7 +24,8 @@ fechaEntrega.addEventListener('click', function() {
     }
 });
 
-btnDonar.addEventListener("click", async function(){
+btnDonar.addEventListener("click", async function(event){
+    event.preventDefault()
     var opcionEstado=document.getElementById("estado").value;
     var estado=false;
 if (comprobarPantallaDonar()) {
@@ -51,7 +52,8 @@ function cargarDatos(estado) {
         ubicacion:'Mi casa',
         estado:estado,
         fecha_entrega:fechaEntrega.value,
-        disponible:1
+        disponible:"2",
+        id_usuario:1
     }
     
     return datos;

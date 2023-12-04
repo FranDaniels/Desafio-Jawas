@@ -26,11 +26,10 @@ class controllerClasificador extends Controller
         return response()->json($msg,$cod);
     }
 
-    public function listarLote(Request $request){
+    public function listarLote($id){
         try {
-            $id=$request->get('idLote');
 
-            $lote=Lote::find($id);
+            $lote = DB::select('SELECT * FROM lote WHERE id = ?', [$id]);
 
             $msg=$lote;
             $cod=200;

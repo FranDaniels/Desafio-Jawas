@@ -13,7 +13,7 @@
             <p id="errores"></p>
             <h1>Donar Lote</h1>
             <div class="row">
-                <form class="row g-3" id="formularioRegistro">
+                <form class="row g-3" id="formularioRegistro" onsubmit="event.preventDefault()">
                     <div class="col-md-6">
                         <label class="form-label">Descripción<p id="errorDescripcion"></p></label><br>
                         <textarea class="form-control" id="descripcion" name="descripcion" cols="10" rows="12"></textarea>
@@ -43,6 +43,6 @@
             </div>
         </div>
     </div>
-    <script type="module" src="./donar.js"></script>
+    <script type="module" src="../../dist/donar.main.js"></script>
 </body>
 </html>

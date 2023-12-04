@@ -11,7 +11,8 @@ module.exports = {
         admin: './src/admin/admin.js',
         clasificador: './src/clasificador/clasificador.js',
         donar: './src/donar/donar.js',
-        perfil: './src/perfil/perfil.js'
+        perfil: './src/perfil/perfil.js',
+        loteClasificador: './src/lotesClasificador/loteClasificador.js'
     },
     output: {
         filename: '[name].main.js',
@@ -75,6 +76,11 @@ module.exports = {
         template: './src/donar/donar.html',
         filename: 'donar/donar.html',
         chunks: ['donar'],
+      }),
+      new HtmlWebpackPlugin({
+        template: './src/lotesClasificador/loteClasificador.html',
+        filename: 'lotesClasificador/loteClasificador.html',
+        chunks: ['loteClasificador'],
       }),
     ],
 };

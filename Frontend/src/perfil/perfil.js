@@ -10,9 +10,9 @@ let formularioPassword=document.getElementById("formularioPassword")
 let btnPassword=document.getElementById("btnPassword")
 let btnDatos=document.getElementById("btnDatos")
 
-var id="1";
+var idUsuario=localStorage.getItem("usuarioId")
 
-await obtenerUsuario(id).then(function(data){
+await obtenerUsuario(idUsuario).then(function(data){
     cargarDatos(data)
   }).catch(function(error){
     return error
@@ -30,7 +30,7 @@ btnDatos.addEventListener("click", async function(event){
   event.preventDefault()
 
     if ( comprobarValidacionePerfil(nombre,apellido,correo,password)) {
-    var datos=cargarDatosCambiados(id)
+    var datos=cargarDatosCambiados(idUsuario)
     await cambiarDatos(datos).then(function(data){
     })
     }
@@ -39,7 +39,7 @@ btnDatos.addEventListener("click", async function(event){
 btnPassword.addEventListener("click",async function(event){
   event.preventDefault()
     if (comprobarPasswordPerfil(password)) {
-        var datos=cargarPasswordCambiada(id)
+        var datos=cargarPasswordCambiada(idUsuario)
         await cambiarPassword(datos).then(function(data){
         })
 

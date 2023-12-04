@@ -26,11 +26,10 @@ class controllerClasificador extends Controller
         return response()->json($msg,$cod);
     }
 
-    public function listarLote(Request $request){
+    public function listarLote($id){
         try {
-            $id=$request->get('idLote');
 
-            $lote=Lote::find($id);
+            $lote = DB::select('SELECT * FROM lote WHERE id = ?', [$id]);
 
             $msg=$lote;
             $cod=200;
@@ -139,9 +138,41 @@ class controllerClasificador extends Controller
         return response()->json(['mens' => $msg],$cod);
     }
 
-    public function listarMisLotes(){
+    public function listarMisLotes($id){
         try {
-            $misLotes=DB::select('');
+            $misLotes = DB::select('
+            SELECT
+                l.id,
+                l.descripcion,
+                l.ubicacion,
+                l.estado,
+                l.fecha_entrega,
+                l.disponible,
+                l.id_usuario
+            FROM
+                lote l
+            JOIN
+                lote_usuario lu ON l.id = lu.id_lote
+            WHERE
+                lu.id_usuario = ?
+            ',[$id]);
+
+            $msg=$misLotes;
+            $cod=200;
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
+
+        return response()->json($msg,$cod);
+    }
+
+    public function listarComponentes(){
+        try {
+            $componentes = DB::select('SELECT tipo FROM componente');
+
+            $msg=$componentes;
+            $cod=200;
         } catch (Exception $e) {
             $msg=$e;
             $cod=404;

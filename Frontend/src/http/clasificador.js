@@ -22,8 +22,7 @@ export async function listarLotes(){
     let headersList = {
       "Content-Type": "application/json"
      }
-     console.log(datos)
-    console.log(datos.idLote)
+     
      let bodyContent = JSON.stringify({
        "idUsuario":datos.idUsuario,
        "idLote":datos.idLote
@@ -43,3 +42,63 @@ export async function listarLotes(){
         return data;          
       }
   }
+
+  export async function listarMisLotes(id){   
+
+    let headersList = {
+    "Content-Type": "application/json",
+      };
+
+      let response = await fetch("http://127.0.0.1:8000/api/clasificador/listarMisLotes/"+id, { 
+        method: "GET",
+        headers: headersList
+      });
+      
+    if (!response.ok) {
+        throw new Error('Error')
+      }else{
+        let data = await response.json();
+        
+        return data;          
+      }
+  }
+
+  export async function listarLote(id){   
+
+    let headersList = {
+    "Content-Type": "application/json",
+      };
+
+      let response = await fetch("http://127.0.0.1:8000/api/clasificador/listarLote/"+id, { 
+        method: "GET",
+        headers: headersList
+      });
+      
+    if (!response.ok) {
+        throw new Error('Error')
+      }else{
+        let data = await response.json();
+        
+        return data;          
+      }
+  }
+
+export async function listarComponentes(){   
+
+  let headersList = {
+  "Content-Type": "application/json",
+    };
+
+    let response = await fetch("http://127.0.0.1:8000/api/clasificador/componentes", { 
+      method: "GET",
+      headers: headersList
+    });
+    
+  if (!response.ok) {
+      throw new Error('Error')
+    }else{
+      let data = await response.json();
+      
+      return data;          
+    }
+}

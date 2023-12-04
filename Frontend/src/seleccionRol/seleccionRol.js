@@ -35,13 +35,13 @@ if (btnConfirmar) {
                 return;
             }
 
-            const correoUsuario = sessionStorage.getItem('correoUsuario');
+            const correoUsuario = JSON.parse(sessionStorage.getItem('usuario')).correo;
 
             if (!correoUsuario) {
                 console.error('Correo de usuario no encontrado en el sessionStorage');
                 return;
             }
-
+            
             await asignarRol({ nombreRol: selectedRol, correoUsuario });
             // window.location.href = '/ruta-de-redireccion';
         } catch (error) {

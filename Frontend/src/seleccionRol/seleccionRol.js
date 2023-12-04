@@ -42,7 +42,7 @@ if (btnConfirmar) {
                 return;
             }
             
-            await asignarRol({ nombreRol: selectedRol, correoUsuario });
+            await asignarRol({ correoUsuario, nombreRol: selectedRol });
             // window.location.href = '/ruta-de-redireccion';
         } catch (error) {
             console.error('Error en la llamada:', error);

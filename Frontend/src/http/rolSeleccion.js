@@ -43,10 +43,14 @@ export async function asignarRol(data) {
             }),
         });
 
+        console.log({
+            correo: correo,
+            nombreRol: data.nombreRol,
+        })
+
         if (!response.ok){
             throw new Error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
         }
-
     } catch (error) {
         console.error('Error en la llamada:', error);
     }

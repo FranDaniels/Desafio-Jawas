@@ -10,7 +10,7 @@ let formularioPassword=document.getElementById("formularioPassword")
 let btnDatos=document.getElementById("btnDatos")
 let btnPassword=document.getElementById("btnPassword")
 
-var id="32";
+var id="1";
 
 await obtenerUsuario(id).then(function(data){
     cargarDatos(data)

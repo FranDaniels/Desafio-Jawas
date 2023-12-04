@@ -6,6 +6,7 @@ module.exports = {
     entry: {
         login: './src/login/login.js',
         registro: './src/registro/registro.js',
+        perfil : './src/perfil/perfil.js',
         inicio: './src/inicio/inicio.js',
         seleccionRol: './src/seleccionRol/seleccionRol.js',
         admin: './src/admin/admin.js',

@@ -139,9 +139,27 @@ class controllerClasificador extends Controller
         return response()->json(['mens' => $msg],$cod);
     }
 
-    public function listarMisLotes(){
+    public function listarMisLotes($id){
         try {
-            $misLotes=DB::select('');
+            $misLotes = DB::select('
+            SELECT
+                l.id,
+                l.descripcion,
+                l.ubicacion,
+                l.estado,
+                l.fecha_entrega,
+                l.disponible,
+                l.id_usuario
+            FROM
+                lote l
+            JOIN
+                lote_usuario lu ON l.id = lu.id_lote
+            WHERE
+                lu.id_usuario = ?
+            ',[$id]);
+
+            $msg=$misLotes;
+            $cod=200;
         } catch (Exception $e) {
             $msg=$e;
             $cod=404;

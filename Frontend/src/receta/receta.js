@@ -3,22 +3,23 @@ import { obtenerRecetas } from '../http/receta.js';
 async function mostrarRecetas() {
     try {
         let response = await obtenerRecetas();
-        let roles = response.roles;
-
-        seleccionRol.innerHTML = '';
-
-        if (Array.isArray(roles)) {
-            roles.forEach((rol) => {
-                let opcion = document.createElement('option');
-                opcion.value = rol.id;
-                opcion.textContent = rol.nombre;
-                seleccionRol.appendChild(opcion);
+        let recetas = response.recetas;
+ 
+        let listaRecetas = document.querySelector('.list-group');
+ 
+        listaRecetas.innerHTML = '';
+ 
+        if (Array.isArray(recetas)) {
+            recetas.forEach((receta) => {
+                let itemLista = document.createElement('li');
+                itemLista.classList.add('list-group-item');
+                itemLista.textContent = receta.nombre;
+                listaRecetas.appendChild(itemLista);
             });
-        } else {
-            console.error('La propiedad roles en la respuesta de la API no es un array:', roles);
         }
     } catch (error) {
-        console.error('Error al obtener las recetas:', error);
+        console.error('Error al obtener recetas:', error);
     }
 }
+ 
 mostrarRecetas();

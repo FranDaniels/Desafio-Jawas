@@ -9,7 +9,7 @@ class despiece extends Model
 {
     use HasFactory;
 
-    protected $table='despiece';
+    protected $table='Despiece';
     public $timestamps = true;
 
     protected $fillable = [

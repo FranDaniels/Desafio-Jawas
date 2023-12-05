@@ -13,6 +13,8 @@ class Joya extends Model
 {
     use HasFactory;
 
+    protected $table = 'joya';
+
     protected $fillable = [
         'nombre',
         'descripcion',

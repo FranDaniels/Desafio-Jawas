@@ -1,4 +1,4 @@
-import { addInventario, listarComponentes, listarLote, listarComponente } from "../http/clasificador.js"
+import { addInventario, listarComponentes, listarLote, listarComponente, realizarDespiece } from "../http/clasificador.js"
 import { includes, tieneElementosRepetidos } from "../utils/funciones.js";
 
 var h1=document.getElementById('h1');
@@ -14,6 +14,7 @@ var tiposComponentes=[]
 var cantidadComponentes=[]
 
 var idLote=localStorage.getItem('idLote')
+var idUsuario=localStorage.getItem('usuarioId')
 
 await listarLote(idLote).then(function(data){
     var lote=data;
@@ -144,9 +145,13 @@ btnClasificar.addEventListener("click", async function(){
         })
         var datos={
             idLote:idLote,
+            idUsuario:idUsuario,
             idComponente:tiposComponentes[i],
             cantidad:cantidadComponentes[i]
         }
+        await realizarDespiece(datos).then(function(data){
+            console.log('Despiece realizado')
+        })
         await addInventario(datos).then(function(data){
             console.log('Datos guardados')
         })

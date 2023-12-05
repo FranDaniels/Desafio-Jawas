@@ -7,3 +7,4 @@ php artisan db:seed --class=LoteSeeder
 php artisan db:seed --class=LoteUserSeeder
 php artisan db:seed --class=ComponenteSeeder 
 php artisan db:seed --class=InventarioSeeder
+php artisan db:seed --class=RecetaSeeder

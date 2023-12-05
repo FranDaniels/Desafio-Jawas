@@ -25,29 +25,19 @@ async function mostrarRoles() {
     }
 }
 
-if (btnConfirmar) {
-    btnConfirmar.addEventListener('click', async function () {
-        try {
-            const selectedRol = seleccionRol.value;
 
-            if (!selectedRol) {
-                console.error('No se ha seleccionado ningún rol.');
-                return;
-            }
+btnConfirmar.addEventListener('click', async function () {
+    let selectedRol = seleccionRol.value;
+    let correoUsuario = JSON.parse(sessionStorage.getItem('usuario')).correo;
 
-            const correoUsuario = JSON.parse(sessionStorage.getItem('usuario')).correo;
+    let datos = {
+        correoUsuario: correoUsuario,
+        nombreRol: selectedRol
+    };
 
-            if (!correoUsuario) {
-                console.error('Correo de usuario no encontrado en el sessionStorage');
-                return;
-            }
-            
-            await asignarRol({ nombreRol: selectedRol, correoUsuario });
-            // window.location.href = '/ruta-de-redireccion';
-        } catch (error) {
-            console.error('Error en la llamada:', error);
-        }
-    });
-}
+    await asignarRol(datos);
+    // window.location.href = '/ruta-de-redireccion';
+
+});
 
 mostrarRoles();

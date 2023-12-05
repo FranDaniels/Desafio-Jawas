@@ -20,6 +20,6 @@ async function mostrarRecetas() {
     } catch (error) {
         console.error('Error al obtener recetas:', error);
     }
- }
+}
  
- mostrarRecetas();
+mostrarRecetas();

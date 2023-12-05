@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Componente;
+use App\Models\despiece;
 use App\Models\Inventario;
 use App\Models\Lote;
 use App\Models\lote_usuario;
@@ -200,6 +201,27 @@ class controllerClasificador extends Controller
             $componentes = DB::select('SELECT tipo FROM componente');
 
             $msg=$componentes;
+            $cod=200;
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
+
+        return response()->json($msg,$cod);
+    }
+
+    public function realizarDespiece(Request $request){
+        try {
+            $despiece = new despiece;
+
+            $despiece->id_lote=$request->get('idLote');
+            $despiece->id_usuario_clasificador=$request->get('idUsuario');
+            $despiece->id_componente=$request->get('idComponente');
+            $despiece->cantidad=$request->get('cantidad');
+
+            $despiece->save();
+            
+            $msg=$despiece;
             $cod=200;
         } catch (Exception $e) {
             $msg=$e;

@@ -50,6 +50,7 @@ Route::get('clasificador/listarLotes',[controllerClasificador::class,'listarLote
 Route::get('clasificador/listarLote/{id}',[controllerClasificador::class,'listarLote']);
 Route::get('clasificador/listarMisLotes/{id}',[controllerClasificador::class,'listarMisLotes']);
 Route::get('clasificador/listarComponente/{id}',[controllerClasificador::class,'listarComponente']);
+Route::post('clasificador/despiece',[controllerClasificador::class,'realizarDespiece']);
 Route::post('clasificador/componente',[controllerClasificador::class,'crearComponente']);
 Route::post('clasificador/inventario',[controllerClasificador::class,'addInventario']);
 Route::post('clasificador/asignarLote',[controllerClasificador::class,'asignarLote']);

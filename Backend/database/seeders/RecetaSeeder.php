@@ -2,37 +2,31 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Receta;
-use App\Models\Joya;
-use App\Models\Componente;
 
+/**
+ * @author Marina Laguna
+ */
 class RecetaSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-         $joya = Joya::where('nombre', 'Pulsera de placa base')->first();
+        \App\Models\Receta::create([
+            'id_joya' => 1,
+            'id_componente' => 1,
+            'cantidad' => 3,
+        ]);
 
-         $componentes = $joya->componentes;
- 
-         foreach ($componentes as $componente) {
-             Receta::create([
-                 'id_joya' => $joya->id,
-                 'id_componente' => $componente->id,
-                 'cantidad' => 1,
-             ]);
-         }
- 
-         $otraJoya = Joya::where('nombre', 'Pendiente de disco duro')->first();
-         $otroComponente = Componente::where('nombre', 'Tarjeta de video')->first();
-         Receta::create([
-             'id_joya' => $otraJoya->id,
-             'id_componente' => $otroComponente->id,
-             'cantidad' => 1,
-         ]);
+        \App\Models\Receta::create([
+            'id_joya' => 2,
+            'id_componente' => 2,
+            'cantidad' => 2,
+        ]);
+
+        \App\Models\Receta::create([
+            'id_joya' => 3,
+            'id_componente' => 4,
+            'cantidad' => 5,
+        ]);
     }
 }

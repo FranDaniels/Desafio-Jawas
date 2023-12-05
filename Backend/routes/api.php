@@ -3,6 +3,7 @@
 use App\Http\Controllers\controllerAdministrador;
 use App\Http\Controllers\controllerClasificador;
 use App\Http\Controllers\controllerInicioSesion;
+use App\Http\Controllers\controllerReceta;
 use App\Http\Controllers\controllerUsuario;
 use App\Http\Controllers\controllerRol;
 use Illuminate\Http\Request;
@@ -54,6 +55,9 @@ Route::post('clasificador/despiece',[controllerClasificador::class,'realizarDesp
 Route::post('clasificador/componente',[controllerClasificador::class,'crearComponente']);
 Route::post('clasificador/inventario',[controllerClasificador::class,'addInventario']);
 Route::post('clasificador/asignarLote',[controllerClasificador::class,'asignarLote']);
+
+//Recetas
+Route::get('mostrarRecetas', [controllerReceta::class, 'mostrarRecetas']);
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });

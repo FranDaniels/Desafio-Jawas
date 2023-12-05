@@ -11,23 +11,9 @@ use Exception;
  */
 class controllerReceta extends Controller
 {
-    public function listarRecetas(){
+    public function mostrarRecetas(){
         try{
             $receta = Receta::all();
-
-            $msg = $receta;
-            $cod = 200;
-        } catch (Exception $e){
-            $msg = $e;
-            $cod = 404;
-        }
-        return response() -> json(['mens' => $msg], $cod);
-    }
-
-    public function listarReceta(Request $request){
-        try{
-            $id = $request -> get('id');
-            $receta = Receta::find($id);
 
             $msg = $receta;
             $cod = 200;

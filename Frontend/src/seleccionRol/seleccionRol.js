@@ -17,8 +17,6 @@ async function mostrarRoles() {
                 opcion.textContent = rol.nombre;
                 seleccionRol.appendChild(opcion);
             });
-        } else {
-            console.error('La propiedad roles en la respuesta de la API no es un array:', roles);
         }
     } catch (error) {
         console.error('Error al obtener roles:', error);

@@ -13,7 +13,8 @@ module.exports = {
         donar: './src/donar/donar.js',
         perfil: './src/perfil/perfil.js',
         loteClasificador: './src/lotesClasificador/loteClasificador.js',
-        clasificacion:'./src/clasificacion/clasificacion.js'
+        clasificacion:'./src/clasificacion/clasificacion.js',
+        receta: './src/receta/receta.js',
     },
     output: {
         filename: '[name].main.js',
@@ -37,7 +38,6 @@ module.exports = {
       ]},
     
     plugins: [
-
       new HtmlWebpackPlugin({
           template: './src/index.html',
           filename: 'index.html',
@@ -87,6 +87,11 @@ module.exports = {
         template: './src/clasificacion/clasificacion.html',
         filename: 'clasificacion/clasificacion.html',
         chunks: ['clasificacion'],
-      })
+      }),
+      new HtmlWebpackPlugin({
+        template: './src/receta/receta.html',
+        filename: 'receta/receta.html',
+        chuncks: ['receta'],
+      }),
     ],
 };

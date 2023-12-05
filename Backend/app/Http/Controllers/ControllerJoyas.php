@@ -18,7 +18,7 @@ class ControllerJoyas extends Controller
             $msg = $joya;
             $cod = 200;
         }catch (Exception $e){
-            $mes = $e;
+            $msg = $e;
             $cod = 404;
         }
         return response() -> json(['mens' => $msg], $cod);
@@ -29,7 +29,7 @@ class ControllerJoyas extends Controller
             $id = $request -> get('id');
             $joya = Joya::find($id);
 
-            $mes = $joya;
+            $msg = $joya;
             $cod = 200;
         }catch (Exception $e){
             $msg = $e;

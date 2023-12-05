@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Inventario extends Model
+class despiece extends Model
 {
     use HasFactory;
 
-    protected $table='inventario';
+    protected $table='despiece';
     public $timestamps = true;
 
     protected $fillable = [
-        'id_lote',
         'id_componente',
-        'cantidad_disponible'
+        'cantidad'
     ];
 }

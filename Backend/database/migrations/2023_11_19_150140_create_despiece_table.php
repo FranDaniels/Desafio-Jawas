@@ -16,8 +16,7 @@ return new class extends Migration
             $table->foreignId('id_lote')->constrained('lote');
             $table->foreignId('id_usuario_clasificador')->constrained('users');
             $table->foreignId('id_componente')->constrained('componente');
-            $table->integer('cantidad');
-            $table->text('descripcion');            
+            $table->integer('cantidad');           
             $table->timestamps();
         });
     }

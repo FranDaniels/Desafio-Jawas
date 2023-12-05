@@ -1,4 +1,4 @@
-import { listarComponentes, listarLote } from "../http/clasificador.js"
+import { addInventario, listarComponentes, listarLote, listarComponente, realizarDespiece } from "../http/clasificador.js"
 import { includes, tieneElementosRepetidos } from "../utils/funciones.js";
 
 var h1=document.getElementById('h1');
@@ -10,8 +10,11 @@ var btnClasificar=document.getElementById('clasificar')
 var btnCancelar=document.getElementById('cancelar')
 
 var componentesMostrados=[]
+var tiposComponentes=[]
+var cantidadComponentes=[]
 
 var idLote=localStorage.getItem('idLote')
+var idUsuario=localStorage.getItem('usuarioId')
 
 await listarLote(idLote).then(function(data){
     var lote=data;
@@ -77,6 +80,7 @@ function generarFilaComponente(tipoComponente){
     tipo.setAttribute("disabled",true)
     tipo.setAttribute("style","width: 150px")
     tipo.setAttribute("id",tipoComponente)
+    tipo.setAttribute("name","tipoComponentes")
     tipo.value=tipoComponente
 
     cell1.appendChild(tipo)
@@ -87,6 +91,7 @@ function generarFilaComponente(tipoComponente){
     cantidad.setAttribute("class","form-control")
     cantidad.setAttribute("type","number")
     cantidad.setAttribute("id","cantidad"+tipoComponente)
+    cantidad.setAttribute("name","cantidadComponentes")
     cantidad.setAttribute("style","width: 150px")
 
     cell2.appendChild(cantidad)
@@ -121,8 +126,37 @@ btnAdd.addEventListener("click",function(){
     }
 })
 
-btnClasificar.addEventListener("click",function(){
-    
+btnClasificar.addEventListener("click", async function(){
+    var tipos=document.getElementsByName('tipoComponentes')
+    var cantidad=document.getElementsByName('cantidadComponentes')
+
+    for (let i = 0; i < tipos.length; i++) {
+        tiposComponentes.push(tipos[i].id)
+    }
+
+    for (let i = 0; i < cantidad.length; i++) {
+        cantidadComponentes.push(cantidad[i].value)
+    }
+
+    for (let i = 0; i < cantidadComponentes.length; i++) {
+        await listarComponente(tiposComponentes[i]).then(function(data){
+            tiposComponentes[i]=data.mens[0].id
+        
+        })
+        var datos={
+            idLote:idLote,
+            idUsuario:idUsuario,
+            idComponente:tiposComponentes[i],
+            cantidad:cantidadComponentes[i]
+        }
+        await realizarDespiece(datos).then(function(data){
+            console.log('Despiece realizado')
+        })
+        await addInventario(datos).then(function(data){
+            console.log('Datos guardados')
+        })
+    }
+
 })
 
 btnCancelar.addEventListener("click",function(){

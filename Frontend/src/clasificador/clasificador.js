@@ -38,7 +38,7 @@ function generarTablaLotes(lotes) {
 }
 
 function asignarLote(btnAsignar) {
-    btnAsignar.addEventListener("click",function(event){
+    btnAsignar.addEventListener("click", async function(event){
         var idLote=event.target.id
         localStorage.setItem("idLote",idLote)
         var idUsuario=localStorage.getItem("usuarioId")
@@ -48,6 +48,8 @@ function asignarLote(btnAsignar) {
             idLote:idLote
         }
 
-        asignarLoteUsuario(datos)
+        await asignarLoteUsuario(datos).then(function(data){
+            window.location.reload()
+        })
     })
 }

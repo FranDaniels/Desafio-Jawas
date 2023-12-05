@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Componente;
+use App\Models\despiece;
 use App\Models\Inventario;
 use App\Models\Lote;
 use App\Models\lote_usuario;
@@ -61,16 +62,44 @@ class controllerClasificador extends Controller
         return response()->json(['mens' => $msg],$cod);
     }
 
+    public function listarComponente($nombre){
+        try {
+
+            $componente=DB::select('
+            SELECT
+                id
+            FROM
+                componente
+            WHERE
+                tipo = ?
+            ',[$nombre]);
+
+            $msg=$componente;
+            $cod=200;
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
+
+        return response()->json(['mens' => $msg],$cod);
+    }
+
     public function addInventario(Request $request){
         try {
 
             $inventario=new Inventario;
 
-            $inventario->id_usuario=$request->get('idUsuario');
+            $inventario->id_lote=$request->get('idLote');
             $inventario->id_componente=$request->get('idComponente');
             $inventario->cantidad_disponible=$request->get('cantidad');
 
+
+            $lote=Lote::find($inventario->id_lote);
+
+            $lote->clasificado=1;
+
             $inventario->save();
+            $lote->save();
 
             $msg=$inventario;
             $cod=200;
@@ -154,7 +183,7 @@ class controllerClasificador extends Controller
             JOIN
                 lote_usuario lu ON l.id = lu.id_lote
             WHERE
-                lu.id_usuario = ?
+                lu.id_usuario = ? and l.clasificado = 0
             ',[$id]);
 
             $msg=$misLotes;
@@ -172,6 +201,27 @@ class controllerClasificador extends Controller
             $componentes = DB::select('SELECT tipo FROM componente');
 
             $msg=$componentes;
+            $cod=200;
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
+
+        return response()->json($msg,$cod);
+    }
+
+    public function realizarDespiece(Request $request){
+        try {
+            $despiece = new despiece;
+
+            $despiece->id_lote=$request->get('idLote');
+            $despiece->id_usuario_clasificador=$request->get('idUsuario');
+            $despiece->id_componente=$request->get('idComponente');
+            $despiece->cantidad=$request->get('cantidad');
+
+            $despiece->save();
+
+            $msg=$despiece;
             $cod=200;
         } catch (Exception $e) {
             $msg=$e;

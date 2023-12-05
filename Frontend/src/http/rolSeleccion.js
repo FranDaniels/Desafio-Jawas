@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export async function obtenerRoles() {
     try {
       let response = await fetch('http://127.0.0.1:8000/api/mostrarRol');
@@ -33,12 +35,13 @@ export async function asignarRol(data) {
         }),
       });
   
-      console.log({
+      /*console.log({
         correo: correo,
         nombreRol: data.nombreRol,
-      });
+      });*/
       
       let responseData = await response.json();
+      console.log(responseData);
       return responseData;
     } catch (error) {
       console.error('Error al asignar rol:', error);

@@ -1,4 +1,4 @@
-import { listarComponentes, listarLote } from "../http/clasificador.js"
+import { addInventario, listarComponentes, listarLote, listarComponente } from "../http/clasificador.js"
 import { includes, tieneElementosRepetidos } from "../utils/funciones.js";
 
 var h1=document.getElementById('h1');
@@ -125,7 +125,7 @@ btnAdd.addEventListener("click",function(){
     }
 })
 
-btnClasificar.addEventListener("click",function(){
+btnClasificar.addEventListener("click", async function(){
     var tipos=document.getElementsByName('tipoComponentes')
     var cantidad=document.getElementsByName('cantidadComponentes')
 
@@ -135,6 +135,21 @@ btnClasificar.addEventListener("click",function(){
 
     for (let i = 0; i < cantidad.length; i++) {
         cantidadComponentes.push(cantidad[i].value)
+    }
+
+    for (let i = 0; i < cantidadComponentes.length; i++) {
+        await listarComponente(tiposComponentes[i]).then(function(data){
+            tiposComponentes[i]=data.mens[0].id
+        
+        })
+        var datos={
+            idLote:idLote,
+            idComponente:tiposComponentes[i],
+            cantidad:cantidadComponentes[i]
+        }
+        await addInventario(datos).then(function(data){
+            console.log('Datos guardados')
+        })
     }
 
 })

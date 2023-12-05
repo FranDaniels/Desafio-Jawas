@@ -61,16 +61,44 @@ class controllerClasificador extends Controller
         return response()->json(['mens' => $msg],$cod);
     }
 
+    public function listarComponente($nombre){
+        try {
+
+            $componente=DB::select('
+            SELECT
+                id
+            FROM
+                componente
+            WHERE
+                tipo = ?
+            ',[$nombre]);
+
+            $msg=$componente;
+            $cod=200;
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
+
+        return response()->json(['mens' => $msg],$cod);
+    }
+
     public function addInventario(Request $request){
         try {
 
             $inventario=new Inventario;
 
-            $inventario->id_usuario=$request->get('idUsuario');
+            $inventario->id_lote=$request->get('idLote');
             $inventario->id_componente=$request->get('idComponente');
             $inventario->cantidad_disponible=$request->get('cantidad');
 
+
+            $lote=Lote::find($inventario->id_lote);
+
+            $lote->clasificado=1;
+
             $inventario->save();
+            $lote->save();
 
             $msg=$inventario;
             $cod=200;

@@ -1,11 +1,12 @@
-import { asignarLoteUsuario, listarLotes } from "../http/clasificador.js"
+import { listarMisLotes } from "../http/clasificador.js"
 
 var tabla=document.getElementById("tbody")
+var idUsuario=localStorage.getItem("usuarioId")
 
-await listarLotes().then(function(data){
+await listarMisLotes(idUsuario).then(function(data){
     var lotes=data;
     generarTablaLotes(lotes)
-    asignarLote(tabla)
+    clasificarLote(tabla)
 })
 
 function generarTablaLotes(lotes) {
@@ -14,7 +15,7 @@ function generarTablaLotes(lotes) {
     for (let i = 0; i < lotes.length; i++) {
         const row = document.createElement("tr");
 
-        let key = ["lote_id", "lote_descripcion", "lote_estado", "lote_fecha_entrega", "usuario_nombre","lote_disponible"];
+        let key = ["id", "descripcion", "estado", "ubicacion", "fecha_entrega","id_usuario"];
 
         for (let j = 0; j < key.length; j++) {
             const cell = document.createElement("td");
@@ -27,9 +28,9 @@ function generarTablaLotes(lotes) {
             row.appendChild(cell);
         }
         const btn=document.createElement("a")
-        btn.text="Asignar Lote"
+        btn.text="Clasificar Lote"
         btn.style.color="black"
-        btn.id=lotes[i].lote_id
+        btn.id=lotes[i].id
         btn.setAttribute("class","btn btn-primary")
         row.appendChild(btn)
 
@@ -37,19 +38,10 @@ function generarTablaLotes(lotes) {
     }
 }
 
-function asignarLote(btnAsignar) {
-    btnAsignar.addEventListener("click", async function(event){
+function clasificarLote(btnAsignar) {
+    btnAsignar.addEventListener("click",function(event){
         var idLote=event.target.id
         localStorage.setItem("idLote",idLote)
-        var idUsuario=localStorage.getItem("usuarioId")
-
-        var datos={
-            idUsuario:idUsuario,
-            idLote:idLote
-        }
-
-        await asignarLoteUsuario(datos).then(function(data){
-            window.location.reload()
-        })
+        window.location.href="../clasificacion/clasificacion.html";
     })
 }

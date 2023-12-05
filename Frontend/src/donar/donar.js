@@ -24,7 +24,8 @@ fechaEntrega.addEventListener('click', function() {
     }
 });
 
-btnDonar.addEventListener("click", async function(){
+btnDonar.addEventListener("click", async function(event){
+    event.preventDefault()
     var opcionEstado=document.getElementById("estado").value;
     var estado=false;
 if (comprobarPantallaDonar()) {
@@ -46,12 +47,15 @@ if (comprobarPantallaDonar()) {
 })
 
 function cargarDatos(estado) {
+    var idUsuario=localStorage.getItem("usuarioId")
+console.log(idUsuario)
     var datos={
         descripcion:descripcion.value,
         ubicacion:'Mi casa',
         estado:estado,
         fecha_entrega:fechaEntrega.value,
-        disponible:1
+        disponible:"1",
+        id_usuario:idUsuario
     }
     
     return datos;

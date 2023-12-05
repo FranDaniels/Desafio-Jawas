@@ -7,39 +7,40 @@ var correo=document.getElementById('correo')
 var password=document.getElementById('password')
 let formularioDatos=document.getElementById("formularioDatos")
 let formularioPassword=document.getElementById("formularioPassword")
-let btnDatos=document.getElementById("btnDatos")
 let btnPassword=document.getElementById("btnPassword")
+let btnDatos=document.getElementById("btnDatos")
 
-var id="32";
+var idUsuario=localStorage.getItem("usuarioId")
 
-await obtenerUsuario(id).then(function(data){
+await obtenerUsuario(idUsuario).then(function(data){
     cargarDatos(data)
   }).catch(function(error){
     return error
   });
 
 formularioDatos.addEventListener('input', function(){
-    btnDatos.removeAttribute("disabled",true)
+    btnDatos.removeAttribute("disabled")
 })
 
 formularioPassword.addEventListener('input',function(){
     btnPassword.removeAttribute("disabled",true)
 })
 
-btnDatos.addEventListener("click",async function(){
+btnDatos.addEventListener("click", async function(event){
+  event.preventDefault()
+
     if ( comprobarValidacionePerfil(nombre,apellido,correo,password)) {
-    var datos=cargarDatosCambiados(id)
+    var datos=cargarDatosCambiados(idUsuario)
     await cambiarDatos(datos).then(function(data){
-    console.log('bien')
     })
     }
 })
 
-btnPassword.addEventListener("click",async function(){
+btnPassword.addEventListener("click",async function(event){
+  event.preventDefault()
     if (comprobarPasswordPerfil(password)) {
-        var datos=cargarPasswordCambiada(id)
+        var datos=cargarPasswordCambiada(idUsuario)
         await cambiarPassword(datos).then(function(data){
-            console.log('bien')
         })
 
     }
@@ -67,8 +68,6 @@ function cargarPasswordCambiada(id){
         id:id,
         password:password.value
     }
+
+    return datos
 }
-
-
-
-

@@ -43,6 +43,7 @@ export async function asignarRol(data) {
       let responseData = await response.json();
       console.log(responseData);
       return responseData;
+
     } catch (error) {
       console.error('Error al asignar rol:', error);
       throw error;

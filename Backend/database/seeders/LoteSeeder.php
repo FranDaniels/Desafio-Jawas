@@ -56,7 +56,7 @@ class LoteSeeder extends Seeder
             'ubicacion' => 'Paseo San Gregorio',
             'estado' => 'En camino',
             'fecha_entrega' => '2023-12-01 12:01:27',
-            'disponible' => '0',
+            'disponible' => '1',
             'clasificado'=>'0',
             'id_usuario' => '2'
         ]);
@@ -65,7 +65,7 @@ class LoteSeeder extends Seeder
             'ubicacion' => 'Paseo San Gregorio',
             'estado' => 'En camino',
             'fecha_entrega' => '2023-12-01 12:01:27',
-            'disponible' => '0',
+            'disponible' => '1',
             'clasificado'=>'0',
             'id_usuario' => '2'
         ]);
@@ -74,7 +74,7 @@ class LoteSeeder extends Seeder
             'ubicacion' => 'Paseo San Gregorio',
             'estado' => 'En camino',
             'fecha_entrega' => '2023-12-01 12:01:27',
-            'disponible' => '0',
+            'disponible' => '1',
             'clasificado'=>'0',
             'id_usuario' => '2'
         ]);
@@ -83,7 +83,7 @@ class LoteSeeder extends Seeder
             'ubicacion' => 'Paseo San Gregorio',
             'estado' => 'En camino',
             'fecha_entrega' => '2023-12-01 12:01:27',
-            'disponible' => '0',
+            'disponible' => '1',
             'clasificado'=>'0',
             'id_usuario' => '2'
         ]);
@@ -92,7 +92,7 @@ class LoteSeeder extends Seeder
             'ubicacion' => 'Paseo San Gregorio',
             'estado' => 'En camino',
             'fecha_entrega' => '2023-12-01 12:01:27',
-            'disponible' => '0',
+            'disponible' => '1',
             'clasificado'=>'0',
             'id_usuario' => '2'
         ]);
@@ -101,7 +101,7 @@ class LoteSeeder extends Seeder
             'ubicacion' => 'Paseo San Gregorio',
             'estado' => 'En camino',
             'fecha_entrega' => '2023-12-01 12:01:27',
-            'disponible' => '0',
+            'disponible' => '1',
             'clasificado'=>'0',
             'id_usuario' => '3'
         ]);
@@ -110,7 +110,7 @@ class LoteSeeder extends Seeder
             'ubicacion' => 'Paseo San Gregorio',
             'estado' => 'En camino',
             'fecha_entrega' => '2023-12-01 12:01:27',
-            'disponible' => '0',
+            'disponible' => '1',
             'clasificado'=>'0',
             'id_usuario' => '3'
         ]);
@@ -119,7 +119,7 @@ class LoteSeeder extends Seeder
             'ubicacion' => 'Paseo San Gregorio',
             'estado' => 'En camino',
             'fecha_entrega' => '2023-12-01 12:01:27',
-            'disponible' => '0',
+            'disponible' => '1',
             'clasificado'=>'0',
             'id_usuario' => '3'
         ]);
@@ -128,7 +128,7 @@ class LoteSeeder extends Seeder
             'ubicacion' => 'Paseo San Gregorio',
             'estado' => 'En camino',
             'fecha_entrega' => '2023-12-01 12:01:27',
-            'disponible' => '0',
+            'disponible' => '1',
             'clasificado'=>'0',
             'id_usuario' => '3'
         ]);

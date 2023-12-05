@@ -1,0 +1,63 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  #login {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  form {
+    margin-top: 20px;
+  }
+  
+  /* Estilos para los campos de formulario */
+  .form-label {
+    font-weight: bold;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  #error {
+    color: red;
+    margin-top: 5px;
+  }
+  
+  /* Estilos para el botón de inicio de sesión */
+  #btn-iniciar-sesion {
+    margin-top: 10px;
+  }
+  
+  /* Estilos para el enlace de registro */
+  p a {
+    text-decoration: none;
+  }
+  
+  /* Estilos para el mensaje de errores */
+  #errores {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+  }
+  

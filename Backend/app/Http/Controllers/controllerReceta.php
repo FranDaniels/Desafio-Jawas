@@ -43,8 +43,9 @@ class controllerReceta extends Controller
 
         $receta -> id = $request -> get('id');
         $receta -> nombre = $request -> get('nombre');
-        $receta -> descripcion = $request -> get('descripcion');
+        $receta -> cantidad = $request -> get('cantidad');
         $receta -> id_joya = $request -> get('joya');
+        $receta -> id_componente = $request -> get('componente');
 
         $msg = $receta;
         $cod = 200;
@@ -64,7 +65,7 @@ class controllerReceta extends Controller
 
             $recetaEncontrada = Receta::find($id);
             $recetaEncontrada -> nombre = $request -> get ('nombre');
-            $recetaEncontrada -> descripcion = $request -> get('descripcion');
+            $recetaEncontrada -> cantidad = $request -> get('cantidad');
 
             $recetaEncontrada -> save();
             $msg = $recetaEncontrada;

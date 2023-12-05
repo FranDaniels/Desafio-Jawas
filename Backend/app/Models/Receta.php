@@ -11,8 +11,9 @@ class Receta extends Model
     
     protected $fillable = [
         'nombre',
-        'descripción',
-        'id_joya'
+        'cantidad',
+        'id_joya',
+        'id_componente'
     ];
 
     protected $hidden = [

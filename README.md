@@ -30,3 +30,30 @@ Cuando se haya clonado el proyecto lo abriremos utilizando Visual Studio Code.
 Nos dirigiremos al archivo raíz de Front y ejecutaremos en nuestra terminal de Visual Studio Code el siguiente comando `npm update`, esperaremos a que termine la instalación y nos dirigiremos al directorio raiz del servidor y ejecutaremos el comando `php artisan serve`.<br>
 
 Para finalizar nos dirigiremos a xampp e iniciaremos Apache y MySQL, a continuación, crearemos una base de datos llamada Dualiza e importaremos la base de datos que se encuentra en nuestro repositorio clonado.
+
+## Manual para el usuario
+## Mensajes JSON
+### Iniciar Sesión
+- Ruta: http://127.0.0.1:8000/api/iniciarSesión
+- Método: POST
+- Body: 
+```json 
+{
+    "correo": "correoexample@gmail.com",
+    "password": "admin123"
+}
+```
+### Mostrar Rol
+- Ruta: http://127.0.0.1:8000/api/mostrarRol
+- Método: GET.
+- Body: no espera ningún mensaje JSON
+### Asignar Rol
+- ruta: http://127.0.0.1:8000/api/asignarRol
+- Método: PUT
+- Body: 
+```json
+{
+    "correoUsuario": "correoexample@gmail.com",
+    "nombreRol": "Administrador"
+}
+```

@@ -22,33 +22,34 @@ class controllerRol extends Controller
         }
     }
 
-    public function asignarRol(Request $request) {
+    public function asignarRol(Request $request)
+    {
         try {
             $correoUsuario = $request->input('correo');
             $nombreRolSeleccionado = $request->input('nombreRol');
-     
+
             $usuario = User::where('correo', $correoUsuario)->first();
-     
+
             if (!$usuario) {
                 throw new Exception('Usuario no encontrado para el correo proporcionado: ' . $correoUsuario);
             }
-     
+
             $rol = Rol::where('nombre', $nombreRolSeleccionado)->first();
-     
+
             if (!$rol) {
                 throw new Exception('Rol no encontrado para el nombre proporcionado: ' . $nombreRolSeleccionado);
             }
-     
+
             $usuario->id_rol = $rol->id;
             $usuario->save();
-     
-            $msg = ['mensaje' => 'Rol asignado correctamente'];
+
+            $msg = $usuario;
             $cod = 200;
         } catch (Exception $e) {
-            $msg = ['error' => 'Ha ocurrido un error en el servidor.'];
+            $msg = $e;
             $cod = 500;
         }
-     
-        return response()->json($msg, $cod);
+
+        return response()->json(['mens' => $msg], $cod);
     }
 }

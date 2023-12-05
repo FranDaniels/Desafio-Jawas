@@ -48,5 +48,11 @@ class ComponenteSeeder extends Seeder
             'descripcion' => '
             El monitor es un componente clave de un sistema de computadora que proporciona una interfaz visual para que los usuarios puedan interactuar con el sistema operativo, las aplicaciones y los datos.'
         ]);
+
+        \App\Models\Componente::create([
+            'nombre' => 'Disco Duro',
+            'tipo' => 'HDD',
+            'descripcion' => 'Ofrece un espacio de almacenamiento permanente para el sistema operativo'
+        ]);
     }
 }

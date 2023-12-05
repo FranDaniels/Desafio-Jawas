@@ -18,6 +18,7 @@ class LoteSeeder extends Seeder
             'estado' => 'Entregado',
             'fecha_entrega' => '2023-12-01 12:01:27',
             'disponible' => '1',
+            'clasificado'=>'0',
             'id_usuario' => '3'
         ]);
 
@@ -27,6 +28,7 @@ class LoteSeeder extends Seeder
             'estado' => 'En camino',
             'fecha_entrega' => '2023-12-01 12:01:27',
             'disponible' => '1',
+            'clasificado'=>'0',
             'id_usuario' => '4'
         ]);
 
@@ -36,6 +38,7 @@ class LoteSeeder extends Seeder
             'estado' => 'Entregado',
             'fecha_entrega' => '2023-12-01 12:01:27',
             'disponible' => '0',
+            'clasificado'=>'0',
             'id_usuario' => '1'
         ]);
 
@@ -45,6 +48,7 @@ class LoteSeeder extends Seeder
             'estado' => 'En camino',
             'fecha_entrega' => '2023-12-01 12:01:27',
             'disponible' => '0',
+            'clasificado'=>'0',
             'id_usuario' => '2'
         ]);
     }

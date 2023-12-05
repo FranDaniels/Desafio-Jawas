@@ -13,6 +13,7 @@ class Inventario extends Model
     public $timestamps = true;
 
     protected $fillable = [
+        'id_lote',
         'id_componente',
         'cantidad_disponible'
     ];

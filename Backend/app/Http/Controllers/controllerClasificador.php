@@ -183,7 +183,7 @@ class controllerClasificador extends Controller
             JOIN
                 lote_usuario lu ON l.id = lu.id_lote
             WHERE
-                lu.id_usuario = ?
+                lu.id_usuario = ? and l.clasificado = 0
             ',[$id]);
 
             $msg=$misLotes;
@@ -220,7 +220,7 @@ class controllerClasificador extends Controller
             $despiece->cantidad=$request->get('cantidad');
 
             $despiece->save();
-            
+
             $msg=$despiece;
             $cod=200;
         } catch (Exception $e) {

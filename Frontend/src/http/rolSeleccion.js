@@ -34,11 +34,6 @@ export async function asignarRol(data) {
           nombreRol: data.nombreRol,
         }),
       });
-  
-      /*console.log({
-        correo: correo,
-        nombreRol: data.nombreRol,
-      });*/
       
       let responseData = await response.json();
       console.log(responseData);

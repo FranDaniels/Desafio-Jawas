@@ -5,6 +5,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+/**
+ * @author Marina Laguna
+ */
 class InventarioSeeder extends Seeder
 {
     /**

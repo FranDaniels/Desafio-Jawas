@@ -23,7 +23,6 @@ async function mostrarRoles() {
     }
 }
 
-
 btnConfirmar.addEventListener('click', async function () {
     let selectedRol = seleccionRol.value;
     let correoUsuario = JSON.parse(sessionStorage.getItem('usuario')).correo;

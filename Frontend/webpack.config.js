@@ -34,7 +34,14 @@ module.exports = {
                   implementation: require.resolve("sass"),
                 }
               }
-        ]}
+        ]},
+        {
+          test: /\.css$/,
+          use: [
+              "style-loader",
+              "css-loader"
+          ]
+      }
       ]},
     
     plugins: [

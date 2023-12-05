@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Joya_receta extends Model
 {
     use HasFactory;
+
+    protected $table = 'joya_receta';
 }

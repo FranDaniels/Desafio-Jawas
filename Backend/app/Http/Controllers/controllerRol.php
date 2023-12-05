@@ -26,7 +26,7 @@ class controllerRol extends Controller
     {
         try {
             $correoUsuario = $request->input('correo');
-            $nombreRolSeleccionado = $request->input('nombreRol');
+            $rolSeleccionado = $request->input('nombreRol');
 
             $usuario = User::where('correo', $correoUsuario)->first();
 
@@ -34,10 +34,10 @@ class controllerRol extends Controller
                 throw new Exception('Usuario no encontrado para el correo proporcionado: ' . $correoUsuario);
             }
 
-            $rol = Rol::where('id', $nombreRolSeleccionado)->first();
+            $rol = Rol::where('id', $rolSeleccionado)->first();
 
             if (!$rol) {
-                throw new Exception('Rol no encontrado para el nombre proporcionado: ' . $nombreRolSeleccionado);
+                throw new Exception('Rol no encontrado para el nombre proporcionado: ' . $rolSeleccionado);
             }
 
             $usuario->id_rol = $rol->id;

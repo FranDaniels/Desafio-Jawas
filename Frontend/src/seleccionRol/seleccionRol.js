@@ -36,7 +36,7 @@ btnConfirmar.addEventListener('click', async function () {
     };
 
     await asignarRol(datos);
-    // window.location.href = '/ruta-de-redireccion';
+    window.location.href = '../inicio/inicio.html';
 
 });
 

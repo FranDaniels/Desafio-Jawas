@@ -6,9 +6,9 @@ export async function obtenerRecetas() {
         throw new Error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
         }
 
-        let roles = await response.json();
+        let recetas = await response.json();
 
-        return roles;
+        return recetas;
     } catch (error) {
         console.error('Error al mostrar las recetas: ', error);
         throw error;

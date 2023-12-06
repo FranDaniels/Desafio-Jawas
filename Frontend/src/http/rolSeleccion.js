@@ -14,15 +14,17 @@ export async function obtenerRolUsuario() {
     if (!response.ok) {
       throw new Error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
     }
+    let rolesResponse = await response.json();
 
-    let { mens } = await response.json();
-
-    if (!mens || !mens.rol || !mens.rol.nombre) {
+    if (!rolesResponse.mens) {
       throw new Error('No se pudieron obtener los roles del usuario.');
     }
 
-    return mens.rol.nombre;
+    let rolUsuario = rolesResponse.mens;
 
+    console.log(rolUsuario);
+
+    return rolUsuario;
   } catch (error) {
     console.error('Error al obtener el rol del usuario', error);
     throw error;

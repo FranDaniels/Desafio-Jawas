@@ -23,6 +23,11 @@ class AuthController extends Controller
     
                 $success['token'] = $usuario->createToken('LaravelSanctumAuth')->plainTextToken;
                 $success['correo'] = $usuario->correo;
+                $success['id'] = $usuario->id;
+                $success['nombre'] = $usuario->nombre;
+                $success['apellido'] = $usuario->apellido;
+                $success['password'] = $usuario->password;
+                $success['id_rol'] = $usuario->id_rol;
     
                 return response()->json(["success" => true, "data" => $success, "message" => "User logged-in!"]);
             } else {

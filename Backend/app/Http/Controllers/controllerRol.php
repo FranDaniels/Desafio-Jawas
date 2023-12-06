@@ -5,50 +5,31 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Rol;
 use Exception;
-use App\Models\User;
+use App\Models\Rol_usuario;
 
 /**
  * @author Marina Laguna 
  */
 class controllerRol extends Controller
 {
-    public function mostrarRol(){
+    public function obtenerRolUsuario($idUsuario) {
         try {
-            $roles = Rol::all();
+            $rolUsuario = rol_usuario::where('id_usuario', $idUsuario)->first();
     
-            return response()->json(['roles' => $roles], 200);
-        } catch (Exception $e) {
-            return response()->json(['No se han encontrado los roles'], 500);
-        }
-    }
-
-    public function asignarRol(Request $request)
-    {
-        try {
-            $correoUsuario = $request->input('correo');
-            $rolSeleccionado = $request->input('nombreRol');
-
-            $usuario = User::where('correo', $correoUsuario)->first();
-
-            if (!$usuario) {
-                throw new Exception('Usuario no encontrado para el correo proporcionado: ' . $correoUsuario);
+            if (!$rolUsuario) {
+                throw new Exception('Rol de usuario no encontrado');
             }
-
-            $rol = Rol::where('id', $rolSeleccionado)->first();
-
-            if (!$rol) {
-                throw new Exception('Rol no encontrado para el nombre proporcionado: ' . $rolSeleccionado);
-            }
-
-            $usuario->id_rol = $rol->id;
-            $usuario->save();
-
-            $msg = $usuario;
+    
+            $rol = $rolUsuario->rol;
+    
+            $msg = $rolUsuario;
             $cod = 200;
+    
         } catch (Exception $e) {
-            $msg = $e;
-            $cod = 500;
+            $msg = $e->getMessage();
+            $cod = 404;
         }
+    
         return response()->json(['mens' => $msg], $cod);
     }
 }

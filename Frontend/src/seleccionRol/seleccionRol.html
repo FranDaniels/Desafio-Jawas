@@ -12,23 +12,16 @@
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Selección de Rol</h5>
+                            <h5 class="card-title">Rol Actual del Usuario</h5>
                         </div>
                         <div class="card-body">
-                            <form id="formSeleccionarRol">
-                                <div class="mb-3">
-                                    <label for="seleccionRol" class="form-label"></label>
-                                    <select class="form-select" id="seleccionRol" name="seleccionRol">
-                                        <!-- Opciones cargadas dinámicamente desde el servidor -->
-                                    </select>
-                                </div>
-                                <button type="button" class="btn btn-primary" id = "btnConfirmar">Confirmar</button>
-                            </form>
+                            <p id="mostrarRol" class="lead"></p>
+                            <button type="button" class="btn btn-primary" id="btnCerrar">Cerrar</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>    
+        <script src="/../dist/seleccionRol.main.js"></script>
     </body>
-    <script src = "/../dist/seleccionRol.main.js"></script>   
 </html>

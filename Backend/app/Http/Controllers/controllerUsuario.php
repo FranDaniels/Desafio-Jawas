@@ -8,6 +8,7 @@ use App\Models\rol_usuario;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class controllerUsuario extends Controller
 {
@@ -37,25 +38,6 @@ class controllerUsuario extends Controller
             $cod=404;
         }
         return response()->json(['mens' => $msg],$cod);
-    }
-
-    public function inicioSesion(Request $request){
-        try {
-            $request->validate([
-                'correo' => 'required|exists:users,correo',
-                'password' => 'required',
-            ]); 
-        
-            $usuario = User::where('correo', $request->input('correo'))->first();
-        
-            if ($usuario && Hash::check($request->input('password'), $usuario->password)) {
-                return response()->json(['mensaje' => 'Inicio de sesión exitoso', 'usuario' => $usuario], 200);
-            } else {
-                return response()->json(['mensaje' => 'Correo o contraseña incorrectos'], 401);
-            }
-        } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
     }
 
     public function modificarPassword(Request $request){

@@ -7,7 +7,7 @@ module.exports = {
         login: './src/login/login.js',
         registro: './src/registro/registro.js',
         inicio: './src/inicio/inicio.js',
-        seleccionRol: './src/seleccionRol/seleccionRol.js',
+        rolUsuario: './src/rolUsuario/rolUsuario.js',
         admin: './src/admin/admin.js',
         clasificador: './src/clasificador/clasificador.js',
         donar: './src/donar/donar.js',
@@ -34,7 +34,14 @@ module.exports = {
                   implementation: require.resolve("sass"),
                 }
               }
-        ]}
+        ]},
+        {
+          test: /\.css$/,
+          use: [
+              "style-loader",
+              "css-loader"
+          ]
+      }
       ]},
     
     plugins: [
@@ -59,9 +66,9 @@ module.exports = {
         chunks: ['perfil'],
     }),
       new HtmlWebpackPlugin({
-          template: './src/seleccionRol/seleccionRol.html',
-          filename: 'seleccionRol/seleccionRol.html',
-          chunks: ['seleccionRol'],
+          template: './src/rolUsuario/rolUsuario.html',
+          filename: 'rolUsuario/rolUsuario.html',
+          chunks: ['rolUsuario'],
       }),
       new HtmlWebpackPlugin({
         template: './src/admin/admin.html',

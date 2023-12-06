@@ -18,18 +18,19 @@ async function realizarInicioSesion() {
             password: contrasena,
         };
 
-        const usuarioGuardado = await inicioSesion(datos);
+        let respuestaServidor = await inicioSesion(datos);
 
-        if (usuarioGuardado && usuarioGuardado.usuario) {
-            const datosUsuario = usuarioGuardado.usuario;
+        if (respuestaServidor.success && respuestaServidor.data) {
+            let datosUsuario = respuestaServidor.data;
             sessionStorage.setItem('usuario', JSON.stringify(datosUsuario));
             localStorage.setItem('usuarioId', datosUsuario.id);
-            window.location.href = "../seleccionRol/seleccionRol.html";
+            redirigir();
         } else {
-            mostrarError("Inicio de sesión fallido.");
+            mostrarError(respuestaServidor.message || "Inicio de sesión fallido.");
         }
     } catch (error) {
         console.error("Error al iniciar sesión:", error);
+        mostrarError("Inicio de sesión fallido.");
     }
 };
 
@@ -44,4 +45,11 @@ function mostrarError(mensaje) {
     setTimeout(() => {
         errorContainer.textContent = "";
     }, 3500);
+}
+
+function redirigir(){
+    window.open('./rolUsuario/rolUsuario.html', 'Rol del Usuario', 'width=600,height=400');
+    setTimeout(function(){
+        window.location.href = './inicio/inicio.html';
+    }, 3000);
 }

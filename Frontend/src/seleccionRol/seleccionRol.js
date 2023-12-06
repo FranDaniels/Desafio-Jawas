@@ -1,6 +1,7 @@
 import { obtenerRolUsuario } from '../http/rolSeleccion.js';
 
 const mostrarRolElement = document.getElementById('mostrarRol');
+const btnCerrar = document.getElementById('btnCerrar');
 
 async function mostrarRolUsuario() {
     try {
@@ -18,3 +19,14 @@ async function mostrarRolUsuario() {
 }
 
 mostrarRolUsuario();
+
+function cerrarVentanaEmergente() {
+    // Cierra la ventana emergente actual
+    window.close();
+}
+
+if (btnCerrar) {
+    btnCerrar.addEventListener('click', cerrarVentanaEmergente);
+} else {
+    console.error('No se encontró el botón de confirmar');
+}

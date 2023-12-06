@@ -1,40 +1,16 @@
-import { obtenerRoles, asignarRol } from '../http/rolSeleccion.js';
+import { obtenerRolUsuario } from '../http/rolSeleccion.js';
 
-const btnConfirmar = document.getElementById('btnConfirmar');
-const seleccionRol = document.getElementById('seleccionRol');
+const mostrarRolElement = document.getElementById('mostrarRol');
 
-async function mostrarRoles() {
+async function mostrarRolUsuario() {
     try {
-        const response = await obtenerRoles();
-        const roles = response.roles;
+        const rolUsuario = await obtenerRolUsuario();
 
-        seleccionRol.innerHTML = '';
+        mostrarRolElement.textContent = `Rol actual: ${rolUsuario.nombre}`;
 
-        if (Array.isArray(roles)) {
-            roles.forEach((rol) => {
-                const opcion = document.createElement('option');
-                opcion.value = rol.id;
-                opcion.textContent = rol.nombre;
-                seleccionRol.appendChild(opcion);
-            });
-        }
     } catch (error) {
-        console.error('Error al obtener roles:', error);
+        console.error('Error al mostrar el rol del usuario:', error);
     }
 }
 
-btnConfirmar.addEventListener('click', async function () {
-    let selectedRol = seleccionRol.value;
-    let correoUsuario = JSON.parse(sessionStorage.getItem('usuario')).correo;
-
-    let datos = {
-        correoUsuario: correoUsuario,
-        nombreRol: selectedRol
-    };
-
-    await asignarRol(datos);
-    window.location.href = '../inicio/inicio.html';
-
-});
-
-mostrarRoles();
+mostrarRolUsuario();

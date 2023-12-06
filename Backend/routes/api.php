@@ -8,6 +8,7 @@ use App\Http\Controllers\controllerUsuario;
 use App\Http\Controllers\controllerRol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,7 @@ Route::post('registro',[controllerUsuario::class,'crearUsuario']);
 Route::put('modificarPass',[controllerUsuario::class,'modificarPassword']);
 Route::put('modificarDatos',[controllerUsuario::class,'modificarDatos']);
 
-Route::post('inicioSesion', [controllerUsuario::class, 'inicioSesion']);
+Route::post('inicioSesion', [AuthController::class, 'inicioSesion']);
 
 Route::get('mostrarRol', [controllerRol::class, 'mostrarRol']);
 Route::put('asignarRol', [controllerRol::class, 'asignarRol']);
@@ -58,6 +59,10 @@ Route::post('clasificador/asignarLote',[controllerClasificador::class,'asignarLo
 
 //Recetas
 Route::get('mostrarRecetas', [controllerReceta::class, 'mostrarRecetas']);
+
+Route::get('', function () {
+    return response()->json("No autorizado",203);
+})->name('nologin');
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });

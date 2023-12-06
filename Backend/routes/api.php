@@ -39,6 +39,7 @@ Route::put('modificarDatos',[controllerUsuario::class,'modificarDatos']);
 
 Route::post('inicioSesion', [AuthController::class, 'inicioSesion']);
 
+Route::get('obtenerRol/{idUsuario}', [controllerUsuario::class, 'obtenerRolUsuario']);
 Route::get('mostrarRol', [controllerRol::class, 'mostrarRol']);
 Route::put('asignarRol', [controllerRol::class, 'asignarRol']);
 

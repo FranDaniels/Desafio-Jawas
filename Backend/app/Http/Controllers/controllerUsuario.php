@@ -121,4 +121,25 @@ class controllerUsuario extends Controller
 
         return response()->json($msg,$cod);
     }
+
+    public function obtenerRolUsuario($idUsuario) {
+        try {
+            $rolUsuario = rol_usuario::where('id_usuario', $idUsuario)->first();
+    
+            if (!$rolUsuario) {
+                throw new Exception('Rol de usuario no encontrado');
+            }
+    
+            $rol = $rolUsuario->rol;
+    
+            $msg = $rolUsuario;
+            $cod = 200;
+    
+        } catch (Exception $e) {
+            $msg = $e->getMessage();
+            $cod = 404;
+        }
+    
+        return response()->json(['mens' => $msg], $cod);
+    }
 }

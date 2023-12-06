@@ -31,8 +31,20 @@ Nos dirigiremos al archivo raíz de Front y ejecutaremos en nuestra terminal de 
 
 Para finalizar nos dirigiremos a xampp e iniciaremos Apache y MySQL, a continuación, crearemos una base de datos llamada Dualiza e importaremos la base de datos que se encuentra en nuestro repositorio clonado.
 
-## Manual para el usuario
-## Mensajes JSON
+## Manual para el usuario de la API
+### Registrar
+- Ruta: `http://127.0.0.1:8000/api/registro`
+- Método: POST
+- Body: 
+```json
+{
+  "nombre": "Marina",
+  "apellido": "Laguna",
+  "correo": "correoexample@gmail.com",
+  "password": "admin123",
+  "rol": 1
+}
+```
 ### Iniciar Sesión
 - Ruta: `http://127.0.0.1:8000/api/iniciarSesión`
 - Método: POST

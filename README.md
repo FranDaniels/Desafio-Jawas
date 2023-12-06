@@ -34,7 +34,7 @@ Para finalizar nos dirigiremos a xampp e iniciaremos Apache y MySQL, a continuac
 ## Manual para el usuario
 ## Mensajes JSON
 ### Iniciar Sesión
-- Ruta: http://127.0.0.1:8000/api/iniciarSesión
+- Ruta: `http://127.0.0.1:8000/api/iniciarSesión`
 - Método: POST
 - Body: 
 ```json 
@@ -43,17 +43,12 @@ Para finalizar nos dirigiremos a xampp e iniciaremos Apache y MySQL, a continuac
     "password": "admin123"
 }
 ```
-### Mostrar Rol
-- Ruta: http://127.0.0.1:8000/api/mostrarRol
-- Método: GET.
+### Obtener Rol de Usuario
+- Ruta: `http://127.0.0.1:8000/api/obtenerRol/{isUsuario}`
+- Método: GET,
 - Body: no espera ningún mensaje JSON
-### Asignar Rol
-- ruta: http://127.0.0.1:8000/api/asignarRol
-- Método: PUT
-- Body: 
-```json
-{
-    "correoUsuario": "correoexample@gmail.com",
-    "nombreRol": "Administrador"
-}
-```
+
+### Mostrar Recetas
+- Ruta: `http://127.0.0.1:8000/api/mostrarRecetas`
+- Método: GET,
+- Body: no espera ningún mensaje JSON

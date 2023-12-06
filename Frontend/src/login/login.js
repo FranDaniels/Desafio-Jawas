@@ -24,7 +24,7 @@ async function realizarInicioSesion() {
             let datosUsuario = respuestaServidor.data;
             sessionStorage.setItem('usuario', JSON.stringify(datosUsuario));
             localStorage.setItem('usuarioId', datosUsuario.id);
-            window.location.href = "../seleccionRol/seleccionRol.html";
+            redirigir();
         } else {
             mostrarError(respuestaServidor.message || "Inicio de sesión fallido.");
         }
@@ -45,4 +45,11 @@ function mostrarError(mensaje) {
     setTimeout(() => {
         errorContainer.textContent = "";
     }, 3500);
+}
+
+function redirigir(){
+    window.open('./seleccionRol/seleccionRol.html', 'Rol del Usuario', 'width=600,height=400');
+    setTimeout(function(){
+        window.location.href = './inicio/inicio.html';
+    }, 3000);
 }

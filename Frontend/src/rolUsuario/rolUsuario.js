@@ -1,4 +1,4 @@
-import { obtenerRolUsuario } from '../http/rolSeleccion.js';
+import { obtenerRolUsuario } from '../http/rolUsuario.js';
 
 const mostrarRolElement = document.getElementById('mostrarRol');
 const btnCerrar = document.getElementById('btnCerrar');

@@ -40,26 +40,6 @@ class controllerUsuario extends Controller
         return response()->json(['mens' => $msg],$cod);
     }
 
-    public function inicioSesion(Request $request){
-        try {
-            $request->validate([
-                'correo' => 'required|exists:users,correo',
-                'password' => 'required',
-            ]); 
-
-            $credentials = $request->only('correo', 'password');
-        
-            if (Auth::attempt($credentials)) {
-                $user = Auth::user();
-                return response()->json(['mensaje' => 'Inicio de sesión exitoso', 'usuario' => $user], 200);
-            } else {
-                return response()->json(['mensaje' => 'Correo o contraseña incorrectos'], 401);
-            }
-        } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-    }
-
     public function modificarPassword(Request $request){
         try {
             $id=$request->get('id');

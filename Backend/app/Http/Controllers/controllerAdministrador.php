@@ -7,22 +7,28 @@ use App\Models\rol_usuario;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class controllerAdministrador extends Controller
 {
     public function listarUsuarios(){
 
         try {
-            $usuario=User::all();
+            $usuarios=DB::select('
+            SELECT
+                id, nombre,apellido,correo,id_rol
+            FROM
+                users
+            ');
 
-            $msg=$usuario;
+            $msg=$usuarios;
             $cod=200;
         } catch (Exception $e) {
             $msg=$e;
             $cod=404;
         }
 
-        return response()->json(['mens' => $msg],$cod);
+        return response()->json($msg,$cod);
     }
 
     public function listarUsuario(Request $request){

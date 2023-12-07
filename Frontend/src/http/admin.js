@@ -3,14 +3,18 @@ export async function listarUsuarios(){
         "Content-Type": "application/json",
     };
        
-       let response = await fetch("http://127.0.0.1:8000/api/listarUsuarios", { 
+       let response = await fetch("http://127.0.0.1:8000/api/admin/listarUsuarios", { 
          method: "GET",
          headers: headersList
        });
        
-       let data = await response.text();
-       
-       return data
+       if (!response.ok) {
+        throw new Error('Error')
+      }else{
+        let data = await response.json();
+        
+        return data;          
+      }
 }
 
 export async function listarUsuario(datos){

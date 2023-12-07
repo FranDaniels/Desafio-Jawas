@@ -15,6 +15,7 @@ module.exports = {
         loteClasificador: './src/lotesClasificador/loteClasificador.js',
         clasificacion:'./src/clasificacion/clasificacion.js',
         receta: './src/receta/receta.js',
+        joya: './src/joya/joya.js',
     },
     output: {
         filename: '[name].main.js',
@@ -99,6 +100,11 @@ module.exports = {
         template: './src/receta/receta.html',
         filename: 'receta/receta.html',
         chuncks: ['receta'],
+      }),
+      new HtmlWebpackPlugin({
+        template: './src/joya/joya.html',
+        filename: 'joya/joya.js',
+        chuncks: ['joya'],
       }),
     ],
 };

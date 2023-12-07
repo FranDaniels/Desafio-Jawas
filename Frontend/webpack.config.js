@@ -99,12 +99,12 @@ module.exports = {
       new HtmlWebpackPlugin({
         template: './src/receta/receta.html',
         filename: 'receta/receta.html',
-        chuncks: ['receta'],
+        chunks: ['receta'],
       }),
       new HtmlWebpackPlugin({
         template: './src/joya/joya.html',
-        filename: 'joya/joya.js',
-        chuncks: ['joya'],
+        filename: 'joya/joya.html',
+        chunks: ['joya'],
       }),
     ],
 };

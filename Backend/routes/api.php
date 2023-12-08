@@ -29,10 +29,14 @@ Route::middleware('auth:sanctum')->group( function () {
 //Hay que añadirle un middleware
 Route::get('admin/listarUsuarios',[controllerAdministrador::class,'listarUsuarios'])->middleware('admin');
 Route::get('admin/listarUsuario',[controllerAdministrador::class,'listarUsuario'])->middleware('admin');
+Route::get('admin/listarRoles/{id}',[controllerAdministrador::class,'listarRoles'])->middleware('admin');
+Route::get('admin/listarTodosLotes',[controllerAdministrador::class,'listarTodosLosLotes'])->middleware('admin');
 Route::post('admin/crearUsuario',[controllerAdministrador::class,'crearUsuario'])->middleware('admin');
 Route::post('admin/rol',[controllerAdministrador::class,'crearRol'])->middleware('admin');
 Route::post('admin/rolUsuario',[controllerAdministrador::class,'addRolUsuario'])->middleware('admin');
 Route::put('admin/modificarUsuario',[controllerAdministrador::class,'modificarUsuario'])->middleware('admin');
+Route::put('admin/modificarLote/{id}',[controllerAdministrador::class,'loteEntregado'])->middleware('admin');
+Route::put('admin/modificarPassword',[controllerAdministrador::class,'modificarPasswordUsuario'])->middleware('admin');
 Route::delete('admin/borrarUsuario',[controllerAdministrador::class,'borrarUsuario'])->middleware('admin');
 
 //Usuario

@@ -126,7 +126,7 @@ class controllerClasificador extends Controller
             JOIN
                 users u ON l.id_usuario = u.id
             WHERE
-                l.disponible = 1
+                l.disponible = 1 and l.estado = \'Entregado\'
             ORDER BY
                 l.id
             ');

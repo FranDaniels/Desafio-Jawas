@@ -32,9 +32,13 @@ export async function listarUsuario(datos){
          headers: headersList
        });
        
-       let data = await response.text();
-
-       return data;
+       if (!response.ok) {
+        throw new Error('Error')
+      }else{
+        let data = await response.json();
+        
+        return data;          
+      }
 }
 
 export async function crearUsuario(datos){
@@ -56,9 +60,13 @@ export async function crearUsuario(datos){
       headers: headersList,
     });
   
-  let data = await response.json();
-
-  return data;
+    if (!response.ok) {
+      throw new Error('Error')
+    }else{
+      let data = await response.json();
+      
+      return data;          
+    }
 }
 
 export async function crearRol(datos){
@@ -76,9 +84,13 @@ export async function crearRol(datos){
          headers: headersList
        });
        
-       let data = await response.text();
-       
-       return data
+       if (!response.ok) {
+        throw new Error('Error')
+      }else{
+        let data = await response.json();
+        
+        return data;          
+      }
 }
 
 export async function modificarUsuario(datos){
@@ -87,40 +99,51 @@ export async function modificarUsuario(datos){
      }
      
      let bodyContent = JSON.stringify({
-       "id": datos.id,
-       "rol":datos.rol
+      "id":datos.id,
+       "nombre":datos.nombre,
+       "apellido":datos.apellido
      });
      
-     let response = await fetch("http://127.0.0.1:8000/api/modificarUsuario", { 
-      method: "PUT",
-      body: bodyContent,
-      headers: headersList
-});
+     let response = await fetch("http://127.0.0.1:8000/api/admin/modificarUsuario", { 
+        method: "PUT",
+        body: bodyContent,
+        headers: headersList
+      });
      
-     let data = await response.text();
-     
-     return data
+      if (!response.ok) {
+        throw new Error('Error')
+      }else{
+        let data = await response.json();
+        
+        return data;          
+      }
 }
 
-export async function aniadirRolUsuario(datos){
+export async function addRolUsuario(usuario,rol){
   let headersList = {
       "Content-Type": "application/json"
      }
-     
+     console.log(rol)
+     console.log(usuario.id)
+
      let bodyContent = JSON.stringify({
-       "idRol": datos.idRol,
-       "idUsuario":datos.idUsuario
+       "idRol": rol,
+       "idUsuario":usuario.id
      });
      
-     let response = await fetch("http://127.0.0.1:8000/api/rolUsuario", { 
+     let response = await fetch("http://127.0.0.1:8000/api/admin/rolUsuario", { 
         method: "POST",
         body: bodyContent,
         headers: headersList
       });
      
-     let data = await response.text();
-     
-     return data
+      if (!response.ok) {
+        throw new Error('Error')
+      }else{
+        let data = await response.json();
+        
+        return data;          
+      }
 }
 
 export async function borrarUsuario(datos){
@@ -138,7 +161,96 @@ export async function borrarUsuario(datos){
         headers: headersList
       });
      
-     let data = await response.text();
+      if (!response.ok) {
+        throw new Error('Error')
+      }else{
+        let data = await response.json();
+        
+        return data;          
+      }
+}
+
+export async function cambiarPasswordUsuario(datos){   
+  let bodyContent = JSON.stringify(
+    {
+      "id":datos.id,
+      "password": datos.password
+    }
+);  
+
+  let headersList = {
+  "Content-Type": "application/json",
+    };
+
+    let response = await fetch("http://127.0.0.1:8000/api/admin/modificarPassword", { 
+      method: "PUT",
+      body: bodyContent,
+      headers: headersList
+    });
+
+    if (!response.ok) {
+      throw new Error('Error')
+    }else{
+      let data = await response.json();
+      
+      return data;          
+    }
+}
+
+export async function cargarRoles(id){   
+  let headersList = {
+    "Content-Type": "application/json"
+   }
+   
+   let response = await fetch("http://127.0.0.1:8000/api/admin/listarRoles/"+id, { 
+     method: "GET",
+     headers: headersList
+   });
+   
+   if (!response.ok) {
+    throw new Error('Error')
+  }else{
+    let data = await response.json();
+    
+    return data;          
+  }
+}
+
+export async function cargarLotes(){   
+  let headersList = {
+    "Content-Type": "application/json"
+   }
+   
+   let response = await fetch("http://127.0.0.1:8000/api/admin/listarTodosLotes", { 
+      method: "GET",
+      headers: headersList
+    });
+   
+   if (!response.ok) {
+    throw new Error('Error')
+  }else{
+    let data = await response.json();
+    
+    return data;          
+  }
+}
+
+  export async function cambiarLoteEntregado(id){   
+    console.log(id)
+    let headersList = {
+      "Content-Type": "application/json"
+     }
      
-     return data
+     let response = await fetch("http://127.0.0.1:8000/api/admin/modificarLote/"+id, { 
+      method: "PUT",
+      headers: headersList
+    });
+     
+     if (!response.ok) {
+      throw new Error('Error')
+    }else{
+      let data = await response.json();
+      
+      return data;          
+    }
 }

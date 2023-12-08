@@ -98,7 +98,7 @@ module.exports = {
       new HtmlWebpackPlugin({
         template: './src/receta/receta.html',
         filename: 'receta/receta.html',
-        chuncks: ['receta'],
+        chunks: ['receta'],
       }),
     ],
 };

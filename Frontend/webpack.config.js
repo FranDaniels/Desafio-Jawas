@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     mode: "development",
@@ -16,6 +17,8 @@ module.exports = {
         clasificacion:'./src/clasificacion/clasificacion.js',
         receta: './src/receta/receta.js',
         adminLote: './src/adminLote/adminLote.js',
+        joya: './src/joya/joya.js',
+
     },
     output: {
         filename: '[name].main.js',
@@ -24,28 +27,32 @@ module.exports = {
     },
     module: {
         rules: [{
-            test: /\.s?css$/,
-            use: [
-              "style-loader", 
-              "css-loader",
-              "sass-loader",
-              {
-                loader: "sass-loader",
-                options: {
-                  implementation: require.resolve("sass"),
-                }
-              }
-        ]},
-        {
-          test: /\.css$/,
+          test: /\.s?css$/,
           use: [
               "style-loader",
-              "css-loader"
+              "css-loader",
+              "sass-loader",
+          ],
+        },
+        {
+          test: /\.(png|jpe?g|gif)$/i,
+          use: [
+              {
+                  loader: 'file-loader',
+                  options: {
+                      outputPath: 'imagenes',
+                  },
+              },
           ]
-      }
+        }
       ]},
     
     plugins: [
+      new CopyWebpackPlugin({
+        patterns: [
+            { from: './src/imagenes', to: 'imagenes' },
+        ],
+    }),
       new HtmlWebpackPlugin({
           template: './src/index.html',
           filename: 'index.html',
@@ -99,7 +106,12 @@ module.exports = {
       new HtmlWebpackPlugin({
         template: './src/receta/receta.html',
         filename: 'receta/receta.html',
-        chuncks: ['receta'],
+        chunks: ['receta'],
+      }),
+      new HtmlWebpackPlugin({
+        template: './src/joya/joya.html',
+        filename: 'joya/joya.html',
+        chunks: ['joya'],
       }),
       new HtmlWebpackPlugin({
         template: './src/adminLote/adminLote.html',

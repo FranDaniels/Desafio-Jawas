@@ -1,4 +1,5 @@
 import { obtenerJoyas } from '../http/joyas.js';
+import './joya.css';
 
 async function mostrarJoyas() {
     try {
@@ -50,18 +51,21 @@ async function mostrarJoyas() {
             contenedorJoyas.appendChild(crearTarjeta(joya));
         });
 
-        // Botón para cambiar entre vista de tarjetas y lista
-        const cambiarVistaBtn = document.getElementById('cambiarVista');
+        let cambiarVistaBtn = document.getElementById('cambiarVista');
 
         if (cambiarVistaBtn) {
             cambiarVistaBtn.addEventListener('click', () => {
-                // Agrega o elimina la clase 'list-group' para cambiar la vista
                 contenedorJoyas.classList.toggle('list-group');
 
-                // Borra las tarjetas actuales
+                let imagenBoton = cambiarVistaBtn.querySelector('img');
+                if (contenedorJoyas.classList.contains('list-group')) {
+                    imagenBoton.src = '../imagenes/vista_cuadricula.png';
+                } else {
+                    imagenBoton.src = '../imagenes/vista_lista.png';
+                }
+
                 contenedorJoyas.innerHTML = '';
 
-                // Renderiza joyas en la nueva vista
                 joyas.forEach((joya) => {
                     if (contenedorJoyas.classList.contains('list-group')) {
                         contenedorJoyas.appendChild(crearItemLista(joya));
@@ -71,7 +75,6 @@ async function mostrarJoyas() {
                 });
             });
         }
-
     } catch (error) {
         console.error('Error al obtener las joyas:', error);
     }

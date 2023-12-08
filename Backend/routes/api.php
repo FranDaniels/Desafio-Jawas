@@ -9,6 +9,7 @@ use App\Http\Controllers\controllerRol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ControllerJoyas;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,9 @@ Route::post('clasificador/asignarLote',[controllerClasificador::class,'asignarLo
 
 //Recetas
 Route::get('mostrarRecetas', [controllerReceta::class, 'mostrarRecetas']);
+
+//Joyas
+Route::get('mostrarJoyas', [ControllerJoyas::class, 'mostrarJoyas']);
 
 Route::get('', function () {
     return response()->json("No autorizado",203);

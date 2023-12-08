@@ -1,0 +1,11 @@
+.buttonVista {
+    background: none;
+    border: none;
+    overflow: visible;
+    outline: none;
+    cursor: pointer;
+
+    position: absolute;
+    top: 65px;
+    right: 80px;
+}

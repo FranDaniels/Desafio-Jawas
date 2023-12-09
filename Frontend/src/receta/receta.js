@@ -1,4 +1,5 @@
 import { obtenerRecetas, obtenerNombreJoya, obtenerNombreComponente } from "../http/receta.js";
+import './receta.css';
 
 async function mostrarRecetas() {
     try {
@@ -68,10 +69,8 @@ async function verReceta(receta, card) {
         `;
         divReceta.style.display = 'block';
 
-        // Oculta el botón "Ver Receta"
         btnVerReceta.style.display = 'none';
 
-        // Agrega un listener al nuevo botón creado
         const cerrarRecetaBtn = document.getElementById(`cerrarRecetaBtn-${receta.id}`);
         cerrarRecetaBtn.addEventListener('click', () => cerrarReceta(receta.id, card));
     } else {

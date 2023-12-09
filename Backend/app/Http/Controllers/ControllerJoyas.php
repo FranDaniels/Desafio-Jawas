@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Joya;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @author Marina Laguna
@@ -24,19 +25,25 @@ class ControllerJoyas extends Controller
         return response() -> json(['mens' => $msg], $cod);
     }
 
-    public function listarJoya(Request $request){
-        try{
-            $id = $request -> get('id');
-            $joya = Joya::find($id);
-
-            $msg = $joya;
-            $cod = 200;
-        }catch (Exception $e){
-            $msg = $e;
-            $cod =404;
+    public function obtenerNombreJoya($id){
+        try {
+            $joya = DB::select('SELECT nombre FROM joya WHERE id = ?', [$id]);
+    
+            if (empty($joya)) {
+                $msg = "Joya no encontrada";
+                $cod = 404;
+            } else {
+                $msg = $joya[0]->nombre;
+                $cod = 200;
+            }
+        } catch (Exception $e) {
+            $msg = $e->getMessage();
+            $cod = 500; 
         }
-        return response() -> json (['mens' => $msg], $cod);
+    
+        return response()->json(['mens' => $msg], $cod);
     }
+    
     
     public function crearJoya(Request $request){
         $joya = new Joya;

@@ -2,27 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lote;
+use App\Models\lote_usuario;
 use App\Models\Rol;
 use App\Models\rol_usuario;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class controllerAdministrador extends Controller
 {
     public function listarUsuarios(){
 
         try {
-            $usuario=User::all();
+            $usuarios=DB::select('
+            SELECT
+                u.id, u.nombre,u.apellido,u.correo,r.nombre AS nombre_rol
+            FROM
+                users u
+            JOIN
+                rol r ON r.id = u.id_rol
+            ORDER BY
+                u.id
+            ');
 
-            $msg=$usuario;
+            $msg=$usuarios;
             $cod=200;
         } catch (Exception $e) {
             $msg=$e;
             $cod=404;
         }
 
-        return response()->json(['mens' => $msg],$cod);
+        return response()->json($msg,$cod);
     }
 
     public function listarUsuario(Request $request){
@@ -70,6 +82,29 @@ class controllerAdministrador extends Controller
         return response()->json(['mens' => $msg],$cod);
     }
 
+    public function listarRoles($id){
+        try {
+
+            $roles = DB::table('rol')
+            ->select('id','nombre')
+            ->whereNotExists(function ($query) use ($id) {
+                $query->select(DB::raw(1))
+                      ->from('rol_usuario')
+                      ->where('id_usuario', '=', $id)
+                      ->whereColumn('id_rol', '=', 'rol.id');
+            })
+            ->get();
+            
+            $msg=$roles;
+            $cod=200;
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
+
+        return response()->json($msg,$cod);
+    }
+
     public function modificarUsuario(Request $request){
 
         try {
@@ -77,10 +112,33 @@ class controllerAdministrador extends Controller
 
             $usuarioEncontrado=User::find($id);
 
-            $usuarioEncontrado->id_rol=$request->get('rol');
+            $usuarioEncontrado->nombre=$request->get('nombre');
+            $usuarioEncontrado->apellido=$request->get('apellido');
 
             $usuarioEncontrado->save();
+
             $msg=$usuarioEncontrado;
+            $cod=200;
+            
+
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
+
+        return response()->json(['mens' => $msg],$cod);
+    }
+
+    public function modificarPasswordUsuario(Request $request){
+        try {
+            $id=$request->get('id');
+
+            $usuarioEncontrado=User::find($id);
+
+            $usuarioEncontrado->password=$request->get('password');
+
+            $usuarioEncontrado->save();
+            $msg="Password cambiada correctamente";
             $cod=200;
             
 
@@ -136,6 +194,34 @@ class controllerAdministrador extends Controller
         return response()->json(['mens' => $msg],$cod);
     }
 
+    public function listarTodosLosLotes(){
+        try {
+            $lotes = DB::select('
+            SELECT
+                l.id AS lote_id,
+                l.descripcion AS lote_descripcion,
+                l.ubicacion AS lote_ubicacion,
+                l.estado AS lote_estado,
+                l.fecha_entrega AS lote_fecha_entrega,
+                u.nombre AS usuario_nombre
+            FROM
+                lote l
+            JOIN
+                users u ON l.id_usuario = u.id
+            ORDER BY
+                l.id
+            ');
+
+        $msg=$lotes;
+        $cod=200;
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
+        
+        return response()->json($msg,$cod);
+    }
+
     public function crearRol(Request $request){
         $rol=new Rol;
 
@@ -152,6 +238,24 @@ class controllerAdministrador extends Controller
         }
 
         return response()->json(['mens' => $msg],$cod);
+    }
+
+    public function loteEntregado($idLote){
+        try {
+        $loteEncontrado=Lote::find($idLote);
+
+        $loteEncontrado->estado="Entregado";
+
+        $loteEncontrado->save();
+
+        $msg=$loteEncontrado;
+        $cod=200;
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
+        
+        return response()->json($msg,$cod);
     }
 
 }

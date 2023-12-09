@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
  */
 class ControllerJoyas extends Controller
 {
-    public function listarJoyas(){
+    public function mostrarJoyas(){
         try{
             $joya = Joya::all();
 

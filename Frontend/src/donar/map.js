@@ -1,5 +1,3 @@
-import	'./map.css';
-
 let map;
 let marker;
 let geocoder;

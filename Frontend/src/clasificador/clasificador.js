@@ -1,5 +1,7 @@
 import { asignarLoteUsuario, listarLotes } from "../http/clasificador.js"
+import { cabecera } from "../utils/componentes.js";
 
+cabecera();
 var tabla=document.getElementById("tbody")
 
 await listarLotes().then(function(data){

@@ -1,5 +1,7 @@
 import { listarMisLotes } from "../http/clasificador.js"
+import { cabecera } from "../utils/componentes.js";
 
+cabecera();
 var tabla=document.getElementById("tbody")
 var idUsuario=localStorage.getItem("usuarioId")
 

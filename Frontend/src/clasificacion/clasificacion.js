@@ -1,6 +1,8 @@
 import { addInventario, listarComponentes, listarLote, listarComponente, realizarDespiece } from "../http/clasificador.js"
 import { includes, tieneElementosRepetidos } from "../utils/funciones.js";
+import { cabecera } from "../utils/componentes.js";
 
+cabecera();
 var h1=document.getElementById('h1');
 var descripcion=document.getElementById('descripcion');
 var ubicacion=document.getElementById('ubicacion');

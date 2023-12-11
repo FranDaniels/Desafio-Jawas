@@ -1,6 +1,8 @@
 import { donarLote } from "../http/donar.js";
 import { comprobarPantallaDonar } from "../utils/validaciones.js";
+import { cabecera } from "../utils/componentes.js";
 
+cabecera();
 var descripcion=document.getElementById('descripcion');
 var ubicacion=document.getElementById('mapa')
 var fechaEntrega=document.getElementById('fechaEntrega');

@@ -25,10 +25,11 @@ module.exports = {
     output: {
         filename: '[name].main.js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/'
+        publicPath: '/',
     },
     module: {
-        rules: [{
+        rules: [
+          {
           test: /\.s?css$/,
           use: [
               "style-loader",

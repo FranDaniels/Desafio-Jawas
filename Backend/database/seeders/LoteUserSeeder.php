@@ -19,7 +19,7 @@ class LoteUserSeeder extends Seeder
 
         \App\Models\lote_usuario::create([
             'id_usuario' => '2',
-            'id_lote' => '4'
+            'id_lote' => '2'
         ]);
     }
 }

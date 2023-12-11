@@ -27,6 +27,7 @@ async function mostrarJoyas() {
             tarjeta.innerHTML = `
                 <div class="card">
                     <div class="card-body">
+                        <img src = ../imagenes/joyas/${joya.imagen}>
                         <h5 class="card-title">${joya.nombre}</h5>
                         <p class="card-text">${joya.descripcion}</p>
                     </div>

@@ -9,8 +9,7 @@ use Illuminate\Database\Seeder;
  */
 class JoyaSeeder extends Seeder
 {
-    public function run()
-    {
+    public function run()  {
         \App\Models\Joya::create([
             'nombre' => 'Pulsera de placa base',
             'descripcion' => 'Una elegante pulsera de cuero con detalles de placa base.',

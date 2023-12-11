@@ -22,6 +22,7 @@ module.exports = {
         joya: './src/joya/joya.js',
         componentes: './src/utils/componentes.js',
         map:'./src/donar/map.js',
+
     },
     output: {
         filename: '[name].main.js',

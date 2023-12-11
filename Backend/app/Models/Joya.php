@@ -18,6 +18,7 @@ class Joya extends Model
     protected $fillable = [
         'nombre',
         'descripcion',
+        'imagen',
         'id_usuario'
     ];
 

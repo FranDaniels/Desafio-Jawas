@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Joya;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @author Marina Laguna
@@ -45,45 +46,75 @@ class ControllerJoyas extends Controller
     }
     
     
-    public function crearJoya(Request $request){
-        $joya = new Joya;
+    public function crearJoya(Request $request)
+    {
+        try {
+            $request->validate([
+                'nombre' => 'required|string',
+                'descripcion' => 'required|string',
+                'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'id_usuario' => 'required|exists:usuarios,id',
+            ]);
 
-        $joya -> id = $request -> get('id');
-        $joya -> nombre = $request -> get('nombre');
-        $joya -> descripcion = $request -> get('descripcion');
-        $joya -> id_usuario = $request -> get('usuario');
+            $imagenPath = $request->file('imagen')->store('imagenes/joyas', 'public');
 
-        $msg = $joya;
-        $cod = 200;
+            $imagen = Storage::url($imagenPath);
 
-        try{
-            $joya -> save();
-        }catch (Exception $e){
-            $msg = $e;
-            $cod = 404;
-        }
-        return response() -> json(['mens' => $msg], $cod);
-    }
+            $joya = Joya::create([
+                'nombre' => $request->input('nombre'),
+                'descripcion' => $request->input('descripcion'),
+                'imagen' => $imagen,
+                'id_usuario' => $request->input('id_usuario'),
+            ]);
 
-    public function modificarJoya(Request $request){
-        try{
-            $id = $request -> get('id');
-
-            $joyaEncontrada = Joya::find($id);
-
-            $joyaEncontrada -> nombre = $request -> get('nombre');
-            $joyaEncontrada -> descripcion = $request -> get('descripcion');
-
-            $joyaEncontrada -> save();
-            $msg = $joyaEncontrada;
+            $msg = ['message' => 'Joya creada exitosamente', 'joya' => $joya];
             $cod = 200;
-        } catch (Exception $e){
-            $msg = $e;
+        } catch (Exception $e) {
+            $msg = ['error' => $e->getMessage()];
             $cod = 404;
         }
+
         return response()->json(['mens' => $msg], $cod);
     }
 
+    public function modificarJoya(Request $request)
+    {
+        try {
+            $request->validate([
+                'id' => 'required|exists:joya,id',
+                'nombre' => 'required|string',
+                'descripcion' => 'required|string',
+                'imagen' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048', // El campo imagen es opcional al modificar
+            ]);
+
+            $id = $request->input('id');
+
+            $joyaEncontrada = Joya::find($id);
+
+            if (!$joyaEncontrada) {
+                throw new Exception('Joya no encontrada');
+            }
+
+            $joyaEncontrada->nombre = $request->input('nombre');
+            $joyaEncontrada->descripcion = $request->input('descripcion');
+
+            if ($request->hasFile('imagen')) {
+                $imagenPath = $request->file('imagen')->store('imagenes/joyas', 'public');
+                $imagen = Storage::url($imagenPath);
+                $joyaEncontrada->imagen_url = $imagen;
+            }
+
+            $joyaEncontrada->save();
+
+            $msg = ['message' => 'Joya modificada exitosamente', 'joya' => $joyaEncontrada];
+            $cod = 200;
+        } catch (Exception $e) {
+            $msg = ['error' => $e->getMessage()];
+            $cod = 404;
+        }
+
+        return response()->json(['mens' => $msg], $cod);
+    }
     public function eliminarJoya(Request $request){
         try{
             $id = $request -> get('id');

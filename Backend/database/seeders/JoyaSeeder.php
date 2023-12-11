@@ -15,21 +15,21 @@ class JoyaSeeder extends Seeder
         Joya::create([  
             'nombre' => 'Pulsera de placa base',
             'descripcion' => 'Una elegante pulsera de cuero con detalles de placa base.',
-            'imagen' => '../Frontend/src/imagenes/joyas/pulseras_placa_base.jpg',
+            'imagen' => 'pulseras_placa_base.jpg',
             'id_usuario' => 1,
         ]);
 
         Joya::create([
             'nombre' => 'Pin de placa base',
             'descripcion' => 'Un delicado pendiente de disco duro y un osito en su centro.',
-            'imagen' => '../Frontend/src/imagenes/joyas/pin_placa_base_rojo.jpg',
+            'imagen' => 'pin_placa_base_rojo.jpg',
             'id_usuario' => 3,
         ]);
 
         Joya::create([
             'nombre' => 'Collar Osito', 
             'descripcion' => 'Un hermoso collar con un disco duro y un hermoso osito en su interior',
-            'imagen' => '../Frontend/src/imagenes/joyas/collar_osito.jpg',
+            'imagen' => 'collar_osito.jpg',
             'id_usuario' => 3,
         ]);
     }

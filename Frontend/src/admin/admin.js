@@ -1,6 +1,9 @@
 import { listarUsuarios, borrarUsuario, cargarRoles, cambiarPasswordUsuario, modificarUsuario, addRolUsuario } from "../http/admin.js";
 import { comprobarPasswordPerfil, validarUsuarioAdmin } from "../utils/validaciones.js";
+import { cabecera, footer } from "../utils/componentes.js";
 
+cabecera();
+footer();
 await listarUsuarios().then(function(data){
     var usuarios=data;
     console.log(usuarios)

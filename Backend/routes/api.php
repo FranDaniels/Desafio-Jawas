@@ -23,8 +23,6 @@ use App\Http\Controllers\AuthController;
 */
 Route::middleware('auth:sanctum')->group( function () {
     //Añadir rutas para que no se puedan hacer si no se ha echo el registro ni el login
-
-    
 });
 
 //Administrador
@@ -68,6 +66,14 @@ Route::post('clasificador/componente',[controllerClasificador::class,'crearCompo
 Route::post('clasificador/inventario',[controllerClasificador::class,'addInventario']);
 Route::post('clasificador/asignarLote',[controllerClasificador::class,'asignarLote']);
 
+//Recetas
+Route::get('mostrarRecetas', [controllerReceta::class, 'mostrarRecetas']);
+Route::get('obtenerNombreJoya/{id}', [ControllerJoyas::class, 'obtenerNombreJoya']);
+Route::get('obtenerNombreComponente/{id}',[controllerReceta::class,'obtenerNombreComponente']);
+Route::get('obtenerRecetaPorId/{id}', [controllerReceta::class, 'obtenerRecetaPorId']);
+
+//Joyas
+Route::get('mostrarJoyas', [ControllerJoyas::class, 'mostrarJoyas']);
 
 Route::get('', function () {
     return response()->json("No autorizado",203);

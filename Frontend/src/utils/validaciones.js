@@ -1,7 +1,7 @@
 import { cleanValue, comprobarLongitudValores, comprobarValores, empty } from "./funciones.js";
 
-let ERNombre=/^[a-zA-Z-\s]{3,20}$/;
-let ERApellido=/^[a-zA-Z-\s]{2,30}$/;
+let ERNombre=/^[a-zA-ZñÑ-\s]{3,20}$/;
+let ERApellido=/^[a-zA-ZñÑ-\s]{2,30}$/;
 let ERCorreo=/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 let ERPassword=/^[a-zA-Z0-9\-.*#$]{6,12}$/;
 

@@ -17,6 +17,8 @@ class UserSeeder extends Seeder
             'apellido' => 'Alvarez',
             'correo' => 'francisco@gmail.com',
             'password' => 'admin123',
+            'img'=>'https://proyectodualiza.s3.amazonaws.com/perfiles/obiwanKenobi.jpeg',
+            'usuarioActivo'=>'1',
             'id_rol' => '1'
         ]);
 
@@ -25,6 +27,8 @@ class UserSeeder extends Seeder
             'apellido' => 'Laguna',
             'correo' => 'marina@gmail.com',
             'password' => 'admin123',
+            'img'=>'https://proyectodualiza.s3.amazonaws.com/perfiles/obiwanKenobi.jpeg',
+            'usuarioActivo'=>'1',
             'id_rol' => '2'
         ]);
 
@@ -33,6 +37,8 @@ class UserSeeder extends Seeder
             'apellido' => 'Hamidou',
             'correo' => 'badrhamidou@gmail.com',
             'password' => 'admin123',
+            'img'=>'https://proyectodualiza.s3.amazonaws.com/perfiles/obiwanKenobi.jpeg',
+            'usuarioActivo'=>'1',
             'id_rol' => '3'
         ]);
 
@@ -41,6 +47,8 @@ class UserSeeder extends Seeder
             'apellido' => 'Barrera',
             'correo' => 'nessi@gmail.com',
             'password' => 'admin123',
+            'img'=>'https://proyectodualiza.s3.amazonaws.com/perfiles/obiwanKenobi.jpeg',
+            'usuarioActivo'=>'1',
             'id_rol' => '4'
         ]);
     }

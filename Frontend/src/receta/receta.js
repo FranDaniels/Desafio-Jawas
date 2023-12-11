@@ -1,4 +1,5 @@
 import { obtenerRecetas, obtenerNombreJoya, obtenerNombreComponente } from "../http/receta.js";
+import './receta.css';
 
 async function mostrarRecetas() {
     try {

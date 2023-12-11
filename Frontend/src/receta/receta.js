@@ -44,7 +44,7 @@ async function crearCardReceta(receta) {
 
     card.innerHTML = `
         <div class="card-body">
-            <h5 class="card-title">Joya: ${nombreJoya}</h5>
+            <h5 class="card-title">${nombreJoya}</h5>
         </div>
     `;
 

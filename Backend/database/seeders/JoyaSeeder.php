@@ -12,7 +12,7 @@ class JoyaSeeder extends Seeder
 {
     public function run()
     {
-        Joya::create([
+        Joya::create([  
             'nombre' => 'Pulsera de placa base',
             'descripcion' => 'Una elegante pulsera de cuero con detalles de placa base.',
             'imagen' => '../Frontend/src/imagenes/joyas/pulseras_placa_base.jpg',

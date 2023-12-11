@@ -1,5 +1,4 @@
 import { obtenerJoyas } from '../http/joyas.js';
-import './joya.css';
 
 async function mostrarJoyas() {
     try {

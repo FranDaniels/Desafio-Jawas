@@ -1,4 +1,3 @@
-import './donar.css';
 import { donarLote } from "../http/donar.js";
 import { comprobarPantallaDonar } from "../utils/validaciones.js";
 

@@ -1,6 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 
 module.exports = {
     mode: "development",
@@ -44,10 +46,30 @@ module.exports = {
                   },
               },
           ]
-        }
+        },
+        {
+          test: /\.(c|sc|sa)ss$/,
+          use: [ MiniCssExtractPlugin.loader, 
+              'css-loader',
+              'sass-loader',
+              {
+                  loader: 'postcss-loader',
+                  options: {
+                      postcssOptions: {
+                          plugins: () => {
+                              require('autoprefixer')
+                          }
+                      }
+                  }
+              }
+          ]
+      }
       ]},
-    
     plugins: [
+      new MiniCssExtractPlugin({
+        filename: '[name].css',
+        ignoreOrder: false
+    }),
       new CopyWebpackPlugin({
         patterns: [
             { from: './src/imagenes', to: 'imagenes' },

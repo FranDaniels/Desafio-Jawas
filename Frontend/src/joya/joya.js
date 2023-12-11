@@ -1,6 +1,7 @@
 import { obtenerJoyas } from '../http/joyas.js';
-import './joya.css';
+import { cabecera } from "../utils/componentes.js";
 
+cabecera();
 async function mostrarJoyas() {
     try {
         let response = await obtenerJoyas();

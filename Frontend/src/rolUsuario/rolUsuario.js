@@ -1,5 +1,7 @@
 import { obtenerRolUsuario } from '../http/rolUsuario.js';
+import { cabecera } from '../utils/componentes.js';
 
+cabecera();
 const mostrarRolElement = document.getElementById('mostrarRol');
 const btnCerrar = document.getElementById('btnCerrar');
 

@@ -1,4 +1,4 @@
-function cabecera() {
+export function cabecera() {
   document.getElementById("cabecera").innerHTML =
       `
       <header>

@@ -1,8 +1,9 @@
 import { cambiarDatos, cambiarPassword, obtenerUsuario } from "../http/perfil.js";
 import { comprobarPasswordPerfil, comprobarValidacionePerfil } from "../utils/validaciones.js";
-import { cabecera } from "../utils/componentes.js";
+import { cabecera, footer } from "../utils/componentes.js";
 
 cabecera();
+footer();
 var nombre=document.getElementById('nombre');
 var apellido=document.getElementById('apellido')
 var correo=document.getElementById('correo')

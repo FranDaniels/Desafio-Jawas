@@ -1,7 +1,8 @@
 import { cambiarLoteEntregado, cargarLotes } from "../http/admin.js";
-import { cabecera } from "../utils/componentes.js";
+import { cabecera, footer } from "../utils/componentes.js";
 
 cabecera();
+footer();
 await cargarLotes().then(function(data){
     var lotes=data;
     console.log(lotes)

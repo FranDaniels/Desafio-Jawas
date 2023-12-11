@@ -1,4 +1,4 @@
-export async function crearUsuario(datos){   
+export async function crearUsuario(datos){  
     let bodyContent = JSON.stringify(
       {
           "nombre": datos.nombre,

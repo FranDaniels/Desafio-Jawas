@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\rol_usuario;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +21,9 @@ class controllerUsuario extends Controller
         $usuario->apellido=$request->get('apellido');
         $usuario->correo=$request->get('correo');
         $usuario->password=$request->get('password');
-        $usuario->id_rol=2;
+        $usuario->img='https://proyectodualiza.s3.amazonaws.com/perfiles/obiwanKenobi.jpeg';
+        $usuario->id_rol="2";
+        $usuario->usuarioActivo='1';
 
         $msg=$usuario;
         $cod=200;
@@ -27,7 +31,7 @@ class controllerUsuario extends Controller
             $usuario->save();
             $id = $usuario->id;
 
-            $idRolSeleccionado = $request->input('seleccionRol');
+            $idRolSeleccionado = $usuario->id_rol;
 
             $rolU = new rol_usuario;
             $rolU->id_rol = $idRolSeleccionado;
@@ -113,6 +117,49 @@ class controllerUsuario extends Controller
 
             $usuario=User::find($id);
 
+            $msg=$usuario;
+            $cod=200;
+
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
+
+        return response()->json($msg,$cod);
+    }
+
+    public function subirImagen(Request $request){
+        $msg=['max'=>'El campo se excede del tamaño máximo'];
+    
+        $validator=Validator::make($request->all(),[
+        'image'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ],$msg);
+
+    if ($validator->fails()) {
+        return response()->json($validator->errors(),202);
+    }
+
+    if ($request->hasFile('image')) {
+        $file=$request->file('image');
+
+        $path=$file->store('perfiles','s3');
+        // $path=$file->storeAs('perfiles',$file->getClientOriginalName(),'s3');
+        
+        $url=Storage::disk('s3')->url($path);
+        return response()->json(['path'=>$path,'url'=>$url],202);
+    }
+    return response()->json(['error'=>'No se recibió ningún archivo.'],400);
+    }
+
+    public function actualizarImagenUsuario(Request $request){
+        try {
+
+            $id=$request->get('id');
+
+            $usuario=User::find($id);
+
+            $usuario->img=$request->get('img');
+            
             $msg=$usuario;
             $cod=200;
 

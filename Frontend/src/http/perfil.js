@@ -47,9 +47,13 @@ export async function cambiarDatos(datos){
         headers: headersList
     });
   
-  let data = await response.json();
-
-  return data;
+    if (!response.ok) {
+      throw new Error('Error')
+    }else{
+      let data = await response.json();
+      
+      return data;          
+    }
   }
 
   export async function obtenerUsuario(datos){
@@ -62,7 +66,47 @@ export async function cambiarDatos(datos){
        headers: headersList
      });
      
-     let data = await response.json();
+     if (!response.ok) {
+      throw new Error('Error')
+    }else{
+      let data = await response.json();
+      
+      return data;          
+    }
+  }
+
+  export async function subirImagenS3(ruta){
+     let response = await fetch("http://127.0.0.1:8000/api/subirImagen", { 
+       method: "POST",
+       body: ruta
+     });
      
-     return data
+     if (!response.ok) {
+      throw new Error('Error')
+    }else{
+      let data = await response.json();
+      
+      return data;          
+    }
+  }
+
+  export async function actualizarImg(datos){
+
+    let headersList = {
+      "Content-Type": "application/json"
+     }
+     
+     let response = await fetch("http://127.0.0.1:8000/api/actualizarImagen", { 
+       method: "PUT",
+       body: datos,
+       headers: headersList
+     });
+     
+     if (!response.ok) {
+      throw new Error('Error')
+    }else{
+      let data = await response.json();
+      
+      return data;          
+    }
   }

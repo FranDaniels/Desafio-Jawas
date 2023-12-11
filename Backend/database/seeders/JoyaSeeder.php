@@ -21,7 +21,7 @@ class JoyaSeeder extends Seeder
 
         Joya::create([
             'nombre' => 'Pin de placa base',
-            'descripcion' => 'Un delicado pendiente de disco duro y un osito en su centro.',
+            'descripcion' => 'Un delicado pin de una placa base.',
             'imagen' => 'pin_placa_base_rojo.jpg',
             'id_usuario' => 3,
         ]);

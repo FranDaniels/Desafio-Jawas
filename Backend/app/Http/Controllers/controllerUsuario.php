@@ -89,10 +89,12 @@ class controllerUsuario extends Controller
             $lote=new Lote;
 
             $lote->descripcion=$request->get('descripcion');
-            $lote->ubicacion=$request->get('ubicacion');
-            $lote->estado=$request->get('estado');
-            $lote->fecha_entrega=$request->get('fecha_entrega');
-            $lote->disponible=$request->get('disponible');
+            $lote->latitud=$request->get('latitud');
+            $lote->longitud=$request->get('longitud');
+            $lote->estado='En camino';
+            $lote->fecha_entrega=now();
+            $lote->disponible=0;
+            $lote->clasificado=0;
             $lote->id_usuario=$request->get('idUsuario');
 
             $msg=$lote;

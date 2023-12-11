@@ -14,7 +14,8 @@ class Lote extends Model
 
     protected $fillable = [
         'descripcion',
-        'ubicacion',
+        'latitud',
+        'longitud',
         'estado',
         'fecha_entrega'
     ];

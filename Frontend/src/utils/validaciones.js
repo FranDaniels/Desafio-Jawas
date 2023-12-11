@@ -197,44 +197,21 @@ function mensajesDeError(errores) {
 }
 
 export function comprobarPantallaDonar(){
-    var opcionEstado=document.getElementById("estado");
     var errorDescripcion=document.getElementById("errorDescripcion");
-    var errorFecha=document.getElementById("errorFecha");
-    var errorEstado=document.getElementById("errorEstado");
     var descripcion=document.getElementById('descripcion');
-    var fecha=document.getElementById('fechaEntrega');
+    var valido=true;
 
-    errorEstado.innerHTML="";
-    errorFecha.innerHTML="";
     errorDescripcion.innerHTML="";
     descripcion.style.borderColor="";
-    opcionEstado.style.borderColor="";
-    fecha.style.borderColor="";
 
     if (empty(descripcion.value)) {
+        valido=false
         descripcion.style.borderColor="red";
         errorDescripcion.style.color="red";
         errorDescripcion.innerHTML="La descripción se encuentra vacia";
     }
-    if (empty(fecha.value)) {
-        fecha.style.borderColor="red";
-        errorFecha.style.color="red";
-        errorFecha.innerHTML="Ingrese una fecha de entrega";  
-    }
-
-    if (opcionEstado.value=="") {
-        opcionEstado.style.borderColor="red";
-        errorEstado.style.color="red";
-        errorEstado.innerHTML="Seleccione el estado en el que se encuentra el lote";
-    }else{
-        if (opcionEstado.value=="1") {
-            return true
-        }else{
-            if (opcionEstado.value=="2") {  
-                return true
-            }
-        }
-    }
+    
+    return valido
 }
 
 export function validarUsuarioAdmin(nombre,apellido){

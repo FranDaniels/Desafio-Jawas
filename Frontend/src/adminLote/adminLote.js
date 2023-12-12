@@ -31,13 +31,16 @@ function generarTablaLotes(lotes) {
         btn.style.color="black"
         btn.id=lotes[i].lote_id
         btn.setAttribute("class","btn btn-primary")
-        btn.setAttribute("data-bs-toggle", "modal");
-        btn.setAttribute("data-bs-target", "#modalModificar");
+        btn.setAttribute("data-bs-toggle","modal")
+        btn.setAttribute("data-bs-target","#modalEntregado")
         btn.setAttribute("id",lotes[i].lote_id)
         btn.addEventListener("click",async function(){
+            var errores=document.getElementById("errores")
             if (lotes[i].lote_estado=="Entregado") {
+                errores.textContent="El lote ya ha sido entregado"
+                errores.style.color="red"
             }else{
-               cambiarLoteEntregado(lotes[i].lote_id).then(function(){
+               await cambiarLoteEntregado(lotes[i].lote_id).then(function(){
                 window.location.reload()
                })
             }

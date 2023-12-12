@@ -46,7 +46,7 @@ function cargarDatos(lote){
 function cargarLote(datos){
     h1.textContent='Lote:'+ ' '+datos.id
     descripcion.textContent=datos.descripcion
-    ubicacion.textContent=datos.latitud,+datos.longitud
+    ubicacion.textContent='Latitud: '+datos.latitud+','+' Longitud: '+datos.longitud
     estado.textContent=datos.estado
 }
 

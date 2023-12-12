@@ -218,7 +218,8 @@ class controllerAdministrador extends Controller
             SELECT
                 l.id AS lote_id,
                 l.descripcion AS lote_descripcion,
-                l.ubicacion AS lote_ubicacion,
+                l.latitud AS lote_latitud,
+                l.longitud AS lote_longitud,
                 l.estado AS lote_estado,
                 l.fecha_entrega AS lote_fecha_entrega,
                 u.nombre AS usuario_nombre

@@ -1,8 +1,6 @@
 import { cambiarLoteEntregado, cargarLotes } from "../http/admin.js";
 import { cabecera, footer } from "../utils/componentes.js";
 
-cabecera();
-footer();
 
 var token=sessionStorage.getItem("token")
 

@@ -1,7 +1,11 @@
+/**
+ * @author Francisco Álvarez Bellón
+ */
+
 import { cleanValue, comprobarLongitudValores, comprobarValores, empty } from "./funciones.js";
 
-let ERNombre=/^[a-zA-Z-\s]{3,20}$/;
-let ERApellido=/^[a-zA-Z-\s]{2,30}$/;
+let ERNombre=/^[a-zA-ZñÑ-\s]{3,20}$/;
+let ERApellido=/^[a-zA-ZñÑ-\s]{2,30}$/;
 let ERCorreo=/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 let ERPassword=/^[a-zA-Z0-9\-.*#$]{6,12}$/;
 
@@ -125,20 +129,20 @@ export function comprobarValidaciones(nombre,apellido,correo,password,password2)
             validacionIncorrecta.push('Las contraseñas no coinciden')
             error.innerHTML="";
             error.style.color="red";
-            console.log(validacionIncorrecta)
+            
             error.innerHTML=mensajesDeError(validacionIncorrecta);
         }
     }else{
         validacionIncorrecta.push('Las contraseñas no coinciden')
         error.innerHTML="";
         error.style.color="red";
-        console.log(validacionIncorrecta)
+        
         error.innerHTML=mensajesDeError(validacionIncorrecta);
     }
     return esValido;
 }
 
-export function comprobarValidacionePerfil(nombre,apellido,correo,pass){
+export function comprobarValidacionePerfil(nombre,apellido,correo){
     var esValido=false;
     validacionCorrecta=[];
     validacionIncorrecta=[];
@@ -147,16 +151,18 @@ export function comprobarValidacionePerfil(nombre,apellido,correo,pass){
     comprobarCorreo(correo)
     
     if (validacionIncorrecta.length>0) {
-        console.log('adios')
+        var error=document.getElementById("errores");
+        
         error.innerHTML="";
         error.style.color="red";
-        console.log(validacionIncorrecta)
+        
         error.innerHTML=mensajesDeError(validacionIncorrecta);
     }else{
-        console.log('hola')
-        error.innerHTML="";
-        error.style.color="green";
-        error.innerHTML="Datos cambiados";
+        var error=document.getElementById("errores");
+        
+        // error.innerHTML="";
+        // error.style.color="green";
+        // error.innerHTML="Datos cambiados";
         esValido=true
     }
     return esValido;
@@ -169,16 +175,18 @@ export function comprobarPasswordPerfil(password){
     comprobarPassword(password)
 
     if (validacionIncorrecta.length>0) {
-        console.log('adios')
+        var error=document.getElementById("errores");
+        
         error.innerHTML="";
         error.style.color="red";
-        console.log(validacionIncorrecta)
+        
         error.innerHTML=mensajesDeError(validacionIncorrecta);
     }else{
-        console.log('hola')
-        error.innerHTML="";
-        error.style.color="green";
-        error.innerHTML="Contraseña cambiada";
+        
+        var error=document.getElementById("errores");
+        //error.innerHTML="";
+        // error.style.color="green";
+        // error.innerHTML="Contraseña cambiada";
         esValido=true
     }
     return esValido;
@@ -193,42 +201,44 @@ function mensajesDeError(errores) {
 }
 
 export function comprobarPantallaDonar(){
-    var opcionEstado=document.getElementById("estado");
     var errorDescripcion=document.getElementById("errorDescripcion");
-    var errorFecha=document.getElementById("errorFecha");
-    var errorEstado=document.getElementById("errorEstado");
     var descripcion=document.getElementById('descripcion');
-    var fecha=document.getElementById('fechaEntrega');
+    var valido=true;
 
-    errorEstado.innerHTML="";
-    errorFecha.innerHTML="";
     errorDescripcion.innerHTML="";
     descripcion.style.borderColor="";
-    opcionEstado.style.borderColor="";
-    fecha.style.borderColor="";
 
     if (empty(descripcion.value)) {
+        valido=false
         descripcion.style.borderColor="red";
         errorDescripcion.style.color="red";
         errorDescripcion.innerHTML="La descripción se encuentra vacia";
     }
-    if (empty(fecha.value)) {
-        fecha.style.borderColor="red";
-        errorFecha.style.color="red";
-        errorFecha.innerHTML="Ingrese una fecha de entrega";  
-    }
+    
+    return valido
+}
 
-    if (opcionEstado.value=="") {
-        opcionEstado.style.borderColor="red";
-        errorEstado.style.color="red";
-        errorEstado.innerHTML="Seleccione el estado en el que se encuentra el lote";
+export function validarUsuarioAdmin(nombre,apellido){
+    var esValido=false;
+    validacionCorrecta=[];
+    validacionIncorrecta=[];
+    comprobarNombre(nombre)
+    comprobarApellido(apellido)
+    
+    if (validacionIncorrecta.length>0) {
+        var error=document.getElementById("errores");
+        
+        error.innerHTML="";
+        error.style.color="red";
+        
+        error.innerHTML=mensajesDeError(validacionIncorrecta);
     }else{
-        if (opcionEstado.value=="1") {
-            return true
-        }else{
-            if (opcionEstado.value=="2") {  
-                return true
-            }
-        }
+        var error=document.getElementById("errores");
+        
+        error.innerHTML="";
+        error.style.color="green";
+        error.innerHTML="Datos cambiados";
+        esValido=true
     }
+    return esValido;
 }

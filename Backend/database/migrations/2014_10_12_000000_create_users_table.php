@@ -17,9 +17,11 @@ return new class extends Migration
             $table->string('apellido');
             $table->string('correo')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->require();
+            $table->string('img');
             $table->rememberToken();
             $table->foreignId('id_rol')->constrained('rol');
+            $table->boolean('usuarioActivo');
             $table->timestamps();
         });
     }

@@ -1,3 +1,5 @@
+// @author Francisco Álvarez Bellón
+
 import { crearUsuario } from "../http/registro.js";
 import { comprobarValidaciones } from "../utils/validaciones.js";
 
@@ -28,7 +30,7 @@ botonRegistro.addEventListener("click",async function(){
             error.innerHTML="Usuario no creado";
           });
           setTimeout(function(){
-            window.location.href = "../login"
+          window.location.href = "../index.html"
           },5000)
         }
 })

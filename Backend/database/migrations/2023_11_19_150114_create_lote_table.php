@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('lote', function (Blueprint $table) {
             $table->id()->unique();
-            $table->string('descripción');
-            $table->string('ubicacion');
+            $table->string('descripcion');
+            $table->string('latitud');
+            $table->string('longitud');
             $table->string('estado');
             $table->dateTime('fecha_entrega');
+            $table->boolean('disponible');
+            $table->boolean('clasificado');
             $table->foreignId('id_usuario')->constrained('users');            
             $table->timestamps();
         });

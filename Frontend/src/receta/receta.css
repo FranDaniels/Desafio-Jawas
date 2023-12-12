@@ -1,0 +1,13 @@
+.card {
+    margin-bottom: 1rem;
+}
+
+.card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-secondary {
+    margin-left: auto;
+}

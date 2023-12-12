@@ -1,4 +1,8 @@
-export async function crearUsuario(datos){   
+/**
+ * @author Francisco Álvarez Bellón
+ */
+
+export async function crearUsuario(datos){  
     let bodyContent = JSON.stringify(
       {
           "nombre": datos.nombre,

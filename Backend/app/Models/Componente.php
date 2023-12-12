@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Componente extends Model
 {
+    /**
+ * @author Francisco Álvarez Bellón
+ */
     use HasFactory;
 
     protected $table='componente';

@@ -3,9 +3,13 @@
 use App\Http\Controllers\controllerAdministrador;
 use App\Http\Controllers\controllerClasificador;
 use App\Http\Controllers\controllerInicioSesion;
+use App\Http\Controllers\controllerReceta;
 use App\Http\Controllers\controllerUsuario;
+use App\Http\Controllers\controllerRol;
+use App\Http\Controllers\ControllerJoyas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,20 +22,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Administrador
-//Hay que añadirle un middleware
-Route::get('admin/listarUsuarios',[controllerAdministrador::class,'listarUsuarios'])->middleware('admin');
-Route::get('admin/listarUsuario',[controllerAdministrador::class,'listarUsuario'])->middleware('admin');
-Route::post('admin/crearUsuario',[controllerAdministrador::class,'crearUsuario'])->middleware('admin');
-Route::post('admin/rol',[controllerAdministrador::class,'crearRol'])->middleware('admin');
-Route::post('admin/rolUsuario',[controllerAdministrador::class,'addRolUsuario'])->middleware('admin');
-Route::put('admin/modificarUsuario',[controllerAdministrador::class,'modificarUsuario'])->middleware('admin');
-Route::delete('admin/borrarUsuario',[controllerAdministrador::class,'borrarUsuario'])->middleware('admin');
-
+/**
+ * @author Francisco Álvarez Bellón
+ */
 //Usuario
-Route::post('registro',[controllerUsuario::class,'crearUsuario']);
-Route::put('modificarPass',[controllerUsuario::class,'modificarPassword']);
-Route::put('modificarDatos',[controllerUsuario::class,'modificarDatos']);
+Route::post('subirImagen',[controllerUsuario::class,'subirImagen']);
+Route::put('actualizarImagen',[controllerUsuario::class,'actualizarImagenUsuario']);
+Route::post('donar',[controllerUsuario::class,'donar']);
 
 if (app()->environment('local')) {
     Route::middleware(['AllowCors'])->group(function () {
@@ -41,15 +38,81 @@ if (app()->environment('local')) {
     // tus rutas normales aquí
 }*/
 
+Route::middleware('cors')->group( function () {
 
-//Lotes
-Route::post('donar',[controllerUsuario::class,'donar']);
+Route::middleware('auth:sanctum')->group( function () {
+    //Añadir rutas para que no se puedan hacer si no se ha echo el registro ni el login
 
+/**
+ * @author Francisco Álvarez Bellón
+ */
+//Administrador
+Route::prefix('admin')->middleware('admin')->group(function(){
+    Route::get('listarUsuarios',[controllerAdministrador::class,'listarUsuarios']);
+    Route::get('listarUsuario',[controllerAdministrador::class,'listarUsuario']);
+    Route::get('listarRoles/{id}',[controllerAdministrador::class,'listarRoles']);
+    Route::get('listarTodosLotes',[controllerAdministrador::class,'listarTodosLosLotes']);
+    Route::get('listarComponentes',[controllerAdministrador::class,'cargarComponentes']);
+    Route::post('componente',[controllerAdministrador::class,'crearComponente']);
+    Route::post('crearUsuario',[controllerAdministrador::class,'crearUsuario']);
+    Route::post('rol',[controllerAdministrador::class,'crearRol']);
+    Route::post('rolUsuario',[controllerAdministrador::class,'addRolUsuario']);
+    Route::put('modificarUsuario',[controllerAdministrador::class,'modificarUsuario']);
+    Route::put('modificarLote/{id}',[controllerAdministrador::class,'loteEntregado']);
+    Route::put('modificarPassword',[controllerAdministrador::class,'modificarPasswordUsuario']);
+    Route::put('darAlta/{id}',[controllerAdministrador::class,'darAlta']);
+    Route::put('darBaja/{id}',[controllerAdministrador::class,'darBaja']);
+});
+
+/**
+ * @author Francisco Álvarez Bellón
+ */
+//Usuario
+Route::get('usuario/{id}',[controllerUsuario::class,'obtenerIdUsu'])->middleware('colaborador');
+Route::put('modificarPass',[controllerUsuario::class,'modificarPassword'])->middleware('colaborador');
+Route::put('modificarDatos',[controllerUsuario::class,'modificarDatos'])->middleware('colaborador');
+
+/**
+ * @author Francisco Álvarez Bellón
+ */
 //Clasificador
-Route::get('clasificador/listarLotes',[controllerClasificador::class,'listarLotes']);
-Route::get('clasificador/listarLote',[controllerClasificador::class,'listarLote']);
-Route::post('clasificador/componente',[controllerClasificador::class,'crearComponente']);
-Route::post('clasificador/inventario',[controllerClasificador::class,'addInventario']);
+Route::prefix('clasificador')->middleware('clasificador')->group(function(){
+    Route::get('componentes',[controllerClasificador::class,'listarComponentes']);
+    Route::get('listarLotesNombre',[controllerClasificador::class,'listarLoteNombreUsu']);
+    Route::get('listarLotes',[controllerClasificador::class,'listarLotes']);
+    Route::get('listarLote/{id}',[controllerClasificador::class,'listarLote']);
+    Route::get('listarMisLotes/{id}',[controllerClasificador::class,'listarMisLotes']);
+    Route::get('listarComponente/{id}',[controllerClasificador::class,'listarComponente']);
+    Route::post('despiece',[controllerClasificador::class,'realizarDespiece']);
+    Route::post('inventario',[controllerClasificador::class,'addInventario']);
+    Route::post('asignarLote',[controllerClasificador::class,'asignarLote']);
+});
+
+//Recetas
+Route::prefix('diseñador')->middleware('diseñador')->group(function(){
+    Route::get('mostrarRecetas', [controllerReceta::class, 'mostrarRecetas']);
+    Route::get('obtenerNombreJoya/{id}', [ControllerJoyas::class, 'obtenerNombreJoya']);
+    Route::get('obtenerNombreComponente/{id}',[controllerReceta::class,'obtenerNombreComponente']);
+    Route::get('obtenerRecetaPorId/{id}', [controllerReceta::class, 'obtenerRecetaPorId']);
+    Route::get('mostrarJoyas', [ControllerJoyas::class, 'mostrarJoyas']);
+});
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+});
+/**
+ * @author Francisco Álvarez Bellón
+ */
+Route::post('registro',[controllerUsuario::class,'crearUsuario']);
+
+Route::post('inicioSesion', [AuthController::class, 'inicioSesion']);
+
+Route::get('obtenerRol/{idUsuario}', [controllerRol::class, 'obtenerRolUsuario']);
+Route::put('modificarRol/{idUsuario}', [controllerRol::class, 'modificarRolUsuario']);
+Route::get('usuarios/{nombreRol}', [controllerRol::class, 'obtenerIdRolPorNombre']);
+
+Route::get('', function () {
+    return response()->json("Unauthorized", 401);
+})->name('nologin');
+});

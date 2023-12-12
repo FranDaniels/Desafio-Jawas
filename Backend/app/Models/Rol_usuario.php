@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+/**
+ * @author Francisco Álvarez Bellón
+ */
 class rol_usuario extends Model
 {
     use HasFactory;
@@ -16,4 +18,8 @@ class rol_usuario extends Model
         'id_rol',
         'id_usuario'
     ];
+
+    public function rol() {
+        return $this->belongsTo(Rol::class, 'id_rol');
+    }
 }

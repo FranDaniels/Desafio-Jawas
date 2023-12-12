@@ -125,14 +125,14 @@ export function comprobarValidaciones(nombre,apellido,correo,password,password2)
             validacionIncorrecta.push('Las contraseñas no coinciden')
             error.innerHTML="";
             error.style.color="red";
-            console.log(validacionIncorrecta)
+            
             error.innerHTML=mensajesDeError(validacionIncorrecta);
         }
     }else{
         validacionIncorrecta.push('Las contraseñas no coinciden')
         error.innerHTML="";
         error.style.color="red";
-        console.log(validacionIncorrecta)
+        
         error.innerHTML=mensajesDeError(validacionIncorrecta);
     }
     return esValido;
@@ -148,14 +148,14 @@ export function comprobarValidacionePerfil(nombre,apellido,correo){
     
     if (validacionIncorrecta.length>0) {
         var error=document.getElementById("errores");
-        console.log('adios')
+        
         error.innerHTML="";
         error.style.color="red";
-        console.log(validacionIncorrecta)
+        
         error.innerHTML=mensajesDeError(validacionIncorrecta);
     }else{
         var error=document.getElementById("errores");
-        console.log('hola')
+        
         // error.innerHTML="";
         // error.style.color="green";
         // error.innerHTML="Datos cambiados";
@@ -172,13 +172,13 @@ export function comprobarPasswordPerfil(password){
 
     if (validacionIncorrecta.length>0) {
         var error=document.getElementById("errores");
-        console.log('adios')
+        
         error.innerHTML="";
         error.style.color="red";
-        console.log(validacionIncorrecta)
+        
         error.innerHTML=mensajesDeError(validacionIncorrecta);
     }else{
-        console.log('hola')
+        
         var error=document.getElementById("errores");
         //error.innerHTML="";
         // error.style.color="green";
@@ -223,14 +223,14 @@ export function validarUsuarioAdmin(nombre,apellido){
     
     if (validacionIncorrecta.length>0) {
         var error=document.getElementById("errores");
-        console.log('adios')
+        
         error.innerHTML="";
         error.style.color="red";
-        console.log(validacionIncorrecta)
+        
         error.innerHTML=mensajesDeError(validacionIncorrecta);
     }else{
         var error=document.getElementById("errores");
-        console.log('hola')
+        
         error.innerHTML="";
         error.style.color="green";
         error.innerHTML="Datos cambiados";

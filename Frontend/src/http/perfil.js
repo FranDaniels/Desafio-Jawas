@@ -1,4 +1,4 @@
-export async function cambiarDatos(datos){ 
+export async function cambiarDatos(datos,token){ 
   
     let bodyContent = JSON.stringify(
       {
@@ -11,7 +11,8 @@ export async function cambiarDatos(datos){
 
 
     let headersList = {
-    "Content-Type": "application/json",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
       };
   
     let response = await fetch("http://127.0.0.1:8000/api/modificarDatos", { 
@@ -29,7 +30,7 @@ export async function cambiarDatos(datos){
     }
   }
 
-  export async function cambiarPassword(datos){   
+  export async function cambiarPassword(datos,token){   
     let bodyContent = JSON.stringify(
       {
         "id":datos.id,
@@ -38,7 +39,8 @@ export async function cambiarDatos(datos){
   );  
 
     let headersList = {
-    "Content-Type": "application/json",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
       };
   
     let response = await fetch("http://127.0.0.1:8000/api/modificarPass", { 
@@ -56,9 +58,10 @@ export async function cambiarDatos(datos){
     }
   }
 
-  export async function obtenerUsuario(datos){
+  export async function obtenerUsuario(datos,token){
     let headersList = {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+    "Authorization": "Bearer "+token
      }
      
      let response = await fetch("http://127.0.0.1:8000/api/usuario/"+datos, { 
@@ -91,22 +94,19 @@ export async function cambiarDatos(datos){
   }
 
   export async function actualizarImg(datos){
-
     let headersList = {
       "Content-Type": "application/json"
      }
      
+     let bodyContent = datos;
+     
+     console.log(bodyContent)
      let response = await fetch("http://127.0.0.1:8000/api/actualizarImagen", { 
        method: "PUT",
-       body: datos,
+       body: bodyContent,
        headers: headersList
      });
      
-     if (!response.ok) {
-      throw new Error('Error')
-    }else{
-      let data = await response.json();
-      
-      return data;          
-    }
+     let data = await response.text();
+     console.log(data);
   }

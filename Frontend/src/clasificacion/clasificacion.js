@@ -29,7 +29,7 @@ await listarLote(idLote,tokenSinComillas).then(function(data){
     cargarLote(datos)
 })
 
-await listarComponentes().then(function(data){
+await listarComponentes(tokenSinComillas).then(function(data){
     var componentes=data;
     generarTablaComponentes(componentes)
 })
@@ -130,7 +130,7 @@ btnAdd.addEventListener("click",function(){
         i++   
     }
     } catch (error) {
-        console.log('Esta duplicado')           
+                 
     }
 })
 
@@ -147,7 +147,7 @@ btnClasificar.addEventListener("click", async function(){
     }
 
     for (let i = 0; i < cantidadComponentes.length; i++) {
-        await listarComponente(tiposComponentes[i]).then(function(data){
+        await listarComponente(tiposComponentes[i],tokenSinComillas).then(function(data){
             tiposComponentes[i]=data.mens[0].id
         
         })
@@ -157,16 +157,19 @@ btnClasificar.addEventListener("click", async function(){
             idComponente:tiposComponentes[i],
             cantidad:cantidadComponentes[i]
         }
-        await realizarDespiece(datos).then(function(data){
-            console.log('Despiece realizado')
+        
+        await realizarDespiece(datos,tokenSinComillas).then(function(data){
+            
         })
-        await addInventario(datos).then(function(data){
-            console.log('Datos guardados')
+        await addInventario(datos,tokenSinComillas).then(function(data){
+            
         })
+
+        window.location.href="http://localhost:8888/src/lotesClasificador/loteClasificador.html"
     }
 
 })
 
 btnCancelar.addEventListener("click",function(){
-    window.location.href="http://localhost:8888/lotesClasificador/loteClasificador.html"
+    window.location.href="http://localhost:8888/src/lotesClasificador/loteClasificador.html"
 })

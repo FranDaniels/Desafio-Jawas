@@ -17,7 +17,11 @@ let img=document.getElementById("imgSubida")
 
 var idUsuario=localStorage.getItem("usuarioId")
 
-await obtenerUsuario(idUsuario).then(function(data){
+var token=sessionStorage.getItem("token")
+
+var tokenSinComillas = token.replace(/^"(.*)"$/, '$1');
+
+await obtenerUsuario(idUsuario,tokenSinComillas).then(function(data){
     cargarDatos(data)
   }).catch(function(error){
     return error
@@ -36,7 +40,7 @@ btnDatos.addEventListener("click", async function(event){
 
     if ( comprobarValidacionePerfil(nombre,apellido,correo,password)) {
     var datos=cargarDatosCambiados(idUsuario)
-    await cambiarDatos(datos).then(function(data){
+    await cambiarDatos(datos,tokenSinComillas).then(function(data){
     })
     }
 })
@@ -45,7 +49,7 @@ btnPassword.addEventListener("click",async function(event){
   event.preventDefault()
     if (comprobarPasswordPerfil(password)) {
         var datos=cargarPasswordCambiada(idUsuario)
-        await cambiarPassword(datos).then(function(data){
+        await cambiarPassword(datos,tokenSinComillas).then(function(data){
         })
 
     }
@@ -88,10 +92,14 @@ function subirImagen(){
     subirImagenS3(bodyImage).then(function(image){
         let bodyContent=JSON.stringify({
             "id":idUsuario,
-            "image":image.url
+            "img":image.url
         })
 
+        console.log(bodyContent)
         actualizarImg(bodyContent).then(function(){
+            setTimeout(function(){
+                window.location.reload()
+            },5000)
         })
     }) 
 }

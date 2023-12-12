@@ -6,7 +6,11 @@ footer(); */
 var tabla=document.getElementById("tbody")
 var idUsuario=localStorage.getItem("usuarioId")
 
-await listarMisLotes(idUsuario).then(function(data){
+var token=sessionStorage.getItem("token")
+
+var tokenSinComillas = token.replace(/^"(.*)"$/, '$1');
+
+await listarMisLotes(idUsuario,tokenSinComillas).then(function(data){
     var lotes=data;
     generarTablaLotes(lotes)
     clasificarLote(tabla)

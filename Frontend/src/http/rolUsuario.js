@@ -29,3 +29,28 @@ export async function obtenerRolUsuario() {
       throw error;
   }
 }
+
+async function modificarRolUsuario(idUsuario) {
+    try {
+      let nuevoRol = localStorage.getItem("nombreRol");
+  
+      let response = await fetch(`http://127.0.0.1:8000/api/modificarRol/${idUsuario}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ rol: nuevoRol }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
+      }
+  
+      let respuestaServidor = await response.json();
+    
+      return respuestaServidor;
+    } catch (error) {
+      console.error('Error al modificar el rol del usuario:', error);
+      throw error;
+    }
+  }

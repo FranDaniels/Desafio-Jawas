@@ -14,10 +14,25 @@ async function mostrarRolesUsuario() {
                 botonRol.className = 'btn btn-primary me-2';
                 botonRol.textContent = rol.nombre;
 
-                botonRol.addEventListener('click', () => {
+                botonRol.addEventListener('click', async () => {
                     localStorage.setItem('nombreRol', rol.nombre);
-                    window.location.href = '../inicio/inicio.html';
-                });
+                  
+                    try {
+                      const nombreRol = localStorage.getItem('nombreRol');
+                  
+                      const usuarioActualizado = await obtenerUsuario();
+                  
+                      usuarioActualizado.nombreRol = nombreRol;
+                  
+                      sessionStorage.setItem('usuario', JSON.stringify(usuarioActualizado));
+                      sessionStorage.setItem('token', usuarioActualizado.token);
+                  
+                      window.location.href = '../inicio/inicio.html';
+                    } catch (error) {
+                      console.error('Error al obtener los datos del usuario:', error);
+                      mostrarError('Error al obtener los datos del usuario.');
+                    }
+                  });
 
                 contenedorRoles.appendChild(botonRol);
             });

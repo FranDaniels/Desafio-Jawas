@@ -98,6 +98,7 @@ Route::post('registro',[controllerUsuario::class,'crearUsuario']);
 Route::post('inicioSesion', [AuthController::class, 'inicioSesion']);
 
 Route::get('obtenerRol/{idUsuario}', [controllerRol::class, 'obtenerRolUsuario']);
+Route::put('modificarRol/{idUsuario}', [controllerRol::class, 'modificarRolUsuario']);
 
 Route::get('', function () {
     return response()->json("Unauthorized", 401);

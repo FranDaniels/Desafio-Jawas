@@ -64,3 +64,13 @@ Para finalizar nos dirigiremos a xampp e iniciaremos Apache y MySQL, a continuac
 - Ruta: `http://127.0.0.1:8000/api/mostrarRecetas`
 - Método: GET,
 - Body: no espera ningún mensaje JSON
+
+### Modificar Rol del Usuario
+- http://127.0.0.1:8000/api/modificarRol/5
+- PUT
+- 
+```json 
+{
+  "rol": 3
+}
+```

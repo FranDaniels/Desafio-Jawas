@@ -35,4 +35,22 @@ class controllerRol extends Controller
     
         return response()->json(['mens' => $msg], $cod);
     }
+
+    public function modificarRolUsuario(Request $request, $idUsuario)
+    {
+        try {
+            $nuevoRol = $request->input('rol');
+            DB::table('rol_usuario')
+                ->where('id_usuario', $idUsuario)
+                ->update(['id_rol' => $nuevoRol]);
+
+            $msg = 'Rol de usuario modificado exitosamente';
+            $cod = 200;
+        } catch (Exception $e) {
+            $msg = $e->getMessage();
+            $cod = 404;
+        }
+
+        return response()->json(['mens' => $msg], $cod);
+    }
 }

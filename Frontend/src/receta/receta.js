@@ -1,12 +1,12 @@
 import { obtenerRecetas, obtenerNombreJoya, obtenerNombreComponente } from "../http/receta.js";
 
-import { seleccionCabecera, footer } from "../utils/componentes.js";
+import { seleccionCabecera } from "../utils/componentes.js";
+
+seleccionCabecera();
 var token=sessionStorage.getItem("token")
 
 var tokenSinComillas = token.replace(/^"(.*)"$/, '$1');
 
-
-seleccionCabecera();
 async function mostrarRecetas() {
     try {
         const response = await obtenerRecetas(tokenSinComillas);

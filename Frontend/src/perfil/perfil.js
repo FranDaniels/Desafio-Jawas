@@ -2,7 +2,7 @@
 
 import { actualizarImg, cambiarDatos, cambiarPassword, obtenerUsuario, subirImagenS3 } from "../http/perfil.js";
 import { comprobarPasswordPerfil, comprobarValidacionePerfil } from "../utils/validaciones.js";
-import { seleccionCabecera, footer } from "../utils/componentes.js";
+import { seleccionCabecera } from "../utils/componentes.js";
 
 seleccionCabecera();
 var nombre=document.getElementById('nombre');

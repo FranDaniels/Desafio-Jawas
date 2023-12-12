@@ -24,7 +24,8 @@ function cabeceraAdministrador() {
   document.getElementById("cabecera").innerHTML =
       `
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Joyería Dualiza</a>
+      <img src="../imagenes/jawa.jpeg" height="40" alt="Company Logo">
+      <a class="navbar-brand" href="#">Dualiza</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -34,10 +35,13 @@ function cabeceraAdministrador() {
             <a class="nav-link" href="../inicio/inicio.html">Inicio</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="../admin/admin.html">Administrar Usuarios</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="../adminLote/adminLote.html">Administrar Lotes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../admin/admin.html">Administración</a>
+            <a class="nav-link" href="../adminComponente/adminComponente.html">Administrar Componentes</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../perfil/perfil.html">
@@ -54,7 +58,8 @@ function cabeceraColaborador() {
   document.getElementById("cabecera").innerHTML =
       `
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Joyería Dualiza</a>
+      <img src="../imagenes/jawa.jpeg" height="40" alt="Company Logo">
+      <a class="navbar-brand" href="#">Dualiza</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -81,7 +86,8 @@ function cabeceraDiseñador() {
   document.getElementById("cabecera").innerHTML =
       `
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Joyería Dualiza</a>
+      <img src="../imagenes/jawa.jpeg" height="40" alt="Company Logo">
+      <a class="navbar-brand" href="#">Dualiza</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -111,7 +117,8 @@ function cabeceraClasificador() {
   document.getElementById("cabecera").innerHTML =
       `
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Joyería Dualiza</a>
+      <img src="../imagenes/jawa.jpeg" height="40" alt="Company Logo">
+      <a class="navbar-brand" href="#">Dualiza</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -121,13 +128,10 @@ function cabeceraClasificador() {
             <a class="nav-link" href="../inicio/inicio.html">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../clasificacion/clasificacion.html">Clasificación</a>
+            <a class="nav-link" href="../clasificador/clasificador.html">Lotes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../lotesClasificador/lotesClasificador.html">Mis Lotes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../clasificar/clasificar.html">Lotes</a>
+            <a class="nav-link" href="../lotesClasificador/loteClasificador.html">Mis Lotes</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../perfil/perfil.html">

@@ -2,7 +2,7 @@
 
 import { donarLote } from "../http/donar.js";
 import { comprobarPantallaDonar } from "../utils/validaciones.js";
-import { seleccionCabecera, footer } from "../utils/componentes.js";
+import { seleccionCabecera } from "../utils/componentes.js";
 
 seleccionCabecera();
 var descripcion=document.getElementById('descripcion');

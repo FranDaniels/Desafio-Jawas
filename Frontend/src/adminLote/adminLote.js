@@ -1,6 +1,9 @@
 // @author Francisco Álvarez Bellón
 
 import { cambiarLoteEntregado, cargarLotes } from "../http/admin.js";
+import { seleccionCabecera } from "../utils/componentes.js";
+
+seleccionCabecera();
 
 var token=sessionStorage.getItem("token")
 

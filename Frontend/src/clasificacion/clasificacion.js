@@ -2,7 +2,7 @@
 
 import { addInventario, listarComponentes, listarLote, listarComponente, realizarDespiece } from "../http/clasificador.js"
 import { includes, tieneElementosRepetidos } from "../utils/funciones.js";
-import { seleccionCabecera, footer } from "../utils/componentes.js";
+import { seleccionCabecera } from "../utils/componentes.js";
 
 seleccionCabecera();
 var h1=document.getElementById('h1');

@@ -3,8 +3,9 @@
 import { listarUsuarios, cargarRoles, cambiarPasswordUsuario, modificarUsuario, addRolUsuario, darBaja, darAlta, crearUsuarioss } from "../http/admin.js";
 import { comprobarPasswordPerfil, validarUsuarioAdmin } from "../utils/validaciones.js";
 import { empty } from "../utils/funciones.js";
+import { seleccionCabecera } from "../utils/componentes.js";
 
-
+seleccionCabecera();
 
 let btnCrearUsuario=document.getElementById("crearUsuario")
 

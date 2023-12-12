@@ -1,11 +1,12 @@
 import { obtenerJoyas } from '../http/joyas.js';
-import { seleccionCabecera, footer } from "../utils/componentes.js";
+import { seleccionCabecera } from "../utils/componentes.js";
+
+seleccionCabecera();
 
 var token=sessionStorage.getItem("token")
 
 var tokenSinComillas = token.replace(/^"(.*)"$/, '$1');
 
-seleccionCabecera();
 async function mostrarJoyas() {
     try {
         let response = await obtenerJoyas(tokenSinComillas);

@@ -1,7 +1,7 @@
 import { cambiarLoteEntregado, cargarLotes } from "../http/admin.js";
-import { cabecera, footer } from "../utils/componentes.js";
+import { seleccionCabecera, footer } from "../utils/componentes.js";
 
-
+seleccionCabecera();
 var token=sessionStorage.getItem("token")
 
 var tokenSinComillas = token.replace(/^"(.*)"$/, '$1');

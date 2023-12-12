@@ -15,12 +15,12 @@ class Clasificador
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $rol=$request->get('idRol');
+        $user=$request->user();
 
-        if ($rol=="4") {
+        if ($user->tokenCan("4")) {
             return $next($request);
         }else{
-            return response()->json('No tienes rol clasificador');
+            return response()->json('No tienes rol colaborador');
         }
     }
 }

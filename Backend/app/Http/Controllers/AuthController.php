@@ -22,10 +22,10 @@ class AuthController extends Controller
             if (Auth::attempt(['correo' => $request->input('correo'), 'password' => $request->input('password')])) {
                 $usuario = Auth::user();
 
-                $roles=DB::select('SELECT r.id_rol FROM rol_usuario r WHERE r.id_usuario=1');
+                $roles=DB::select('SELECT r.id_rol FROM rol_usuario r WHERE r.id_usuario=?',[$usuario->id_rol]);
 
                 $i=0;
-                $array=[];
+                $array=[];  
 
                 while ($i < count($roles)) {
                     array_push($array,$roles[$i]->id_rol);

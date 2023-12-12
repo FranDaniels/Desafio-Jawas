@@ -14,21 +14,16 @@ async function mostrarRolesUsuario() {
                 botonRol.className = 'btn btn-primary me-2';
                 botonRol.textContent = rol.nombre;
 
-                //Terminar de rellenar
                 botonRol.addEventListener('click', () => {
-                    localStorage.setItem('nombreRol', rol.nombre)
-                    setTimeout(function(){
-                        window.location.href = '../inicio/inicio.html';
-                    }, 3000);
+                    localStorage.setItem('nombreRol', rol.nombre);
+                    window.location.href = '../inicio/inicio.html';
                 });
-                 
-                
+
                 contenedorRoles.appendChild(botonRol);
             });
         } else {
             console.error('La respuesta del servidor no contiene roles válidos.');
         }
-
     } catch (error) {
         console.error('Error al mostrar los roles del usuario:', error);
     }

@@ -21,6 +21,8 @@ use App\Http\Controllers\AuthController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::post('subirImagen',[controllerUsuario::class,'subirImagen']);
+Route::put('actualizarImagen',[controllerUsuario::class,'actualizarImagenUsuario']);
 
 if (app()->environment('local')) {
     Route::middleware(['AllowCors'])->group(function () {
@@ -56,8 +58,6 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 
 //Usuario
 Route::get('usuario/{id}',[controllerUsuario::class,'obtenerIdUsu'])->middleware('colaborador');
-Route::post('subirImagen',[controllerUsuario::class,'subirImagen'])->middleware('colaborador');
-Route::put('actualizarImagen',[controllerUsuario::class,'actualizarImagenUsuario'])->middleware('colaborador');
 Route::put('modificarPass',[controllerUsuario::class,'modificarPassword'])->middleware('colaborador');
 Route::put('modificarDatos',[controllerUsuario::class,'modificarDatos'])->middleware('colaborador');
 

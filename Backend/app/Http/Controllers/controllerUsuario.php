@@ -129,6 +129,7 @@ class controllerUsuario extends Controller
     }
 
     public function subirImagen(Request $request){
+        
         $msg=['max'=>'El campo se excede del tamaño máximo'];
     
         $validator=Validator::make($request->all(),[
@@ -141,7 +142,6 @@ class controllerUsuario extends Controller
 
     if ($request->hasFile('image')) {
         $file=$request->file('image');
-
         $path=$file->store('perfiles','s3');
         // $path=$file->storeAs('perfiles',$file->getClientOriginalName(),'s3');
         
@@ -159,6 +159,8 @@ class controllerUsuario extends Controller
             $usuario=User::find($id);
 
             $usuario->img=$request->get('img');
+            
+            $usuario->save();
             
             $msg=$usuario;
             $cod=200;

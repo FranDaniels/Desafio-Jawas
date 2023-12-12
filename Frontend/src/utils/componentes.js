@@ -1,4 +1,19 @@
-export function cabecera() {
+export function seleccionCabecera(){
+  const rolSeleccionado = sessionStorage.getItem('rolSeleccionado');
+
+  switch (rolSeleccionado){
+    case 'administrador':
+      cabeceraAdministrador();
+    case 'colaborador':
+      cabeceraColaborador();
+    case 'diseñador':
+      cabeceraDiseñador();
+    case 'clasificador':
+      cabeceraClasificador();
+  }
+}
+
+function cabeceraAdministrador() {
   document.getElementById("cabecera").innerHTML =
       `
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,7 +33,121 @@ export function cabecera() {
             <a class="nav-link" href="../receta/receta.html">Recetas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../donar/donar.html">Donar</a>
+            <a class="nav-link" href="../donar/donar.html">Donación</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../clasificacion/clasificacion.html">Clasificación</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../clasificar/clasificar.html">Lotes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../adminLote/adminLote.html">Administrar Lotes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../admin/admin.html">Administración</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../perfil/perfil.html">
+              <img src="../imagenes/icono_perfil.png" alt="Perfil" width="30" height="30">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  `;
+}
+
+function cabeceraColaborador() {
+  document.getElementById("cabecera").innerHTML =
+      `
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Joyería Jawas</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="../inicio/inicio.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../joya/joya.html">Joyas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../receta/receta.html">Recetas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../donar/donar.html">Donación</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../perfil/perfil.html">
+              <img src="../imagenes/icono_perfil.png" alt="Perfil" width="30" height="30">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  `;
+}
+
+function cabeceraDiseñador() {
+  document.getElementById("cabecera").innerHTML =
+      `
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Joyería Jawas</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="../inicio/inicio.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../joya/joya.html">Joyas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../receta/receta.html">Recetas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../perfil/perfil.html">
+              <img src="../imagenes/icono_perfil.png" alt="Perfil" width="30" height="30">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  `;
+}
+
+function cabeceraClasificador() {
+  document.getElementById("cabecera").innerHTML =
+      `
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Joyería Jawas</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="../inicio/inicio.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../joya/joya.html">Joyas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../receta/receta.html">Recetas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../clasificacion/clasificacion.html">Clasificación</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../receta/receta.html">Recetas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../clasificar/clasificar.html">Lotes</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../perfil/perfil.html">

@@ -1,4 +1,4 @@
-import { cabecera, footer } from "../utils/componentes.js";
+import { seleccionCabecera, footer } from "../utils/componentes.js";
 
-cabecera();
+seleccionCabecera();
 footer();

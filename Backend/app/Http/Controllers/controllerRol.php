@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Rol;
 use Exception;
 use App\Models\Rol_usuario;
+use Illuminate\Support\Facades\DB; 
 
 /**
  * @author Marina Laguna 
@@ -14,15 +15,17 @@ class controllerRol extends Controller
 {
     public function obtenerRolUsuario($idUsuario) {
         try {
-            $rolUsuario = rol_usuario::where('id_usuario', $idUsuario)->first();
+            $rolesUsuario = DB::table('rol_usuario')
+                ->where('id_usuario', $idUsuario)
+                ->join('rol', 'rol_usuario.id_rol', '=', 'rol.id')
+                ->select('rol_usuario.*', 'rol.nombre as nombre')
+                ->get();
     
-            if (!$rolUsuario) {
-                throw new Exception('Rol de usuario no encontrado');
+            if ($rolesUsuario->isEmpty()) {
+                throw new Exception('Roles de usuario no encontrados');
             }
     
-            $rol = $rolUsuario->rol;
-    
-            $msg = $rolUsuario;
+            $msg = $rolesUsuario;
             $cod = 200;
     
         } catch (Exception $e) {

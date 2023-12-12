@@ -1,32 +1,42 @@
 import { obtenerRolUsuario } from '../http/rolUsuario.js';
 
 const mostrarRolElement = document.getElementById('mostrarRol');
-const btnCerrar = document.getElementById('btnCerrar');
+const btnSeleccionar = document.getElementById('btnSeleccionar');
 
-async function mostrarRolUsuario() {
+async function mostrarRolesUsuario() {
     try {
-        const rolUsuario = await obtenerRolUsuario();
+        const rolesUsuario = await obtenerRolUsuario();
 
-        if (!rolUsuario.rol || !rolUsuario.rol.nombre) {
-            throw new Error('No se pudo obtener el nombre del rol del usuario.');
+        const contenedorRoles = document.getElementById('contenedorRoles');
+
+        contenedorRoles.innerHTML = '';
+
+        if (Array.isArray(rolesUsuario) && rolesUsuario.length > 0) {
+            rolesUsuario.forEach((rol) => {
+                const botonRol = document.createElement('button');
+                botonRol.className = 'btn btn-primary me-2';
+                botonRol.textContent = rol.nombre;
+
+                //Terminar de rellenar
+                botonRol.addEventListener('click', () => {
+                    console.log(`Accediendo con el rol: ${rol.nombre}`);
+                });
+
+                contenedorRoles.appendChild(botonRol);
+            });
+        } else {
+            console.warn('La respuesta del servidor no contiene roles válidos.');
         }
 
-        mostrarRolElement.textContent = `${rolUsuario.rol.nombre}`;
-
     } catch (error) {
-        console.error('Error al mostrar el rol del usuario:', error);
+        console.error('Error al mostrar los roles del usuario:', error);
     }
 }
 
-mostrarRolUsuario();
+mostrarRolesUsuario();
 
-function cerrarVentanaEmergente() {
-    // Cierra la ventana emergente actual
-    window.close();
-}
+botonRol.addEventListener('click', () =>{
+    console.log(`Accediendo con el rol: ${rol.nombre}`);
 
-if (btnCerrar) {
-    btnCerrar.addEventListener('click', cerrarVentanaEmergente);
-} else {
-    console.error('No se encontró el botón de confirmar');
-}
+    sessionStorage.setItem('rol', rol.nombre);
+});

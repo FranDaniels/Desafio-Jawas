@@ -1,8 +1,5 @@
 import { obtenerRolUsuario } from '../http/rolUsuario.js';
 
-const mostrarRolElement = document.getElementById('mostrarRol');
-const btnSeleccionar = document.getElementById('btnSeleccionar');
-
 async function mostrarRolesUsuario() {
     try {
         const rolesUsuario = await obtenerRolUsuario();
@@ -19,13 +16,14 @@ async function mostrarRolesUsuario() {
 
                 //Terminar de rellenar
                 botonRol.addEventListener('click', () => {
-                    console.log(`Accediendo con el rol: ${rol.nombre}`);
+                    localStorage.setItem('nombreRol', rol.nombre)
                 });
-
+                 
+                
                 contenedorRoles.appendChild(botonRol);
             });
         } else {
-            console.warn('La respuesta del servidor no contiene roles válidos.');
+            console.error('La respuesta del servidor no contiene roles válidos.');
         }
 
     } catch (error) {
@@ -34,9 +32,3 @@ async function mostrarRolesUsuario() {
 }
 
 mostrarRolesUsuario();
-
-botonRol.addEventListener('click', () =>{
-    console.log(`Accediendo con el rol: ${rol.nombre}`);
-
-    sessionStorage.setItem('rol', rol.nombre);
-});

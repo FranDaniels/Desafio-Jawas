@@ -5,7 +5,6 @@ cabecera();
 footer();
 await cargarLotes().then(function(data){
     var lotes=data;
-    console.log(lotes)
     generarTablaLotes(lotes)
 })
 
@@ -36,12 +35,17 @@ function generarTablaLotes(lotes) {
         btn.setAttribute("id",lotes[i].lote_id)
         btn.addEventListener("click",async function(){
             var errores=document.getElementById("errores")
+            errores.textContent=""
             if (lotes[i].lote_estado=="Entregado") {
                 errores.textContent="El lote ya ha sido entregado"
                 errores.style.color="red"
             }else{
                await cambiarLoteEntregado(lotes[i].lote_id).then(function(){
-                window.location.reload()
+                errores.textContent="El lote se ha cambiado ha entregado"
+                errores.style.color="green"
+                setTimeout(function(){
+                    window.location.reload()
+                    },5000)
                })
             }
         })

@@ -1,10 +1,15 @@
 import { obtenerRecetas, obtenerNombreJoya, obtenerNombreComponente } from "../http/receta.js";
+
 import { seleccionCabecera, footer } from "../utils/componentes.js";
+var token=sessionStorage.getItem("token")
+
+var tokenSinComillas = token.replace(/^"(.*)"$/, '$1');
+
 
 seleccionCabecera();
 async function mostrarRecetas() {
     try {
-        const response = await obtenerRecetas();
+        const response = await obtenerRecetas(tokenSinComillas);
 
         if (!response || !response.mens || !Array.isArray(response.mens)) {
             console.error('La respuesta del servidor no tiene la estructura esperada.');
@@ -33,7 +38,7 @@ async function crearCardReceta(receta) {
     const card = document.createElement('div');
     card.classList.add('card', 'mb-3');
 
-    const nombreJoya = await obtenerNombreJoya(receta.id_joya);
+    const nombreJoya = await obtenerNombreJoya(receta.id_joya,tokenSinComillas);
 
     const button = document.createElement('button');
     button.classList.add('btn', 'btn-primary');
@@ -61,7 +66,7 @@ async function verReceta(receta, card) {
     const btnVerReceta = card.querySelector('.btn-primary');
 
     if (receta) {
-        const nombreComponente = await obtenerNombreComponente(receta.id_componente);
+        const nombreComponente = await obtenerNombreComponente(receta.id_componente,tokenSinComillas);
 
         divReceta.innerHTML = `
             <p>Componente: ${nombreComponente}</p>

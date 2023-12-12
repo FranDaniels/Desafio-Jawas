@@ -94,10 +94,8 @@ Route::prefix('diseñador')->middleware('diseñador')->group(function(){
     Route::get('obtenerNombreJoya/{id}', [ControllerJoyas::class, 'obtenerNombreJoya']);
     Route::get('obtenerNombreComponente/{id}',[controllerReceta::class,'obtenerNombreComponente']);
     Route::get('obtenerRecetaPorId/{id}', [controllerReceta::class, 'obtenerRecetaPorId']);
+    Route::get('mostrarJoyas', [ControllerJoyas::class, 'mostrarJoyas']);
 });
-
-//Joyas
-Route::get('mostrarJoyas', [ControllerJoyas::class, 'mostrarJoyas']);
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });

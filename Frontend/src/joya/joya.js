@@ -1,10 +1,14 @@
 import { obtenerJoyas } from '../http/joyas.js';
 import { seleccionCabecera, footer } from "../utils/componentes.js";
 
+var token=sessionStorage.getItem("token")
+
+var tokenSinComillas = token.replace(/^"(.*)"$/, '$1');
+
 seleccionCabecera();
 async function mostrarJoyas() {
     try {
-        let response = await obtenerJoyas();
+        let response = await obtenerJoyas(tokenSinComillas);
 
         if (!response || !response.mens || !Array.isArray(response.mens)) {
             console.error('La respuesta del servidor no tiene la estructura esperada.');

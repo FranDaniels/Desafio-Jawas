@@ -1,6 +1,9 @@
-import { listarUsuarios, borrarUsuario, cargarRoles, cambiarPasswordUsuario, modificarUsuario, addRolUsuario, darBaja, darAlta } from "../http/admin.js";
+import { listarUsuarios, borrarUsuario, cargarRoles, cambiarPasswordUsuario, modificarUsuario, addRolUsuario, darBaja, darAlta, crearUsuarioss } from "../http/admin.js";
 import { comprobarPasswordPerfil, validarUsuarioAdmin } from "../utils/validaciones.js";
 import { cabecera, footer } from "../utils/componentes.js";
+import { empty } from "../utils/funciones.js";
+
+let btnCrearUsuario=document.getElementById("crearUsuario")
 
 cabecera();
 // footer();
@@ -258,6 +261,91 @@ function cargarPassword(usuario,passUsuario){
     var datos={
         id:usuario.id,
         password:passUsuario.value
+    }
+
+    return datos
+}
+
+btnCrearUsuario.addEventListener("click",async function(){
+    var nombreNuevo=document.getElementById("nombreNuevo")
+    var apellidoNuevo=document.getElementById("apellidoNuevo")
+    var correoNuevo=document.getElementById("correoNuevo")
+    var passwordNuevo=document.getElementById("passwordUsuNuevo")
+    var crear=document.getElementById("crear")
+
+    var datos=cargarDatosUsuarioNuevo(nombreNuevo,apellidoNuevo,correoNuevo,passwordNuevo)
+
+    if (datos!=null) {
+        await crearUsuarioss(datos).then(function(){
+            crear.textContent="Usuario Creado"
+            crear.style.color="green"
+        })  
+    }
+    
+})
+
+function cargarDatosUsuarioNuevo(nombre,apellido,correo,password){
+    var selectedOption=document.getElementById("inputGroupSelectNuevo").value
+    var option;
+    var datos;
+    var errores=[]
+    var errorNombre=document.getElementById("errorNombreNuevo")
+    var errorApellido=document.getElementById("errorApellidoNuevo")
+    var errorCorreo=document.getElementById("errorCorreoNuevo")
+    var errorPassword=document.getElementById("errorPasswordNuevo")
+    errorNombre.textContent=""
+    errorApellido.textContent=""
+    errorCorreo.textContent=""
+    errorPassword.textContent=""
+
+    if (empty(nombre.value)) {
+        errorNombre.textContent="El nombre se encuentra vacio"
+        errorNombre.style.color="red"
+        errores.push("error")
+    }
+
+    if (empty(apellido.value)) {
+        errorApellido.textContent="El apellido se encuentra vacio"
+        errorApellido.style.color="red"
+        errores.push("error")
+    }
+
+    if (empty(correo.value)) {
+        errorCorreo.textContent="El correo se encuentra vacio"
+        errorCorreo.style.color="red"
+        errores.push("error")
+    }
+
+    if (empty(password.value)) {
+        errorPassword.textContent="El password se encuentra vacio"
+        errorPassword.style.color="red"
+        errores.push("error")
+    }
+
+    if (selectedOption=="1") {
+        option="1"
+    }else{
+        if (selectedOption=="2") {
+            option="2"
+        }else{
+            if (selectedOption=="3") {
+                option="3"
+            }else{
+                if (selectedOption=="4") {
+                    option="4"
+                }
+            }
+        }
+    }
+
+    if (errores.length==0) {
+        datos={
+            nombre:nombre.value,
+            apellido:apellido.value,
+            correo:correo.value,
+            password:password.value,
+            rol:option
+        }
     }
 
     return datos

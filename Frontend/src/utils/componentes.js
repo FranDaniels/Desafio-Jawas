@@ -1,15 +1,18 @@
 export function seleccionCabecera(){
-  const rolSeleccionado = sessionStorage.getItem('rolSeleccionado');
-
-  switch (rolSeleccionado){
-    case 'administrador':
+  const nombreRol = localStorage.getItem('nombreRol');
+  switch (nombreRol){
+    case 'Administrador':
       cabeceraAdministrador();
-    case 'colaborador':
+      break;
+    case 'Colaborador':
       cabeceraColaborador();
-    case 'diseñador':
+      break;
+    case 'Diseñador':
       cabeceraDiseñador();
-    case 'clasificador':
+      break;
+    case 'Clasificador':
       cabeceraClasificador();
+      break;
   }
 }
 
@@ -142,9 +145,6 @@ function cabeceraClasificador() {
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../clasificacion/clasificacion.html">Clasificación</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../receta/receta.html">Recetas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../clasificar/clasificar.html">Lotes</a>

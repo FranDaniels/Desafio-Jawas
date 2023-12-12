@@ -52,7 +52,6 @@ function crearTablaUsuarios(usuarios){
         btnRol.text="Añadir Rol"
         btnRol.style.color="black"
         btnRol.addEventListener('click', async function(){
-            console.log(usuarios[i].id)
             await cargarRoles(usuarios[i].id,tokenSinComillas).then(function(data){
                 var roles=data
                 cargarTablaRoles(usuarios[i],roles)
@@ -114,6 +113,9 @@ function modificarUsuarios(usuario){
           if ( validarUsuarioAdmin(nombre,apellido)) {
           var datos=cargarDatosCambiados(usuario)
           await modificarUsuario(datos,tokenSinComillas).then(function(data){
+            setTimeout(function(){
+            window.location.reload()
+            },5000)
           })
           }
       })
@@ -124,6 +126,9 @@ function modificarUsuarios(usuario){
             var datos=cargarPassword(usuario,passUsuario)
             console.log(datos)
             await cambiarPasswordUsuario(datos,tokenSinComillas).then(function(data){
+                setTimeout(function(){
+                window.location.reload()
+                },5000)
             })
         }
       })
@@ -241,7 +246,7 @@ function cargarTablaRoles(usuario,roles){
     selecTable.appendChild(select)
     asignarRol(usuario)
     x.addEventListener("click", function(){
-            select.remove()
+        select.remove()
     })
     cancelarRol.addEventListener("click",function(){
         select.remove()
@@ -289,10 +294,9 @@ btnCrearUsuario.addEventListener("click",async function(){
         correoNuevo.value=""
         passwordNuevo.value=""
         crear.textContent=""
-        window.location.href = "http://localhost:8888/admin/admin.html"
+        window.location.reload()
         },5000)
     }
-    
 })
 
 function cargarDatosUsuarioNuevo(nombre,apellido,correo,password){

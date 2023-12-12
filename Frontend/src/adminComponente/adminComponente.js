@@ -46,6 +46,9 @@ btnComponenteNuevo.addEventListener("click",function(){
     btnCrearComponente.addEventListener("click", async function(){
         var datos=cargarDatos(nombre,tipo,descripcion)
         await crearComponentess(datos,tokenSinComillas).then(function(){
+            setTimeout(function(){
+            window.location.reload()
+            },5000)
         })
     })
 })

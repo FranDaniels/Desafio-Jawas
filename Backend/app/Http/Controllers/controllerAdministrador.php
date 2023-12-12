@@ -63,7 +63,9 @@ class controllerAdministrador extends Controller
         $usuario->apellido=$request->get('apellido');
         $usuario->correo=$request->get('correo');
         $usuario->password=$request->get('password');
+        $usuario->img='https://proyectodualiza.s3.amazonaws.com/perfiles/obiwanKenobi.jpeg';
         $usuario->id_rol=$request->get('rol');
+        $usuario->usuarioActivo="1";
 
         $msg=$usuario;
         $cod=200;

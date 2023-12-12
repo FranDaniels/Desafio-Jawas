@@ -41,24 +41,25 @@ export async function listarUsuario(datos){
       }
 }
 
-export async function crearUsuario(datos){
-    let bodyContent=JSON.stringify({
-        "nombre":datos.nombre,
-        "apellido":datos.apellido,
-        "correo":datos.correo,
-        "password":datos.password,
-        "id":datos.id
-    });
+export async function crearUsuarioss(datos){
 
-    let headersList={
-        "Content-Type": "application/json",
-    };
-
-    let response = await fetch("http://127.0.0.1:8000/api/crearUsuario", {
-      method: "POST",
-      body: bodyContent,
-      headers: headersList,
-    });
+  let headersList = {
+    "Content-Type": "application/json"
+   }
+   
+   let bodyContent = JSON.stringify({
+     "nombre":datos.nombre,
+     "apellido":datos.apellido,
+     "correo":datos.correo,
+     "password":datos.password,
+     "rol":datos.rol
+   });
+   
+   let response = await fetch("http://127.0.0.1:8000/api/admin/crearUsuario", { 
+     method: "POST",
+     body: bodyContent,
+     headers: headersList
+   });
   
     if (!response.ok) {
       throw new Error('Error')

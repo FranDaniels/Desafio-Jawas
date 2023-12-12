@@ -8,6 +8,8 @@
 </head>
 <body> 
       <div id = "cabecera"></div>
+
+      <button id="crearUsuarioNuevo" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearUsuario">Crear Usuario Nuevo</button>
     <table id="tablaUsuarios" class="table table-striped text-center">
         <tr style="font-size:25px">
             <th scope="col">Número de usuario</th>
@@ -50,6 +52,54 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-primary" id="guardarCambios">Guardar Cambios</button>
             <button type="button" class="btn btn-primary" id="cambiarPassword">Cambiar Contraseña</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalCrearUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">Creación de usuario</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="crear"></div>
+            <div id="errores"></div>
+            <div class="col-md-6">
+                <label class="form-label">Nombre</label>
+                <p id="errorNombreNuevo"></p>
+                <input type="text" class="form-control" id="nombreNuevo" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Apellido</label>
+                <p id="errorApellidoNuevo"></p>
+                <input type="text" class="form-control" id="apellidoNuevo" />
+              </div>
+              <div class="col-md-7">
+                <label class="form-label">Correo</label>
+                <p id="errorCorreoNuevo"></p>
+                <input type="email" class="form-control" id="correoNuevo" />
+              </div>
+              <div class="col-md-7">
+                <label class="form-label">Contraseña</label>
+                <p id="errorPasswordNuevo"></p>
+                <input type="password" class="form-control" id="passwordUsuNuevo" />
+              </div>
+              <div class="col-md-7">
+                <label class="form-label">Rol</label>
+                <select class="form-select" id="inputGroupSelectNuevo" >
+                  <option value="1" id="admin">Administrador</option>
+                  <option value="2" id="cola">Colaborador</option>
+                  <option value="3" id="dise">Diseñador</option>
+                  <option value="4" id="clasi">Clasificador</option>
+              </select>
+              </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="crearUsuario">Crear usuario</button>
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
         </div>
       </div>

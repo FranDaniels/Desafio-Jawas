@@ -23,6 +23,15 @@ use App\Http\Controllers\AuthController;
 */
 Route::middleware('auth:sanctum')->group( function () {
     //Añadir rutas para que no se puedan hacer si no se ha echo el registro ni el login
+    Route::get('obtenerRol/{idUsuario}', [controllerRol::class, 'obtenerRolUsuario']);
+    //Recetas
+    Route::get('mostrarRecetas', [controllerReceta::class, 'mostrarRecetas']);
+    Route::get('obtenerNombreJoya/{id}', [ControllerJoyas::class, 'obtenerNombreJoya']);
+    Route::get('obtenerNombreComponente/{id}',[controllerReceta::class,'obtenerNombreComponente']);
+    Route::get('obtenerRecetaPorId/{id}', [controllerReceta::class, 'obtenerRecetaPorId']);
+
+    //Joyas
+    Route::get('mostrarJoyas', [ControllerJoyas::class, 'mostrarJoyas']);
 });
 
 //Administrador
@@ -52,8 +61,6 @@ Route::put('modificarDatos',[controllerUsuario::class,'modificarDatos']);
 
 Route::post('inicioSesion', [AuthController::class, 'inicioSesion']);
 
-Route::get('obtenerRol/{idUsuario}', [controllerRol::class, 'obtenerRolUsuario']);
-
 //Lotes
 Route::post('donar',[controllerUsuario::class,'donar']);
 
@@ -67,15 +74,6 @@ Route::get('clasificador/listarComponente/{id}',[controllerClasificador::class,'
 Route::post('clasificador/despiece',[controllerClasificador::class,'realizarDespiece']);
 Route::post('clasificador/inventario',[controllerClasificador::class,'addInventario']);
 Route::post('clasificador/asignarLote',[controllerClasificador::class,'asignarLote']);
-
-//Recetas
-Route::get('mostrarRecetas', [controllerReceta::class, 'mostrarRecetas']);
-Route::get('obtenerNombreJoya/{id}', [ControllerJoyas::class, 'obtenerNombreJoya']);
-Route::get('obtenerNombreComponente/{id}',[controllerReceta::class,'obtenerNombreComponente']);
-Route::get('obtenerRecetaPorId/{id}', [controllerReceta::class, 'obtenerRecetaPorId']);
-
-//Joyas
-Route::get('mostrarJoyas', [ControllerJoyas::class, 'mostrarJoyas']);
 
 Route::get('', function () {
     return response()->json("No autorizado",203);

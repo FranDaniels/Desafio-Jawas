@@ -18,7 +18,7 @@ class controllerAdministrador extends Controller
         try {
             $usuarios=DB::select('
             SELECT
-                u.id, u.nombre,u.apellido,u.correo,r.nombre AS nombre_rol
+                u.id, u.nombre,u.apellido,u.correo,r.nombre AS nombre_rol,u.usuarioActivo
             FROM
                 users u
             JOIN
@@ -169,23 +169,38 @@ class controllerAdministrador extends Controller
         return response()->json(['mens' => $msg],$cod);
     }
 
-    public function borrarUsuario(Request $request){
+    public function darAlta($id){
 
         try {
-            $id=$request->get('id');
 
-            $rol=rol_usuario::where('id_usuario',$id)->delete();
-            $usuarioBorrado=User::where('id',$id)->delete();
+            $usuario=User::find($id);
 
-            if ($usuarioBorrado==0&&$rol==0) {
-                $msg="Usuario no encontrado";
-                $cod=200;
-            }else{
-                $msg='Usuario borrado correctamente';
+            $usuario->usuarioActivo=1;
 
-                $cod=200;
-            }
+            $usuario->save();
+            $msg='Usuario dado de alta correctamente';
+            $cod=200;
+            
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
 
+        return response()->json(['mens' => $msg],$cod);
+    }
+
+    public function darBaja($id){
+
+        try {
+
+            $usuario=User::find($id);
+
+            $usuario->usuarioActivo=0;
+            
+            $usuario->save();
+            $msg='Usuario dado de baja correctamente';
+            $cod=200;
+            
         } catch (Exception $e) {
             $msg=$e;
             $cod=404;

@@ -1,12 +1,11 @@
-import { listarUsuarios, borrarUsuario, cargarRoles, cambiarPasswordUsuario, modificarUsuario, addRolUsuario } from "../http/admin.js";
+import { listarUsuarios, borrarUsuario, cargarRoles, cambiarPasswordUsuario, modificarUsuario, addRolUsuario, darBaja, darAlta } from "../http/admin.js";
 import { comprobarPasswordPerfil, validarUsuarioAdmin } from "../utils/validaciones.js";
 import { cabecera, footer } from "../utils/componentes.js";
 
 cabecera();
-footer();
+// footer();
 await listarUsuarios().then(function(data){
     var usuarios=data;
-    console.log(usuarios)
     crearTablaUsuarios(usuarios)
 })
 
@@ -58,18 +57,31 @@ function crearTablaUsuarios(usuarios){
         btnRol.setAttribute("name","addRol"+usuarios[i].id)
         row.appendChild(btnRol)
         
-        const btnBorrar=document.createElement("a")
-        btnBorrar.text="Dar de baja"
-        btnBorrar.style.color="black"
-        btnBorrar.addEventListener('click',function(){
-            borrarUsuarios(usuarios[i])
+        const btnAlta=document.createElement("a")
+        btnAlta.text="Dar de Alta"
+        btnAlta.style.color="black"
+        btnAlta.addEventListener('click',function(){
+            altaUsuario(usuarios[i])
         })
-        btnBorrar.setAttribute("class", "btn btn-danger");
-        btnBorrar.setAttribute("data-bs-toggle", "modal");
-        btnBorrar.setAttribute("data-bs-target", "#modalBorrar");
-        btnBorrar.setAttribute("id",+usuarios[i].id)
-        btnBorrar.setAttribute("name","borrar"+usuarios[i].id)
-        row.appendChild(btnBorrar)
+        btnAlta.setAttribute("class", "btn btn-danger");
+        btnAlta.setAttribute("data-bs-toggle", "modal");
+        btnAlta.setAttribute("data-bs-target", "#modalAlta");
+        btnAlta.setAttribute("id",+usuarios[i].id)
+        btnAlta.setAttribute("name","alta"+usuarios[i].id)
+        row.appendChild(btnAlta)
+
+        const btnBaja=document.createElement("a")
+        btnBaja.text="Dar de Baja"
+        btnBaja.style.color="black"
+        btnBaja.addEventListener('click',function(){
+            bajaUsuario(usuarios[i])
+        })
+        btnBaja.setAttribute("class", "btn btn-danger");
+        btnBaja.setAttribute("data-bs-toggle", "modal");
+        btnBaja.setAttribute("data-bs-target", "#modalBaja");
+        btnBaja.setAttribute("id",+usuarios[i].id)
+        btnBaja.setAttribute("name","baja"+usuarios[i].id)
+        row.appendChild(btnBaja)
 
         bodyTabla.appendChild(row);
     }
@@ -109,18 +121,43 @@ function modificarUsuarios(usuario){
       })
 }
 
-function borrarUsuarios(usuario){
+function bajaUsuario(usuario){
     var tituloTexto=document.getElementById("borrarTexto")
-    var btnBorrar=document.getElementById("borrarUsu")
+    var btnBaja=document.getElementById("bajaUsu")
+    var errorBaja=document.getElementById("errorBaja")
+    errorBaja.textContent=""
     tituloTexto.textContent='¿Deseas dar de baja al usuario '+usuario.nombre+' '+usuario.apellido+'?'
 
-    btnBorrar.addEventListener("click", async function(event){
+    btnBaja.addEventListener("click", async function(event){
         event.preventDefault()
-          var datos={
-            id:usuario.id
-          }
-          await borrarUsuario(datos).then(function(data){
-          })
+        if (usuario.usuarioActivo=="0") {
+            errorBaja.textContent="El usuario ya esta dado de baja"
+            errorBaja.style.color="red"
+        }else{
+            await darBaja(usuario.id).then(function(data){
+                window.location.reload()
+              })  
+        }    
+      })
+}
+
+function altaUsuario(usuario){
+    var tituloTexto=document.getElementById("borrarTextoAlta")
+    var btnAlta=document.getElementById("altaUsu")
+    var errorAlta=document.getElementById("errorAlta")
+    errorAlta.textContent=""
+    tituloTexto.textContent='¿Deseas dar de alta al usuario '+usuario.nombre+' '+usuario.apellido+'?'
+
+    btnAlta.addEventListener("click", async function(event){
+        event.preventDefault()
+        if (usuario.usuarioActivo=="1") {
+            errorAlta.textContent="El usuario ya esta dado de alta"
+            errorAlta.style.color="red"
+        }else{
+            await darAlta(usuario.id).then(function(data){
+                window.location.reload()
+              })
+        }
           
       })
 }

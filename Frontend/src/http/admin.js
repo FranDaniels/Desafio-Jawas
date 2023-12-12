@@ -146,28 +146,42 @@ export async function addRolUsuario(usuario,rol){
       }
 }
 
-export async function borrarUsuario(datos){
+export async function darBaja(id){
   let headersList = {
-      "Content-Type": "application/json"
-     }
-     
-     let bodyContent = JSON.stringify({
-       "id": datos.id
-     });
-     
-     let response = await fetch("http://127.0.0.1:8000/api/borrarUsuario", { 
-        method: "DELETE",
-        body: bodyContent,
-        headers: headersList
-      });
-     
-      if (!response.ok) {
-        throw new Error('Error')
-      }else{
-        let data = await response.json();
-        
-        return data;          
-      }
+    "Content-Type": "application/json",
+      };
+
+   let response = await fetch("http://127.0.0.1:8000/api/admin/darBaja/"+id, { 
+     method: "PUT",
+     headers:headersList
+   });
+   
+   if (!response.ok) {
+    throw new Error('Error')
+  }else{
+    let data = await response.json();
+    
+    return data;          
+  }
+}
+
+export async function darAlta(id){
+  let headersList = {
+    "Content-Type": "application/json",
+      };
+      
+   let response = await fetch("http://127.0.0.1:8000/api/admin/darAlta/"+id, { 
+     method: "PUT",
+     headers:headersList
+   });
+   
+   if (!response.ok) {
+    throw new Error('Error')
+  }else{
+    let data = await response.json();
+    
+    return data;          
+  }
 }
 
 export async function cambiarPasswordUsuario(datos){   

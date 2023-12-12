@@ -37,7 +37,8 @@ Route::post('admin/rolUsuario',[controllerAdministrador::class,'addRolUsuario'])
 Route::put('admin/modificarUsuario',[controllerAdministrador::class,'modificarUsuario'])->middleware('admin');
 Route::put('admin/modificarLote/{id}',[controllerAdministrador::class,'loteEntregado'])->middleware('admin');
 Route::put('admin/modificarPassword',[controllerAdministrador::class,'modificarPasswordUsuario'])->middleware('admin');
-Route::delete('admin/borrarUsuario',[controllerAdministrador::class,'borrarUsuario'])->middleware('admin');
+Route::put('admin/darAlta/{id}',[controllerAdministrador::class,'darAlta'])->middleware('admin');
+Route::put('admin/darBaja/{id}',[controllerAdministrador::class,'darBaja'])->middleware('admin');
 
 //Usuario
 Route::get('usuario/{id}',[controllerUsuario::class,'obtenerIdUsu']);

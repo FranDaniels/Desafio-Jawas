@@ -65,9 +65,13 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin'=>\App\Http\Middleware\Admin::class,
+        'clasificador'=>\App\Http\Middleware\Clasificador::class,
+        'diseñador'=>\App\Http\Middleware\Clasificador::class,
+        'colaborador'=>\App\Http\Middleware\Clasificador::class,
+        "cors" => \App\Http\Middleware\Cors::class,
     ];
 
     protected $routeMiddleware = [
-        "cors" => \App\Http\Middleware\Cors::class,
+       
        ];
 }

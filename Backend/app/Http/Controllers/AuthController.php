@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 
 class AuthController extends Controller
@@ -20,8 +21,18 @@ class AuthController extends Controller
     
             if (Auth::attempt(['correo' => $request->input('correo'), 'password' => $request->input('password')])) {
                 $usuario = Auth::user();
-    
-                $success['token'] = $usuario->createToken('LaravelSanctumAuth')->plainTextToken;
+
+                $roles=DB::select('SELECT r.id_rol FROM rol_usuario r WHERE r.id_usuario=1');
+
+                $i=0;
+                $array=[];
+
+                while ($i < count($roles)) {
+                    array_push($array,$roles[$i]->id_rol);
+                    $i++;
+                }
+
+                $success['token'] = $usuario->createToken('access_token',$array)->plainTextToken;
                 $success['correo'] = $usuario->correo;
                 $success['id'] = $usuario->id;
                 $success['nombre'] = $usuario->nombre;

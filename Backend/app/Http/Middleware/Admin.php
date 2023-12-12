@@ -15,6 +15,12 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        $user=$request->user();
+
+        if ($user->tokenCan("1")) {
+            return $next($request);
+        }else{
+            return response()->json('No tienes rol administrador');
+        }
     }
 }

@@ -21,65 +21,85 @@ use App\Http\Controllers\AuthController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+if (app()->environment('local')) {
+    Route::middleware(['AllowCors'])->group(function () {
+        Route::post('inicioSesion', [controllerUsuario::class, 'inicioSesion']);
+    });
+} /*else {
+    // tus rutas normales aquí
+}*/
+
+Route::middleware('cors')->group( function () {
+
 Route::middleware('auth:sanctum')->group( function () {
     //Añadir rutas para que no se puedan hacer si no se ha echo el registro ni el login
-});
 
 //Administrador
-//Hay que añadirle un middleware
-Route::get('admin/listarUsuarios',[controllerAdministrador::class,'listarUsuarios'])->middleware('admin');
-Route::get('admin/listarUsuario',[controllerAdministrador::class,'listarUsuario'])->middleware('admin');
-Route::get('admin/listarRoles/{id}',[controllerAdministrador::class,'listarRoles'])->middleware('admin');
-Route::get('admin/listarTodosLotes',[controllerAdministrador::class,'listarTodosLosLotes'])->middleware('admin');
-Route::get('admin/listarComponentes',[controllerAdministrador::class,'cargarComponentes'])->middleware('admin');
-Route::post('admin/componente',[controllerAdministrador::class,'crearComponente'])->middleware('admin');
-Route::post('admin/crearUsuario',[controllerAdministrador::class,'crearUsuario'])->middleware('admin');
-Route::post('admin/rol',[controllerAdministrador::class,'crearRol'])->middleware('admin');
-Route::post('admin/rolUsuario',[controllerAdministrador::class,'addRolUsuario'])->middleware('admin');
-Route::put('admin/modificarUsuario',[controllerAdministrador::class,'modificarUsuario'])->middleware('admin');
-Route::put('admin/modificarLote/{id}',[controllerAdministrador::class,'loteEntregado'])->middleware('admin');
-Route::put('admin/modificarPassword',[controllerAdministrador::class,'modificarPasswordUsuario'])->middleware('admin');
-Route::put('admin/darAlta/{id}',[controllerAdministrador::class,'darAlta'])->middleware('admin');
-Route::put('admin/darBaja/{id}',[controllerAdministrador::class,'darBaja'])->middleware('admin');
+Route::prefix('admin')->middleware('admin')->group(function(){
+    Route::get('listarUsuarios',[controllerAdministrador::class,'listarUsuarios']);
+    Route::get('listarUsuario',[controllerAdministrador::class,'listarUsuario']);
+    Route::get('listarRoles/{id}',[controllerAdministrador::class,'listarRoles']);
+    Route::get('listarTodosLotes',[controllerAdministrador::class,'listarTodosLosLotes']);
+    Route::get('listarComponentes',[controllerAdministrador::class,'cargarComponentes']);
+    Route::post('componente',[controllerAdministrador::class,'crearComponente']);
+    Route::post('crearUsuario',[controllerAdministrador::class,'crearUsuario']);
+    Route::post('rol',[controllerAdministrador::class,'crearRol']);
+    Route::post('rolUsuario',[controllerAdministrador::class,'addRolUsuario']);
+    Route::put('modificarUsuario',[controllerAdministrador::class,'modificarUsuario']);
+    Route::put('modificarLote/{id}',[controllerAdministrador::class,'loteEntregado']);
+    Route::put('modificarPassword',[controllerAdministrador::class,'modificarPasswordUsuario']);
+    Route::put('darAlta/{id}',[controllerAdministrador::class,'darAlta']);
+    Route::put('darBaja/{id}',[controllerAdministrador::class,'darBaja']);
+});
+
 
 //Usuario
-Route::get('usuario/{id}',[controllerUsuario::class,'obtenerIdUsu']);
-Route::post('registro',[controllerUsuario::class,'crearUsuario']);
-Route::post('subirImagen',[controllerUsuario::class,'subirImagen']);
-Route::put('actualizarImagen',[controllerUsuario::class,'actualizarImagenUsuario']);
-Route::put('modificarPass',[controllerUsuario::class,'modificarPassword']);
-Route::put('modificarDatos',[controllerUsuario::class,'modificarDatos']);
-
-Route::post('inicioSesion', [AuthController::class, 'inicioSesion']);
-
-Route::get('obtenerRol/{idUsuario}', [controllerRol::class, 'obtenerRolUsuario']);
+Route::get('usuario/{id}',[controllerUsuario::class,'obtenerIdUsu'])->middleware('colaborador');
+Route::post('subirImagen',[controllerUsuario::class,'subirImagen'])->middleware('colaborador');
+Route::put('actualizarImagen',[controllerUsuario::class,'actualizarImagenUsuario'])->middleware('colaborador');
+Route::put('modificarPass',[controllerUsuario::class,'modificarPassword'])->middleware('colaborador');
+Route::put('modificarDatos',[controllerUsuario::class,'modificarDatos'])->middleware('colaborador');
 
 //Lotes
 Route::post('donar',[controllerUsuario::class,'donar']);
 
 //Clasificador
-Route::get('clasificador/componentes',[controllerClasificador::class,'listarComponentes']);
-Route::get('clasificador/listarLotesNombre',[controllerClasificador::class,'listarLoteNombreUsu']);
-Route::get('clasificador/listarLotes',[controllerClasificador::class,'listarLotes']);
-Route::get('clasificador/listarLote/{id}',[controllerClasificador::class,'listarLote']);
-Route::get('clasificador/listarMisLotes/{id}',[controllerClasificador::class,'listarMisLotes']);
-Route::get('clasificador/listarComponente/{id}',[controllerClasificador::class,'listarComponente']);
-Route::post('clasificador/despiece',[controllerClasificador::class,'realizarDespiece']);
-Route::post('clasificador/inventario',[controllerClasificador::class,'addInventario']);
-Route::post('clasificador/asignarLote',[controllerClasificador::class,'asignarLote']);
+Route::prefix('clasificador')->middleware('clasificador')->group(function(){
+    Route::get('componentes',[controllerClasificador::class,'listarComponentes']);
+    Route::get('listarLotesNombre',[controllerClasificador::class,'listarLoteNombreUsu']);
+    Route::get('listarLotes',[controllerClasificador::class,'listarLotes']);
+    Route::get('listarLote/{id}',[controllerClasificador::class,'listarLote']);
+    Route::get('listarMisLotes/{id}',[controllerClasificador::class,'listarMisLotes']);
+    Route::get('listarComponente/{id}',[controllerClasificador::class,'listarComponente']);
+    Route::post('despiece',[controllerClasificador::class,'realizarDespiece']);
+    Route::post('inventario',[controllerClasificador::class,'addInventario']);
+    Route::post('asignarLote',[controllerClasificador::class,'asignarLote']);
+});
 
 //Recetas
-Route::get('mostrarRecetas', [controllerReceta::class, 'mostrarRecetas']);
-Route::get('obtenerNombreJoya/{id}', [ControllerJoyas::class, 'obtenerNombreJoya']);
-Route::get('obtenerNombreComponente/{id}',[controllerReceta::class,'obtenerNombreComponente']);
-Route::get('obtenerRecetaPorId/{id}', [controllerReceta::class, 'obtenerRecetaPorId']);
+Route::prefix('diseñador')->middleware('diseñador')->group(function(){
+    Route::get('mostrarRecetas', [controllerReceta::class, 'mostrarRecetas']);
+    Route::get('obtenerNombreJoya/{id}', [ControllerJoyas::class, 'obtenerNombreJoya']);
+    Route::get('obtenerNombreComponente/{id}',[controllerReceta::class,'obtenerNombreComponente']);
+    Route::get('obtenerRecetaPorId/{id}', [controllerReceta::class, 'obtenerRecetaPorId']);
+});
 
 //Joyas
 Route::get('mostrarJoyas', [ControllerJoyas::class, 'mostrarJoyas']);
-
-Route::get('', function () {
-    return response()->json("No autorizado",203);
-})->name('nologin');
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+});
+
+Route::post('registro',[controllerUsuario::class,'crearUsuario']);
+
+Route::post('inicioSesion', [AuthController::class, 'inicioSesion']);
+
+Route::get('obtenerRol/{idUsuario}', [controllerRol::class, 'obtenerRolUsuario']);
+
+Route::get('', function () {
+    return response()->json("Unauthorized", 401);
+})->name('nologin');
+});

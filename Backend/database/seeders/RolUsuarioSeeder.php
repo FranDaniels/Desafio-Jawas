@@ -13,6 +13,10 @@ class RolUsuarioSeeder extends Seeder
     public function run(): void
     {
         \App\Models\rol_usuario::create([
+            'id_rol' => '1',
+            'id_usuario' => '1'
+        ]);
+        \App\Models\rol_usuario::create([
             'id_rol' => '2',
             'id_usuario' => '1'
         ]);

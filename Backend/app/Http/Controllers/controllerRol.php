@@ -18,7 +18,7 @@ class controllerRol extends Controller
             $rolesUsuario = DB::table('rol_usuario')
                 ->where('id_usuario', $idUsuario)
                 ->join('rol', 'rol_usuario.id_rol', '=', 'rol.id')
-                ->select('rol_usuario.*', 'rol.nombre as nombre_rol')
+                ->select('rol_usuario.*', 'rol.nombre as nombre')
                 ->get();
     
             if ($rolesUsuario->isEmpty()) {

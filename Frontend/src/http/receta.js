@@ -1,6 +1,14 @@
-export async function obtenerRecetas() {
+export async function obtenerRecetas(token) {
     try {
-        let response = await fetch('http://127.0.0.1:8000/api/mostrarRecetas');
+        let headersList={
+            "Content-Type": "application/json",
+            "Authorization": "Bearer "+token
+        }
+
+        let response = await fetch('http://127.0.0.1:8000/api/diseñador/mostrarRecetas',{
+            method: "GET",    
+            headers:headersList
+        });
 
         if (!response.ok){
             throw new Error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
@@ -16,9 +24,17 @@ export async function obtenerRecetas() {
     }
 }
 
-export async function obtenerNombreJoya(id_joya) {
+export async function obtenerNombreJoya(id_joya,token) {
     try {
-        let response = await fetch(`http://127.0.0.1:8000/api/obtenerNombreJoya/${id_joya}`);
+        let headersList={
+            "Content-Type": "application/json",
+            "Authorization": "Bearer "+token
+        }
+
+        let response = await fetch(`http://127.0.0.1:8000/api/diseñador/obtenerNombreJoya/${id_joya}`,{
+            method: "GET",    
+            headers:headersList
+        });
         let resultado = await response.json();
         return resultado.mens;
     } catch (error) {
@@ -27,9 +43,17 @@ export async function obtenerNombreJoya(id_joya) {
     }
 }   
 
-export async function obtenerNombreComponente(id_componente){
+export async function obtenerNombreComponente(id_componente,token){
     try{
-        let response = await fetch(`http://127.0.0.1:8000/api/obtenerNombreComponente/${id_componente}`);
+        let headersList={
+            "Content-Type": "application/json",
+            "Authorization": "Bearer "+token
+        }
+        
+        let response = await fetch(`http://127.0.0.1:8000/api/diseñador/obtenerNombreComponente/${id_componente}`,{
+            method: "GET",    
+            headers:headersList
+        });
         let resultado = await response.json();
         return resultado.mens;
     }catch (error){

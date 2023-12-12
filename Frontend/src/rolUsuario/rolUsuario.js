@@ -34,3 +34,9 @@ async function mostrarRolesUsuario() {
 }
 
 mostrarRolesUsuario();
+
+botonRol.addEventListener('click', () =>{
+    console.log(`Accediendo con el rol: ${rol.nombre}`);
+
+    sessionStorage.setItem('rol', rol.nombre);
+});

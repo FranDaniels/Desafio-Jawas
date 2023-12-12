@@ -1,4 +1,19 @@
-export function cabeceraAdministrador() {
+export function seleccionCabecera(){
+  const rolSeleccionado = sessionStorage.getItem('rolSeleccionado');
+
+  switch (rolSeleccionado){
+    case 'administrador':
+      cabeceraAdministrador();
+    case 'colaborador':
+      cabeceraColaborador();
+    case 'diseñador':
+      cabeceraDiseñador();
+    case 'clasificador':
+      cabeceraClasificador();
+  }
+}
+
+function cabeceraAdministrador() {
   document.getElementById("cabecera").innerHTML =
       `
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -43,7 +58,7 @@ export function cabeceraAdministrador() {
   `;
 }
 
-export function cabeceraColaborador() {
+function cabeceraColaborador() {
   document.getElementById("cabecera").innerHTML =
       `
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -76,7 +91,7 @@ export function cabeceraColaborador() {
   `;
 }
 
-export function cabeceraDiseñador() {
+function cabeceraDiseñador() {
   document.getElementById("cabecera").innerHTML =
       `
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -106,7 +121,7 @@ export function cabeceraDiseñador() {
   `;
 }
 
-export function cabeceraClasificador() {
+function cabeceraClasificador() {
   document.getElementById("cabecera").innerHTML =
       `
       <nav class="navbar navbar-expand-lg navbar-light bg-light">

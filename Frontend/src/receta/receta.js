@@ -1,8 +1,8 @@
 import { obtenerRecetas, obtenerNombreJoya, obtenerNombreComponente } from "../http/receta.js";
-import { cabecera, footer } from "../utils/componentes.js";
+/* import { cabecera, footer } from "../utils/componentes.js";
 
 cabecera();
-footer();
+footer(); */
 async function mostrarRecetas() {
     try {
         const response = await obtenerRecetas();

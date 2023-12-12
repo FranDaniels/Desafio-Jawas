@@ -22,6 +22,7 @@ module.exports = {
         joya: './src/joya/joya.js',
         componentes: './src/utils/componentes.js',
         map:'./src/donar/map.js',
+        adminComponente:'./src/adminComponente/adminComponente.js',
 
     },
     output: {
@@ -142,6 +143,11 @@ module.exports = {
         template: './src/adminLote/adminLote.html',
         filename: 'adminLote/adminLote.html',
         chunks: ['adminLote'],
+      }),
+      new HtmlWebpackPlugin({
+        template: './src/adminComponente/adminComponente.html',
+        filename: 'adminComponente/adminComponente.html',
+        chunks: ['adminComponente'],
       }),
     ],
 };

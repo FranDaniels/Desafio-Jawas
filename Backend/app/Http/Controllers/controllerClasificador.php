@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Componente;
 use App\Models\despiece;
 use App\Models\Inventario;
 use App\Models\Lote;
@@ -33,26 +32,6 @@ class controllerClasificador extends Controller
             $lote = DB::select('SELECT * FROM lote WHERE id = ?', [$id]);
 
             $msg=$lote;
-            $cod=200;
-        } catch (Exception $e) {
-            $msg=$e;
-            $cod=404;
-        }
-
-        return response()->json(['mens' => $msg],$cod);
-    }
-
-    public function crearComponente(Request $request){
-        try {
-            $componente=new Componente;
-
-            $componente->nombre=$request->get('nombre');
-            $componente->tipo=$request->get('tipo');
-            $componente->descripcion=$request->get('descripcion');
-
-            $componente->save();
-
-            $msg=$componente;
             $cod=200;
         } catch (Exception $e) {
             $msg=$e;

@@ -31,6 +31,8 @@ Route::get('admin/listarUsuarios',[controllerAdministrador::class,'listarUsuario
 Route::get('admin/listarUsuario',[controllerAdministrador::class,'listarUsuario'])->middleware('admin');
 Route::get('admin/listarRoles/{id}',[controllerAdministrador::class,'listarRoles'])->middleware('admin');
 Route::get('admin/listarTodosLotes',[controllerAdministrador::class,'listarTodosLosLotes'])->middleware('admin');
+Route::get('admin/listarComponentes',[controllerAdministrador::class,'cargarComponentes'])->middleware('admin');
+Route::post('admin/componente',[controllerAdministrador::class,'crearComponente'])->middleware('admin');
 Route::post('admin/crearUsuario',[controllerAdministrador::class,'crearUsuario'])->middleware('admin');
 Route::post('admin/rol',[controllerAdministrador::class,'crearRol'])->middleware('admin');
 Route::post('admin/rolUsuario',[controllerAdministrador::class,'addRolUsuario'])->middleware('admin');
@@ -63,7 +65,6 @@ Route::get('clasificador/listarLote/{id}',[controllerClasificador::class,'listar
 Route::get('clasificador/listarMisLotes/{id}',[controllerClasificador::class,'listarMisLotes']);
 Route::get('clasificador/listarComponente/{id}',[controllerClasificador::class,'listarComponente']);
 Route::post('clasificador/despiece',[controllerClasificador::class,'realizarDespiece']);
-Route::post('clasificador/componente',[controllerClasificador::class,'crearComponente']);
 Route::post('clasificador/inventario',[controllerClasificador::class,'addInventario']);
 Route::post('clasificador/asignarLote',[controllerClasificador::class,'asignarLote']);
 

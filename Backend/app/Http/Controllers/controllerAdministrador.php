@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Componente;
 use App\Models\Lote;
 use App\Models\lote_usuario;
 use App\Models\Rol;
@@ -273,4 +274,44 @@ class controllerAdministrador extends Controller
         return response()->json($msg,$cod);
     }
 
+    public function cargarComponentes(){
+        try {
+            $componentes=DB::select('
+            SELECT
+                c.nombre,c.tipo,c.descripcion
+            FROM
+                componente c
+            ORDER BY
+                c.id
+            ');
+
+            $msg=$componentes;
+            $cod=200;
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
+
+        return response()->json($msg,$cod);
+    }
+
+    public function crearComponente(Request $request){
+        try {
+            $componente=new Componente;
+
+            $componente->nombre=$request->get('nombre');
+            $componente->tipo=$request->get('tipo');
+            $componente->descripcion=$request->get('descripcion');
+
+            $componente->save();
+
+            $msg=$componente;
+            $cod=200;
+        } catch (Exception $e) {
+            $msg=$e;
+            $cod=404;
+        }
+
+        return response()->json(['mens' => $msg],$cod);
+    }
 }

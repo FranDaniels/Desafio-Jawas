@@ -22,13 +22,13 @@ async function realizarInicioSesion() {
 
         if (respuestaServidor.success && respuestaServidor.data) {
             let datosUsuario = respuestaServidor.data;
-            let token = datosUsuario.token
+            let token = datosUsuario.token;
             var match = token.replace(/^'(.*)'$/, '$1');
             console.log(match);
             sessionStorage.setItem('usuario', JSON.stringify(datosUsuario));
-            sessionStorage.setItem('token',JSON.stringify(datosUsuario.token))
+            sessionStorage.setItem('token', JSON.stringify(datosUsuario.token));
             localStorage.setItem('usuarioId', datosUsuario.id);
-            redirigir();
+            window.location.href = '/src/rolUsuario/rolUsuario.html';
         } else {
             mostrarError(respuestaServidor.message || "Inicio de sesión fallido.");
         }
@@ -36,7 +36,7 @@ async function realizarInicioSesion() {
         console.error("Error al iniciar sesión:", error);
         mostrarError("Inicio de sesión fallido.");
     }
-};
+}
 
 if (btnIniciarSesion) {
     btnIniciarSesion.addEventListener('click', realizarInicioSesion);
@@ -49,8 +49,4 @@ function mostrarError(mensaje) {
     setTimeout(() => {
         errorContainer.textContent = "";
     }, 3500);
-}
-
-function redirigir(){
-    window.open('./rolUsuario/rolUsuario.html', 'Rol del Usuario', 'width=600,height=400');
 }

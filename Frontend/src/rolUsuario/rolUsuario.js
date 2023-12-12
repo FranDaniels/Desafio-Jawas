@@ -1,4 +1,4 @@
-import { obtenerRolUsuario } from '../http/rolUsuario.js';
+import { obtenerRolUsuario, obtenerIdRolPorNombre, modificarRolUsuario } from '../http/rolUsuario.js';
 
 async function mostrarRolesUsuario() {
     try {
@@ -9,30 +9,27 @@ async function mostrarRolesUsuario() {
         contenedorRoles.innerHTML = '';
 
         if (Array.isArray(rolesUsuario) && rolesUsuario.length > 0) {
-            rolesUsuario.forEach((rol) => {
+            rolesUsuario.forEach(async (rol) => {
                 const botonRol = document.createElement('button');
                 botonRol.className = 'btn btn-primary me-2';
                 botonRol.textContent = rol.nombre;
 
                 botonRol.addEventListener('click', async () => {
-                    localStorage.setItem('nombreRol', rol.nombre);
-                  
                     try {
-                      const nombreRol = localStorage.getItem('nombreRol');
-                  
-                      const usuarioActualizado = await obtenerUsuario();
-                  
-                      usuarioActualizado.nombreRol = nombreRol;
-                  
-                      sessionStorage.setItem('usuario', JSON.stringify(usuarioActualizado));
-                      sessionStorage.setItem('token', usuarioActualizado.token);
-                  
-                      window.location.href = '../inicio/inicio.html';
+                        const idRol = await obtenerIdRolPorNombre(rol.nombre);
+                        const usuarioActualizado = await modificarRolUsuario(idRol);
+
+                        usuarioActualizado.idRol = idRol;
+                        usuarioActualizado.nombreRol = rol.nombre;
+
+                        sessionStorage.setItem('usuario', JSON.stringify(usuarioActualizado));
+                        sessionStorage.setItem('token', usuarioActualizado.token);
+
+                        window.location.href = '../inicio/inicio.html';
                     } catch (error) {
-                      console.error('Error al obtener los datos del usuario:', error);
-                      mostrarError('Error al obtener los datos del usuario.');
+                        console.error('Error al obtener los datos del usuario:', error);
                     }
-                  });
+                });
 
                 contenedorRoles.appendChild(botonRol);
             });

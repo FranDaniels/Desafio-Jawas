@@ -53,4 +53,21 @@ class controllerRol extends Controller
 
         return response()->json(['mens' => $msg], $cod);
     }
+
+    function obtenerIdRolPorNombre($nombreRol) {
+        try {
+            $rol = DB::table('rol')->where('nombre', $nombreRol)->first();
+    
+            if ($rol) {
+                $msg = $rol->id;
+                $cod = 200;
+            } else {
+                throw new Exception('No se encontró el rol con el nombre especificado');
+            }
+        } catch (Exception $e) {
+            $msg = $e->getMessage();
+            $cod = 404;
+        }
+        return response()->json(['mens' => $msg], $cod);
+    }
 }

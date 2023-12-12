@@ -3,8 +3,11 @@ import { seleccionCabecera, footer } from "../utils/componentes.js";
 
 seleccionCabecera();
 var tabla=document.getElementById("tbody")
+var token=sessionStorage.getItem("token")
 
-await listarLotes().then(function(data){
+var tokenSinComillas = token.replace(/^"(.*)"$/, '$1');
+
+await listarLotes(tokenSinComillas).then(function(data){
     var lotes=data;
     generarTablaLotes(lotes)
     asignarLote(tabla)
@@ -50,7 +53,7 @@ function asignarLote(btnAsignar) {
             idLote:idLote
         }
 
-        await asignarLoteUsuario(datos).then(function(data){
+        await asignarLoteUsuario(datos,tokenSinComillas).then(function(data){
             window.location.reload()
         })
     })

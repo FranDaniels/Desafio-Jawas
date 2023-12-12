@@ -2,12 +2,17 @@ import { listarUsuarios, borrarUsuario, cargarRoles, cambiarPasswordUsuario, mod
 import { comprobarPasswordPerfil, validarUsuarioAdmin } from "../utils/validaciones.js";
 import { cabecera, footer } from "../utils/componentes.js";
 import { empty } from "../utils/funciones.js";
+import nom from "nom/lib/nom.js";
 
 let btnCrearUsuario=document.getElementById("crearUsuario")
 
+var token=sessionStorage.getItem("token")
+
+var tokenSinComillas = token.replace(/^"(.*)"$/, '$1');
+
 cabecera();
 // footer();
-await listarUsuarios().then(function(data){
+await listarUsuarios(tokenSinComillas).then(function(data){
     var usuarios=data;
     crearTablaUsuarios(usuarios)
 })
@@ -48,7 +53,7 @@ function crearTablaUsuarios(usuarios){
         btnRol.style.color="black"
         btnRol.addEventListener('click', async function(){
             console.log(usuarios[i].id)
-            await cargarRoles(usuarios[i].id).then(function(data){
+            await cargarRoles(usuarios[i].id,tokenSinComillas).then(function(data){
                 var roles=data
                 cargarTablaRoles(usuarios[i],roles)
             })
@@ -108,7 +113,7 @@ function modificarUsuarios(usuario){
         event.preventDefault()
           if ( validarUsuarioAdmin(nombre,apellido)) {
           var datos=cargarDatosCambiados(usuario)
-          await modificarUsuario(datos).then(function(data){
+          await modificarUsuario(datos,tokenSinComillas).then(function(data){
           })
           }
       })
@@ -118,7 +123,7 @@ function modificarUsuarios(usuario){
         if (comprobarPasswordPerfil(passUsuario)) {
             var datos=cargarPassword(usuario,passUsuario)
             console.log(datos)
-            await cambiarPasswordUsuario(datos).then(function(data){
+            await cambiarPasswordUsuario(datos,tokenSinComillas).then(function(data){
             })
         }
       })
@@ -137,7 +142,7 @@ function bajaUsuario(usuario){
             errorBaja.textContent="El usuario ya esta dado de baja"
             errorBaja.style.color="red"
         }else{
-            await darBaja(usuario.id).then(function(data){
+            await darBaja(usuario.id,tokenSinComillas).then(function(data){
                 window.location.reload()
               })  
         }    
@@ -157,7 +162,7 @@ function altaUsuario(usuario){
             errorAlta.textContent="El usuario ya esta dado de alta"
             errorAlta.style.color="red"
         }else{
-            await darAlta(usuario.id).then(function(data){
+            await darAlta(usuario.id,tokenSinComillas).then(function(data){
                 window.location.reload()
               })
         }
@@ -189,7 +194,7 @@ function asignarRol(usuario){
         event.preventDefault()
         console.log(usuario)
         console.log(rol)
-        await addRolUsuario(usuario,rol).then(function(data){
+        await addRolUsuario(usuario,rol,tokenSinComillas).then(function(data){
 
         })
 
@@ -256,8 +261,7 @@ function cargarDatosCambiados(usuario) {
 }
 
 function cargarPassword(usuario,passUsuario){
-    console.log(passUsuario)
-    console.log(passUsuario.value)
+
     var datos={
         id:usuario.id,
         password:passUsuario.value
@@ -276,10 +280,17 @@ btnCrearUsuario.addEventListener("click",async function(){
     var datos=cargarDatosUsuarioNuevo(nombreNuevo,apellidoNuevo,correoNuevo,passwordNuevo)
 
     if (datos!=null) {
-        await crearUsuarioss(datos).then(function(){
+        await crearUsuarioss(datos,tokenSinComillas).then(function(){
             crear.textContent="Usuario Creado"
             crear.style.color="green"
-        })  
+        }),setTimeout(function(){
+        nombreNuevo.value=""
+        apellidoNuevo.value=""
+        correoNuevo.value=""
+        passwordNuevo.value=""
+        crear.textContent=""
+        window.location.href = "http://localhost:8888/admin/admin.html"
+        },5000)
     }
     
 })

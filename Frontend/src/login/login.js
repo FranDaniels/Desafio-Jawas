@@ -22,7 +22,11 @@ async function realizarInicioSesion() {
 
         if (respuestaServidor.success && respuestaServidor.data) {
             let datosUsuario = respuestaServidor.data;
+            let token = datosUsuario.token
+            var match = token.replace(/^'(.*)'$/, '$1');
+            console.log(match);
             sessionStorage.setItem('usuario', JSON.stringify(datosUsuario));
+            sessionStorage.setItem('token',JSON.stringify(datosUsuario.token))
             localStorage.setItem('usuarioId', datosUsuario.id);
             redirigir();
         } else {

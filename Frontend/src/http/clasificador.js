@@ -1,7 +1,8 @@
-export async function listarLotes(){   
+export async function listarLotes(token){   
 
     let headersList = {
-    "Content-Type": "application/json",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
       };
   
       let response = await fetch("http://127.0.0.1:8000/api/clasificador/listarLotesNombre", { 
@@ -18,9 +19,10 @@ export async function listarLotes(){
       }
   }
 
-  export async function asignarLoteUsuario(datos){   
+  export async function asignarLoteUsuario(datos,token){   
     let headersList = {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
      }
      
      let bodyContent = JSON.stringify({
@@ -43,10 +45,11 @@ export async function listarLotes(){
       }
   }
 
-  export async function listarMisLotes(id){   
+  export async function listarMisLotes(id,token){   
 
     let headersList = {
-    "Content-Type": "application/json",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
       };
 
       let response = await fetch("http://127.0.0.1:8000/api/clasificador/listarMisLotes/"+id, { 
@@ -63,10 +66,11 @@ export async function listarLotes(){
       }
   }
 
-  export async function listarLote(id){   
+  export async function listarLote(id,token){   
 
     let headersList = {
-    "Content-Type": "application/json",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
       };
 
       let response = await fetch("http://127.0.0.1:8000/api/clasificador/listarLote/"+id, { 
@@ -83,10 +87,11 @@ export async function listarLotes(){
       }
   }
 
-export async function listarComponentes(){   
+export async function listarComponentes(token){   
 
   let headersList = {
-  "Content-Type": "application/json",
+    "Content-Type": "application/json",
+    "Authorization": "Bearer "+token
     };
 
     let response = await fetch("http://127.0.0.1:8000/api/clasificador/componentes", { 
@@ -103,9 +108,10 @@ export async function listarComponentes(){
     }
 }
 
-export async function addInventario(datos){
+export async function addInventario(datos,token){
   let headersList = {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
    }
    
    console.log(datos)
@@ -130,9 +136,10 @@ export async function addInventario(datos){
   }
 }
 
-export async function listarComponente(nombre){
+export async function listarComponente(nombre,token){
   let headersList = {
     "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
       };
    
    let response = await fetch("http://127.0.0.1:8000/api/clasificador/listarComponente/"+nombre, { 
@@ -149,9 +156,10 @@ export async function listarComponente(nombre){
   }
 }
 
-export async function realizarDespiece(datos){
+export async function realizarDespiece(datos,token){
   let headersList = {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
    }
    
    let bodyContent = JSON.stringify({

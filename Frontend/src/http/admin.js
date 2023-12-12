@@ -1,6 +1,7 @@
-export async function listarUsuarios(){
+export async function listarUsuarios(token){
     let headersList={
-        "Content-Type": "application/json",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
     };
        
        let response = await fetch("http://127.0.0.1:8000/api/admin/listarUsuarios", { 
@@ -17,9 +18,10 @@ export async function listarUsuarios(){
       }
 }
 
-export async function listarUsuario(datos){
+export async function listarUsuario(datos,token){
     let headersList = {
-        "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
        }
        
        let bodyContent = JSON.stringify({
@@ -41,10 +43,11 @@ export async function listarUsuario(datos){
       }
 }
 
-export async function crearUsuarioss(datos){
+export async function crearUsuarioss(datos,token){
 
   let headersList = {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
    }
    
    let bodyContent = JSON.stringify({
@@ -70,9 +73,10 @@ export async function crearUsuarioss(datos){
     }
 }
 
-export async function crearRol(datos){
+export async function crearRol(datos,token){
     let headersList = {
-        "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
        }
        
        let bodyContent = JSON.stringify({
@@ -94,9 +98,10 @@ export async function crearRol(datos){
       }
 }
 
-export async function modificarUsuario(datos){
+export async function modificarUsuario(datos,token){
   let headersList = {
-      "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "Authorization": "Bearer "+token
      }
      
      let bodyContent = JSON.stringify({
@@ -120,9 +125,10 @@ export async function modificarUsuario(datos){
       }
 }
 
-export async function addRolUsuario(usuario,rol){
+export async function addRolUsuario(usuario,rol,token){
   let headersList = {
-      "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "Authorization": "Bearer "+token
      }
      console.log(rol)
      console.log(usuario.id)
@@ -147,9 +153,10 @@ export async function addRolUsuario(usuario,rol){
       }
 }
 
-export async function darBaja(id){
+export async function darBaja(id,token){
   let headersList = {
     "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
       };
 
    let response = await fetch("http://127.0.0.1:8000/api/admin/darBaja/"+id, { 
@@ -166,9 +173,10 @@ export async function darBaja(id){
   }
 }
 
-export async function darAlta(id){
+export async function darAlta(id,token){
   let headersList = {
     "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
       };
       
    let response = await fetch("http://127.0.0.1:8000/api/admin/darAlta/"+id, { 
@@ -185,7 +193,7 @@ export async function darAlta(id){
   }
 }
 
-export async function cambiarPasswordUsuario(datos){   
+export async function cambiarPasswordUsuario(datos,token){   
   let bodyContent = JSON.stringify(
     {
       "id":datos.id,
@@ -194,7 +202,8 @@ export async function cambiarPasswordUsuario(datos){
 );  
 
   let headersList = {
-  "Content-Type": "application/json",
+    "Content-Type": "application/json",
+    "Authorization": "Bearer "+token
     };
 
     let response = await fetch("http://127.0.0.1:8000/api/admin/modificarPassword", { 
@@ -212,9 +221,10 @@ export async function cambiarPasswordUsuario(datos){
     }
 }
 
-export async function cargarRoles(id){   
+export async function cargarRoles(id,token){   
   let headersList = {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
    }
    
    let response = await fetch("http://127.0.0.1:8000/api/admin/listarRoles/"+id, { 
@@ -231,15 +241,21 @@ export async function cargarRoles(id){
   }
 }
 
-export async function cargarLotes(){   
+export async function cargarLotes(token){   
+debugger
   let headersList = {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    'Access-Control-Allow-Origin': '*',
+    "Authorization":"Bearer " +token
    }
-   
-   let response = await fetch("http://127.0.0.1:8000/api/admin/listarTodosLotes", { 
+
+   let options = 
+    { 
       method: "GET",
       headers: headersList
-    });
+    }
+   
+   let response = await fetch("http://127.0.0.1:8000/api/admin/listarTodosLotes", options);
    
    if (!response.ok) {
     throw new Error('Error')
@@ -250,10 +266,11 @@ export async function cargarLotes(){
   }
 }
 
-  export async function cambiarLoteEntregado(id){   
+  export async function cambiarLoteEntregado(id,token){   
     console.log(id)
     let headersList = {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
      }
      
      let response = await fetch("http://127.0.0.1:8000/api/admin/modificarLote/"+id, { 
@@ -270,9 +287,10 @@ export async function cargarLotes(){
     }
 }
 
-export async function cargarComponentes(){
+export async function cargarComponentes(token){
   let headersList = {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
    }
    
    let response = await fetch("http://127.0.0.1:8000/api/admin/listarComponentes", { 
@@ -289,12 +307,14 @@ export async function cargarComponentes(){
   }
 }
 
-export async function crearComponentess(datos){
-
+export async function crearComponentess(datos,token){
+console.log(token)
   let headersList = {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
    }
    
+   console.log(datos)
    let bodyContent = JSON.stringify({
      "nombre":datos.nombre,
      "tipo":datos.tipo,

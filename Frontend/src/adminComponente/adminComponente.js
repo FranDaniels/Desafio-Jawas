@@ -3,7 +3,11 @@ import { empty } from "../utils/funciones.js";
 
 let btnComponenteNuevo=document.getElementById("crearComponenteNuevo")
 
-await cargarComponentes().then(function(data){
+var token=sessionStorage.getItem("token")
+
+var tokenSinComillas = token.replace(/^"(.*)"$/, '$1');
+
+await cargarComponentes(tokenSinComillas).then(function(data){
     var componentes=data;
     generarTablaComponentes(componentes)
 })
@@ -37,7 +41,7 @@ btnComponenteNuevo.addEventListener("click",function(){
     
     btnCrearComponente.addEventListener("click", async function(){
         var datos=cargarDatos(nombre,tipo,descripcion)
-        await crearComponentess(datos).then(function(){
+        await crearComponentess(datos,tokenSinComillas).then(function(){
         })
     })
 })

@@ -3,7 +3,11 @@ import { cabecera, footer } from "../utils/componentes.js";
 
 cabecera();
 footer();
-await cargarLotes().then(function(data){
+
+var token=sessionStorage.getItem("token")
+
+var tokenSinComillas = token.replace(/^"(.*)"$/, '$1');
+await cargarLotes(tokenSinComillas).then(function(data){
     var lotes=data;
     generarTablaLotes(lotes)
 })
@@ -40,7 +44,7 @@ function generarTablaLotes(lotes) {
                 errores.textContent="El lote ya ha sido entregado"
                 errores.style.color="red"
             }else{
-               await cambiarLoteEntregado(lotes[i].lote_id).then(function(){
+               await cambiarLoteEntregado(lotes[i].lote_id,tokenSinComillas).then(function(){
                 errores.textContent="El lote se ha cambiado ha entregado"
                 errores.style.color="green"
                 setTimeout(function(){

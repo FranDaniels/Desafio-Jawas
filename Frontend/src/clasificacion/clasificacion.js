@@ -19,7 +19,11 @@ var cantidadComponentes=[]
 var idLote=localStorage.getItem('idLote')
 var idUsuario=localStorage.getItem('usuarioId')
 
-await listarLote(idLote).then(function(data){
+var token=sessionStorage.getItem("token")
+
+var tokenSinComillas = token.replace(/^"(.*)"$/, '$1');
+
+await listarLote(idLote,tokenSinComillas).then(function(data){
     var lote=data;
     var datos=cargarDatos(lote)
     cargarLote(datos)

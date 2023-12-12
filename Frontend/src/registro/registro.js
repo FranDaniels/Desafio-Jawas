@@ -1,6 +1,5 @@
-/**
- * @author Francisco Álvarez Bellón
- */
+// @author Francisco Álvarez Bellón
+
 import { crearUsuario } from "../http/registro.js";
 import { comprobarValidaciones } from "../utils/validaciones.js";
 

@@ -1,6 +1,4 @@
-/**
- * @author Francisco Álvarez Bellón
- */
+// @author Francisco Álvarez Bellón
 
 let map;
 let marker;

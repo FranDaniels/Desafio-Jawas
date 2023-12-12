@@ -1,6 +1,4 @@
-/**
- * @author Francisco Álvarez Bellón
- */
+// @author Francisco Álvarez Bellón
 
 import { cargarComponentes, crearComponentess } from "../http/admin.js";
 import { empty } from "../utils/funciones.js";

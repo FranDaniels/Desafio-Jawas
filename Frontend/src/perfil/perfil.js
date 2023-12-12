@@ -1,6 +1,4 @@
-/**
- * @author Francisco Álvarez Bellón
- */
+// @author Francisco Álvarez Bellón
 
 import { actualizarImg, cambiarDatos, cambiarPassword, obtenerUsuario, subirImagenS3 } from "../http/perfil.js";
 import { comprobarPasswordPerfil, comprobarValidacionePerfil } from "../utils/validaciones.js";

@@ -1,6 +1,4 @@
-/**
- * @author Francisco Álvarez Bellón
- */
+// @author Francisco Álvarez Bellón
 
 import { listarMisLotes } from "../http/clasificador.js"
 import { seleccionCabecera, footer } from "../utils/componentes.js";

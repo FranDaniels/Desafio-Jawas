@@ -1,6 +1,4 @@
-/**
- * @author Francisco Álvarez Bellón
- */
+// @author Francisco Álvarez Bellón
 
 import { donarLote } from "../http/donar.js";
 import { comprobarPantallaDonar } from "../utils/validaciones.js";

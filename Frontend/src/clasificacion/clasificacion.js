@@ -1,6 +1,4 @@
-/**
- * @author Francisco Álvarez Bellón
- */
+// @author Francisco Álvarez Bellón
 
 import { addInventario, listarComponentes, listarLote, listarComponente, realizarDespiece } from "../http/clasificador.js"
 import { includes, tieneElementosRepetidos } from "../utils/funciones.js";

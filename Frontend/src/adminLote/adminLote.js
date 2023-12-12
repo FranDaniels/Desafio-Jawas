@@ -1,11 +1,7 @@
-/**
- * @author Francisco Álvarez Bellón
- */
+// @author Francisco Álvarez Bellón
 
 import { cambiarLoteEntregado, cargarLotes } from "../http/admin.js";
-import { seleccionCabecera, footer } from "../utils/componentes.js";
 
-seleccionCabecera();
 var token=sessionStorage.getItem("token")
 
 var tokenSinComillas = token.replace(/^"(.*)"$/, '$1');

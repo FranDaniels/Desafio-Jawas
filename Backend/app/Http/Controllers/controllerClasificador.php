@@ -177,7 +177,7 @@ class controllerClasificador extends Controller
         }
 
         return response()->json($msg,$cod);
-    }
+    }   
 
     public function listarComponentes(){
         try {

@@ -1,7 +1,6 @@
 import { obtenerJoyas } from '../http/joyas.js';
 import { cabecera, footer } from "../utils/componentes.js";
 
-
 cabecera();
 footer();
 async function mostrarJoyas() {

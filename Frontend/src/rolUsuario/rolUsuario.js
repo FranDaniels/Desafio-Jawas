@@ -1,5 +1,6 @@
 import { obtenerRolUsuario } from '../http/rolUsuario.js';
-
+import { protegerRutas } from '../http/auth.js';
+protegerRutas();
 const mostrarRolElement = document.getElementById('mostrarRol');
 const btnCerrar = document.getElementById('btnCerrar');
 

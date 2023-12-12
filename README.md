@@ -150,3 +150,13 @@ Para poder gestionar la base de datos con xampp nos dirigiremos a la pagina ofic
 - Método: `GET`
 - Header: `Bearer 26|McDZR6XJK6u6DFy2rJnvQiZmcoeNc4mGr4TjsGFde922b7e4`
 - Body: no espera ningún mensaje JSON
+
+### Modificar Rol del Usuario
+- http://127.0.0.1:8000/api/modificarRol/5
+- PUT
+- 
+```json 
+{
+  "rol": 3
+}
+```

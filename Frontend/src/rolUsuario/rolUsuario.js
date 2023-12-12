@@ -17,6 +17,9 @@ async function mostrarRolesUsuario() {
                 //Terminar de rellenar
                 botonRol.addEventListener('click', () => {
                     localStorage.setItem('nombreRol', rol.nombre)
+                    setTimeout(function(){
+                        window.location.href = '../inicio/inicio.html';
+                    }, 3000);
                 });
                  
                 

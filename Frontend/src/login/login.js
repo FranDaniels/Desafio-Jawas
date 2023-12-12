@@ -53,7 +53,4 @@ function mostrarError(mensaje) {
 
 function redirigir(){
     window.open('./rolUsuario/rolUsuario.html', 'Rol del Usuario', 'width=600,height=400');
-    setTimeout(function(){
-        window.location.href = './inicio/inicio.html';
-    }, 3000);
 }

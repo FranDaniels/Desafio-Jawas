@@ -2,7 +2,6 @@ import { listarUsuarios, borrarUsuario, cargarRoles, cambiarPasswordUsuario, mod
 import { comprobarPasswordPerfil, validarUsuarioAdmin } from "../utils/validaciones.js";
 import { cabecera, footer } from "../utils/componentes.js";
 import { empty } from "../utils/funciones.js";
-import nom from "nom/lib/nom.js";
 
 let btnCrearUsuario=document.getElementById("crearUsuario")
 

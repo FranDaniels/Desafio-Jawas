@@ -1,8 +1,7 @@
 import { obtenerJoyas } from '../http/joyas.js';
-/* import { cabecera, footer } from "../utils/componentes.js";
+import { seleccionCabecera, footer } from "../utils/componentes.js";
 
-cabecera();
-footer(); */
+seleccionCabecera();
 async function mostrarJoyas() {
     try {
         let response = await obtenerJoyas();

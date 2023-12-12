@@ -1,9 +1,8 @@
 import { donarLote } from "../http/donar.js";
 import { comprobarPantallaDonar } from "../utils/validaciones.js";
-/* import { cabecera, footer } from "../utils/componentes.js";
+import { seleccionCabecera, footer } from "../utils/componentes.js";
 
-cabecera();
-footer(); */
+seleccionCabecera();
 var descripcion=document.getElementById('descripcion');
 var btnDonar=document.getElementById('btn-donar');
 var msgText=document.getElementById("errores");

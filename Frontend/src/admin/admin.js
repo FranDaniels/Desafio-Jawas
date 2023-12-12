@@ -1,17 +1,15 @@
 import { listarUsuarios, borrarUsuario, cargarRoles, cambiarPasswordUsuario, modificarUsuario, addRolUsuario, darBaja, darAlta, crearUsuarioss } from "../http/admin.js";
 import { comprobarPasswordPerfil, validarUsuarioAdmin } from "../utils/validaciones.js";
-import { cabecera, footer } from "../utils/componentes.js";
 import { empty } from "../utils/funciones.js";
+import { seleccionCabecera, footer } from "../utils/componentes.js";
 
-
+seleccionCabecera();
 let btnCrearUsuario=document.getElementById("crearUsuario")
 
 var token=sessionStorage.getItem("token")
 
 var tokenSinComillas = token.replace(/^"(.*)"$/, '$1');
 
-//cabecera();
-// footer();
 await listarUsuarios(tokenSinComillas).then(function(data){
     var usuarios=data;
     crearTablaUsuarios(usuarios)

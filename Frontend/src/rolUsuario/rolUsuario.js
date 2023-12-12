@@ -7,27 +7,21 @@ async function mostrarRolesUsuario() {
     try {
         const rolesUsuario = await obtenerRolUsuario();
 
-        // Obtén el contenedor de roles
         const contenedorRoles = document.getElementById('contenedorRoles');
 
-        // Limpiar el contenedor antes de agregar nuevos roles
         contenedorRoles.innerHTML = '';
 
-        // Verifica si rolesUsuario es un array válido
         if (Array.isArray(rolesUsuario) && rolesUsuario.length > 0) {
-            // Iterar sobre los roles y crear botones
             rolesUsuario.forEach((rol) => {
                 const botonRol = document.createElement('button');
                 botonRol.className = 'btn btn-primary me-2';
                 botonRol.textContent = rol.nombre;
 
-                // Agregar un evento al botón (puedes redirigir a la página correspondiente)
+                //Terminar de rellenar
                 botonRol.addEventListener('click', () => {
                     console.log(`Accediendo con el rol: ${rol.nombre}`);
-                    // Puedes redirigir o realizar acciones específicas aquí
                 });
 
-                // Agregar el botón al contenedor
                 contenedorRoles.appendChild(botonRol);
             });
         } else {

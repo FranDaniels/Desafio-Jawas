@@ -23,44 +23,130 @@ Para poder instalarlo nos dirigiremos a la página oficial de <a href="https://c
 Para poder gestionar la base de datos con xampp nos dirigiremos a la pagina oficial de xampp <a href="https://www.apachefriends.org/es/download.html"></a>.
 
 ## Instalación
-Para poder instalar nuestro proyecto nos dirigiremos a GitHub y utilizando el comando `git clone https://github.com/FranDaniels/Desafio-Jawas`.<br>
+- Para poder instalar nuestro proyecto nos dirigiremos a GitHub y utilizando el comando `git clone https://github.com/FranDaniels/Desafio-Jawas`.<br>
 
-Cuando se haya clonado el proyecto lo abriremos utilizando Visual Studio Code.
+- Cuando se haya clonado el proyecto lo abriremos utilizando Visual Studio Code.
 
-Nos dirigiremos al archivo raíz de Front y ejecutaremos en nuestra terminal de Visual Studio Code el siguiente comando `npm update`, esperaremos a que termine la instalación y nos dirigiremos al directorio raiz del servidor y ejecutaremos el comando `php artisan serve`.<br>
+- Implementaremos el archivo `.env` en el apartado del backend.
 
-Para finalizar nos dirigiremos a xampp e iniciaremos Apache y MySQL, a continuación, crearemos una base de datos llamada Dualiza e importaremos la base de datos que se encuentra en nuestro repositorio clonado.
+- Nos dirigiremos a xampp e iniciaremos Apache y MySQL, a continuación, crearemos una base de datos llamada Dualiza e importaremos la base de datos que se encuentra en nuestro repositorio clonado.
 
-## Manual para el usuario de la API
+- Nos dirigiremos al archivo raíz de Front y ejecutaremos en nuestra terminal de Visual Studio Code el siguiente comando `npm install` con este comando se nos generará la carpeta `node_modules`, esperaremos a que termine la instalación. 
+
+- Ejecutaremos el comando `npm run build` con este comando generaremos la carpeta `.dist` para finalizar con el fronted ejecutaremos el comando `npm run dev` para ejecutar el webpack.
+
+- Nos dirigiremos al directorio raiz del servidor y ejecutaremos el script `.\script.bat` para cargar todas las migrations y los seeders en la base de datos ya para finalizar en backend utilizaremos el comando `php artisan serve` para poder arrancar el servidor.
+
+## Manual para el administrador de la API
+
+### Obtener Rol de Usuario
+- Ruta: `http://127.0.0.1:8000/api/obtenerRol/{isUsuario}`
+- Método: `GET`
+- Body: no espera ningún mensaje JSON
+
+### Crear Usuario
+- Ruta: `http://127.0.0.1:8000/api/admin/crearUsuario`
+- Método: `POST`
+- Header: `Bearer 26|McDZR6XJK6u6DFy2rJnvQiZmcoeNc4mGr4TjsGFde922b7e4`
+- Body:
+```json
+{
+  "nombre": "Francisco",
+  "apellido": "Alvarez",
+  "correo": "correoexample@gmail.com",
+  "password": "jawas123",
+  "rol": "1"
+}
+```
+### Listar Usuarios
+- Ruta: `http://127.0.0.1:8000/api/admin/listarUsuarios`
+- Método: `GET`
+- Header: `Bearer 26|McDZR6XJK6u6DFy2rJnvQiZmcoeNc4mGr4TjsGFde922b7e4`
+- Body: no espera ningún mensaje JSON
+
+### Modificar Usuario
+- Ruta: `http://127.0.0.1:8000/api/admin/modificarUsuario`
+- Método: `POST`
+- Header: `Bearer 26|McDZR6XJK6u6DFy2rJnvQiZmcoeNc4mGr4TjsGFde922b7e4`
+- Body:
+```json
+{
+  "id":"1",
+  "nombre":"Fran",
+  "apellido":"Fernandez"
+}
+```
+### Dar Alta
+- Ruta: `http://127.0.0.1:8000/api/admin/darAlta/{id}`
+- Método: `PUT`
+- Header: `Bearer 26|McDZR6XJK6u6DFy2rJnvQiZmcoeNc4mGr4TjsGFde922b7e4`
+- Body: no espera ningún mensaje JSON
+
+### Dar Baja
+- Ruta: `http://127.0.0.1:8000/api/admin/darBaja/{id}`
+- Método: `PUT`
+- Header: `Bearer 26|McDZR6XJK6u6DFy2rJnvQiZmcoeNc4mGr4TjsGFde922b7e4`
+- Body: no espera ningún mensaje JSON
+
+##
+## Manual para el Usuario de la API
+
 ### Registrar
 - Ruta: `http://127.0.0.1:8000/api/registro`
-- Método: POST
+- Método: `POST`
 - Body: 
 ```json
 {
-  "nombre": "Marina",
-  "apellido": "Laguna",
+  "nombre": "Francisco",
+  "apellido": "Alvarez",
   "correo": "correoexample@gmail.com",
-  "password": "admin123",
-  "rol": 1
+  "password": "jawas123"
 }
 ```
 ### Iniciar Sesión
 - Ruta: `http://127.0.0.1:8000/api/iniciarSesión`
-- Método: POST
+- Método: `POST`
 - Body: 
 ```json 
 {
     "correo": "correoexample@gmail.com",
-    "password": "admin123"
+    "password": "jawas123"
 }
 ```
-### Obtener Rol de Usuario
-- Ruta: `http://127.0.0.1:8000/api/obtenerRol/{isUsuario}`
-- Método: GET,
-- Body: no espera ningún mensaje JSON
+
+### Donar 
+- Ruta: `http://127.0.0.1:8000/api/donar`
+- Método: `POST`
+- Header: `Bearer 26|McDZR6XJK6u6DFy2rJnvQiZmcoeNc4mGr4TjsGFde922b7e4`
+- Body: 
+```json 
+{
+    "descripcion": "correoexample@gmail.com",
+    "latitud": "38.69296294925023",
+    "longitud":"-4.1086506843566895",
+    "idUsuario":"1"
+}
+```
+
+##
+## Manual para el Diseñador de la API
 
 ### Mostrar Recetas
 - Ruta: `http://127.0.0.1:8000/api/mostrarRecetas`
-- Método: GET,
+- Método: `GET`
+- Body: no espera ningún mensaje JSON
+
+##
+## Manual para el Clasificador de la API
+
+### Listar lotes
+- Ruta: `http://127.0.0.1:8000/api/clasificador/listarLotes`
+- Método: `GET`
+- Header: `Bearer 26|McDZR6XJK6u6DFy2rJnvQiZmcoeNc4mGr4TjsGFde922b7e4`
+- Body: no espera ningún mensaje JSON
+
+### Listar lotes clasificador
+- Ruta: `http://127.0.0.1:8000/api/clasificador/listarMisLotes/{idUsuario}`
+- Método: `GET`
+- Header: `Bearer 26|McDZR6XJK6u6DFy2rJnvQiZmcoeNc4mGr4TjsGFde922b7e4`
 - Body: no espera ningún mensaje JSON

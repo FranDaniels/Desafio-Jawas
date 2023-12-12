@@ -35,7 +35,8 @@ function cargarDatos(lote){
     var datos={
         id:lote.mens[0].id,
         descripcion:lote.mens[0].descripcion,
-        ubicacion:lote.mens[0].ubicacion,
+        latitud:lote.mens[0].latitud,
+        longitud:lote.mens[0].longitud,
         estado:lote.mens[0].estado
     }
 
@@ -45,7 +46,7 @@ function cargarDatos(lote){
 function cargarLote(datos){
     h1.textContent='Lote:'+ ' '+datos.id
     descripcion.textContent=datos.descripcion
-    ubicacion.textContent=datos.ubicacion
+    ubicacion.textContent=datos.latitud,+datos.longitud
     estado.textContent=datos.estado
 }
 
@@ -163,5 +164,5 @@ btnClasificar.addEventListener("click", async function(){
 })
 
 btnCancelar.addEventListener("click",function(){
-    window.location.href="../inicio/inicio.html"
+    window.location.href="http://localhost:8888/lotesClasificador/loteClasificador.html"
 })

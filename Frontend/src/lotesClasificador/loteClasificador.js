@@ -18,7 +18,7 @@ function generarTablaLotes(lotes) {
     for (let i = 0; i < lotes.length; i++) {
         const row = document.createElement("tr");
 
-        let key = ["id", "descripcion", "estado", "ubicacion", "fecha_entrega","id_usuario"];
+        let key = ["id", "descripcion", "estado", "latitud","longitud", "fecha_entrega","id_usuario"];
 
         for (let j = 0; j < key.length; j++) {
             const cell = document.createElement("td");

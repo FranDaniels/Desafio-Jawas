@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+/**
+ * @author Francisco Álvarez Bellón
+ */
 class rol_usuario extends Model
 {
     use HasFactory;

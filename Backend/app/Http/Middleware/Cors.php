@@ -2,6 +2,9 @@
 namespace App\Http\Middleware;
 use Closure;
 class Cors
+/**
+ * @author Francisco Álvarez Bellón
+ */
 {
   public function handle($request, Closure $next)
   {

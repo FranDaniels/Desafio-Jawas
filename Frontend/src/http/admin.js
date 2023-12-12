@@ -1,3 +1,7 @@
+/**
+ * @author Francisco Álvarez Bellón
+ */
+
 export async function listarUsuarios(token){
     let headersList={
       "Content-Type": "application/json",

@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @author Francisco Álvarez Bellón
+ */
 class controllerAdministrador extends Controller
 {
     public function listarUsuarios(){

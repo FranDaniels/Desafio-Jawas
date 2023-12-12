@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
-
+/**
+ * @author Francisco Álvarez Bellón y Marina Laguna Valdepeñas
+ */
 class AuthController extends Controller
 {
     public function inicioSesion(Request $request)

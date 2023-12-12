@@ -1,3 +1,7 @@
+/**
+ * @author Francisco Álvarez Bellón
+ */
+
 import { cleanValue, comprobarLongitudValores, comprobarValores, empty } from "./funciones.js";
 
 let ERNombre=/^[a-zA-ZñÑ-\s]{3,20}$/;

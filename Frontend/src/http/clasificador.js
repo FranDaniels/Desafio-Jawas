@@ -1,3 +1,7 @@
+/**
+ * @author Francisco Álvarez Bellón
+ */
+
 export async function listarLotes(token){   
 
     let headersList = {

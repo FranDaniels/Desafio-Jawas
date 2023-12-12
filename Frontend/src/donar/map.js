@@ -1,3 +1,7 @@
+/**
+ * @author Francisco Álvarez Bellón
+ */
+
 let map;
 let marker;
 let geoloc;

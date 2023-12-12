@@ -71,6 +71,9 @@ class Kernel extends HttpKernel
         "cors" => \App\Http\Middleware\Cors::class,
     ];
 
+    /**
+ * @author Francisco Álvarez Bellón
+ */
     protected $routeMiddleware = [
        
        ];

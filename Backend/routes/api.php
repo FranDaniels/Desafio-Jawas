@@ -21,8 +21,14 @@ use App\Http\Controllers\AuthController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+/**
+ * @author Francisco Álvarez Bellón
+ */
+//Usuario
 Route::post('subirImagen',[controllerUsuario::class,'subirImagen']);
 Route::put('actualizarImagen',[controllerUsuario::class,'actualizarImagenUsuario']);
+Route::post('donar',[controllerUsuario::class,'donar']);
 
 if (app()->environment('local')) {
     Route::middleware(['AllowCors'])->group(function () {
@@ -37,6 +43,9 @@ Route::middleware('cors')->group( function () {
 Route::middleware('auth:sanctum')->group( function () {
     //Añadir rutas para que no se puedan hacer si no se ha echo el registro ni el login
 
+/**
+ * @author Francisco Álvarez Bellón
+ */
 //Administrador
 Route::prefix('admin')->middleware('admin')->group(function(){
     Route::get('listarUsuarios',[controllerAdministrador::class,'listarUsuarios']);
@@ -55,15 +64,17 @@ Route::prefix('admin')->middleware('admin')->group(function(){
     Route::put('darBaja/{id}',[controllerAdministrador::class,'darBaja']);
 });
 
-
+/**
+ * @author Francisco Álvarez Bellón
+ */
 //Usuario
 Route::get('usuario/{id}',[controllerUsuario::class,'obtenerIdUsu'])->middleware('colaborador');
 Route::put('modificarPass',[controllerUsuario::class,'modificarPassword'])->middleware('colaborador');
 Route::put('modificarDatos',[controllerUsuario::class,'modificarDatos'])->middleware('colaborador');
 
-//Lotes
-Route::post('donar',[controllerUsuario::class,'donar']);
-
+/**
+ * @author Francisco Álvarez Bellón
+ */
 //Clasificador
 Route::prefix('clasificador')->middleware('clasificador')->group(function(){
     Route::get('componentes',[controllerClasificador::class,'listarComponentes']);
@@ -92,7 +103,9 @@ Route::get('mostrarJoyas', [ControllerJoyas::class, 'mostrarJoyas']);
 // });
 
 });
-
+/**
+ * @author Francisco Álvarez Bellón
+ */
 Route::post('registro',[controllerUsuario::class,'crearUsuario']);
 
 Route::post('inicioSesion', [AuthController::class, 'inicioSesion']);

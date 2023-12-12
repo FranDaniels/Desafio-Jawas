@@ -1,3 +1,7 @@
+/**
+ * @author Francisco Álvarez Bellón
+ */
+
 import { cambiarLoteEntregado, cargarLotes } from "../http/admin.js";
 import { seleccionCabecera, footer } from "../utils/componentes.js";
 

@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+/**
+ * @author Francisco Álvarez Bellón
+ */
 class RolUsuarioSeeder extends Seeder
 {
     /**

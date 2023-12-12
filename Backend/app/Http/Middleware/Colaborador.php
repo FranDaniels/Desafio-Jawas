@@ -9,6 +9,9 @@ use Symfony\Component\HttpFoundation\Response;
 class Colaborador
 {
     /**
+ * @author Francisco Álvarez Bellón
+ */
+    /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next

@@ -9,7 +9,9 @@ use App\Models\lote_usuario;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+/**
+ * @author Francisco Álvarez Bellón
+ */
 class controllerClasificador extends Controller
 {
     public function listarLotes(){

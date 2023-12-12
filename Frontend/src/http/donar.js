@@ -1,5 +1,8 @@
+/**
+ * @author Francisco Álvarez Bellón
+ */
+
 export async function donarLote(datos){   
-debugger
   
     let bodyContent = JSON.stringify(
       {

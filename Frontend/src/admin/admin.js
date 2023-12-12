@@ -1,3 +1,7 @@
+/**
+ * @author Francisco Álvarez Bellón
+ */
+
 import { listarUsuarios, borrarUsuario, cargarRoles, cambiarPasswordUsuario, modificarUsuario, addRolUsuario, darBaja, darAlta, crearUsuarioss } from "../http/admin.js";
 import { comprobarPasswordPerfil, validarUsuarioAdmin } from "../utils/validaciones.js";
 import { empty } from "../utils/funciones.js";

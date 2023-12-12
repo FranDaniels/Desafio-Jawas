@@ -6,6 +6,9 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @author Francisco Álvarez Bellón
+ */
 class Diseñador
 {
     /**

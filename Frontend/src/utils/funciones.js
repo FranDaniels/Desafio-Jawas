@@ -1,3 +1,7 @@
+/**
+ * @author Francisco Álvarez Bellón
+ */
+
 export function empty(texto) {
     return texto.length==0;
 }

@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
+/**
+ * @author Francisco Álvarez Bellón
+ */
 class controllerUsuario extends Controller
 {
     public function crearUsuario(Request $request){

@@ -1,3 +1,7 @@
+/**
+ * @author Francisco Álvarez Bellón
+ */
+
 import { donarLote } from "../http/donar.js";
 import { comprobarPantallaDonar } from "../utils/validaciones.js";
 import { seleccionCabecera, footer } from "../utils/componentes.js";

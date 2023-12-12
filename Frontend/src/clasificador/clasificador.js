@@ -1,3 +1,7 @@
+/**
+ * @author Francisco Álvarez Bellón
+ */
+
 import { asignarLoteUsuario, listarLotes } from "../http/clasificador.js"
 import { seleccionCabecera, footer } from "../utils/componentes.js";
 

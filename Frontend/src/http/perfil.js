@@ -1,3 +1,7 @@
+/**
+ * @author Francisco Álvarez Bellón
+ */
+
 export async function cambiarDatos(datos,token){ 
   
     let bodyContent = JSON.stringify(

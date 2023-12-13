@@ -1,5 +1,6 @@
 .card {
     margin-bottom: 1rem;
+    background-color: #dde7fc;
 }
 
 .card-body {
@@ -10,4 +11,14 @@
 
 .btn-secondary {
     margin-left: auto;
+}
+
+.btn{
+    background-color: #b2beff;
+    border-color: #b2beff;
+    color: black;
+}
+
+body{
+    background-color: #edf2fb;
 }

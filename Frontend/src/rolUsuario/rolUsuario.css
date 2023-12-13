@@ -1,0 +1,18 @@
+.card-header{
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px; 
+    overflow: hidden; /* Asegura que las imágenes no se salgan de las tarjetas */
+    text-align: center;
+    background-color: #dde7fc;
+}
+
+.card-body{
+    background-color: #edf2fb;
+}
+
+.btn{
+    background-color: #b2beff;
+    border-color: #b2beff;
+    color: black;
+}

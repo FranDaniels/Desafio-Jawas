@@ -1,20 +1,20 @@
-body{
-    background-color: #edf2fb;
-}
-
-#crearUsuarioNuevo{
-    background-color: #b2beff;
-    border-color: #b2beff;
-    color: black;
-    margin: 2%;
-    margin-left: 45%;
-    padding: 15px;
-}
-
-#tablaUsuarios{
+#tablaComponentes{
     background-color: #edf2fb;
 }
 
 a{
-    margin: 5px;
+    margin: 10px;
+}
+
+#crearComponenteNuevo{
+    background-color: #b2beff;
+    border-color: #b2beff;
+    color: black;
+    margin: 10px;
+    margin-left: 45%;
+    padding: 15px;
+}
+
+body{
+    background-color: #edf2fb;
 }

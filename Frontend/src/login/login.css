@@ -14,7 +14,7 @@ body {
   }
   
   #login {
-    background-color: #f8f8f8;
+    background-color: #dde7fc;
     padding: 20px;
     border-radius: 10px;
   }
@@ -48,6 +48,9 @@ body {
   /* Estilos para el botón de inicio de sesión */
   #btn-iniciar-sesion {
     margin-top: 10px;
+    background-color: #b2beff;
+    border-color: #b2beff;
+    color: black;
   }
   
   /* Estilos para el enlace de registro */
